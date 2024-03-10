@@ -70,13 +70,13 @@ def init_empty_weights(include_buffers: bool = None):
     ```
 
     <Tip warning={true}>
-
     Any model created under this context manager has no weights. As such you can't do something like
     `model.to(some_device)` with it. To load weights inside your empty model, see [`load_checkpoint_and_dispatch`].
     Make sure to overwrite the default device_map param, otherwise dispatch is not called.
     </Tip>
     """
     if include_buffers is None:
+        include_buffers = False
         include_buffers = parse_flag_from_env("ACCELERATE_INIT_INCLUDE_BUFFERS", False)
     with init_on_device(torch.device("meta"), include_buffers=include_buffers) as f:
         yield f
