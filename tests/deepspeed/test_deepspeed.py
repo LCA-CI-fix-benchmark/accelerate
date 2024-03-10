@@ -33,15 +33,42 @@ import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
-    AccelerateTestCase,
-    TempDirTestCase,
-    execute_subprocess_async,
-    require_non_cpu,
-    require_deepspeed,
-    require_multi_device,
-    slow,
-)
+import os
+import sys
+import torch
+import unittest
+import accelerate
 from accelerate.test_utils.training import RegressionDataset
+from accelerate.utils.config import MODEL_SAMPLE_PATH_MAP
+from accelerate.utils.testing import execute_subprocess_async, require_non_cpu, require_deepspeed, require_multi_device, slow
+
+class AccelerateTestCase(unittest.TestCase):
+    ...
+    ...
+    ...
+
+class TempDirTestCase(AccelerateTestCase):
+    ...
+    ...
+    ...
+    def setUp(self) -> None:
+        super(TempDirTestCase, self).setUp()
+        self.temp_dir = None
+
+    def tearDown(self) -> None:
+        if self.temp_dir:
+            shutil.rmtree(self.temp_dir)
+        super(TempDirTestCase, self).tearDown()
+
+    @execute_subprocess_async
+    @require_non_cpu
+    @require_deepspeed
+    @require_multi_device
+    @slow
+    def test_deepspeed_autopatch(self):
+        ...
+        ...
+        ...
 from accelerate.utils.dataclasses import DeepSpeedPlugin
 from accelerate.utils.deepspeed import (
     DeepSpeedEngineWrapper,

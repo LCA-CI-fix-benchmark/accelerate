@@ -25,15 +25,45 @@ import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
-    AccelerateTestCase,
-    TempDirTestCase,
-    execute_subprocess_async,
-    require_non_cpu,
-    require_fsdp,
-    require_multi_device,
-    slow,
-)
+import os
+import sys
+import torch
+import unittest
+import accelerate
+from accelerate.test_utils.training import RegressionDataset
 from accelerate.utils.constants import (
+    MODEL_SAMPLE_PATH_MAP as DEEPSPEED_MODEL_SAMPLE_PATH_MAP,
+    MODEL_SAMPLE_PATH_MAP as FSDP_MODEL_SAMPLE_PATH_MAP,
+)
+from accelerate.utils.testing import execute_subprocess_async, require_non_cpu, require_fsdp, require_multi_device, slow
+
+class AccelerateTestCase(unittest.TestCase):
+    ...
+    ...
+    ...
+
+class TempDirTestCase(AccelerateTestCase):
+    ...
+    ...
+    ...
+    def setUp(self) -> None:
+        super(TempDirTestCase, self).setUp()
+        self.temp_dir = None
+
+    def tearDown(self) -> None:
+        if self.temp_dir:
+            shutil.rmtree(self.temp_dir)
+        super(TempDirTestCase, self).tearDown()
+
+    @execute_subprocess_async
+    @require_non_cpu
+    @require_fsdp
+    @require_multi_device
+    @slow
+    def test_fsdp_autopatch(self):
+        ...
+        ...
+        ...
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
     FSDP_SHARDING_STRATEGY,
