@@ -56,13 +56,8 @@ from .imports import (
     is_boto3_available,
     is_ccl_available,
     is_clearml_available,
-    is_comet_ml_available,
-    is_cuda_available,
-    is_datasets_available,
-    is_peft_available,
-    is_deepspeed_available,
-    is_dvclive_available,
-    is_fp8_available,
+from ..dataclasses import AutocastKwargs, CustomDtype, DistributedType
+from . import is_comet_ml_available, is_cuda_available, is_datasets_available, is_deepspeed_available, is_dvclive_available, is_fp8_available, is_peft_available
     is_ipex_available,
     is_megatron_lm_available,
     is_mlflow_available,
