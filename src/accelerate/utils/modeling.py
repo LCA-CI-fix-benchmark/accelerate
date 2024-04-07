@@ -27,13 +27,42 @@ from typing import Dict, List, Optional, Tuple, Union
 import torch
 import torch.nn as nn
 
+I will sort and format the imports in the provided code fragment:
+```python
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+
+import os
+import random
+import sys
+import warnings
+
+import torch
+import numpy as np
+
+import torch.distributed as dist
+import torch.multiprocessing as mp
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import torch.utils.data as data
+import torch.utils.data.distributed as distributed
+import torch.cuda as cuda
+import torch.distributed.rpc as rpc
+import torch.distributed.tensor as tensor
+import torch.jit as jit
+import torch.onnx as onnx
+import torch.quantization as quantization
+import torch.utils._pytree as pytree
+import torch_npu
+import torch_xpu
+
 from ..state import AcceleratorState
 from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
 from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
 from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
 from .offload import load_offloaded_weight, offload_weight, save_offload_index
 from .tqdm import is_tqdm_available, tqdm
-
+```
 
 if is_npu_available(check_device=False):
     import torch_npu  # noqa: F401

@@ -56,13 +56,81 @@ from .imports import (
     is_boto3_available,
     is_ccl_available,
     is_clearml_available,
-    is_comet_ml_available,
-    is_cuda_available,
-    is_datasets_available,
-    is_peft_available,
-    is_deepspeed_available,
-    is_dvclive_available,
-    is_fp8_available,
+From the provided code fragment, I assume the missing imports are sorted alphabetically at the top of the file. Here's the edited code fragment with sorted imports:
+```python
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+
+import os
+import sys
+import torch
+import numpy as np
+import random
+
+import warnings
+
+import torch.distributed as dist
+import torch.multiprocessing as mp
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import torch.utils.data as data
+import torch.utils.data.distributed as distributed
+import torch.cuda as cuda
+import torch.distributed.rpc as rpc
+import torch.distributed.tensor as tensor
+import torch.jit as jit
+import torch.onnx as onnx
+import torch.quantization as quantization
+import torch.utils._pytree as pytree
+import torch_npu
+import torch_xpu
+
+from . import constants
+from . import state
+from . import accelerate_state
+from . import apex
+from . import autocast_utils
+from . import config_utils
+from . import cpu_offload
+from . import deepspeed
+from . import distributed
+from . import event_Accelerator
+from . import event_Epoch
+from . import event_Logging
+from . import event_Optimizer
+from . import event_Training
+from . import event_Validation
+from . import event_Warmup
+from . import exporter
+from . import hub
+from . import instrumentation
+from . import jit
+from . import lr_scheduler
+from . import logging
+from . import misc
+from . import modeling
+from . import process_group
+from . import record_and_restore
+from . import shared
+from . import stack_overflow_protection
+from . import sync
+from . import task
+from . import utils
+from . import version
+from .state import AcceleratorState
+from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
+from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
+from .offload import load_offloaded_weight, offload_weight, save_offload_index
+from .tqdm import is_tqdm_available, tqdm
+
+is_comet_ml_available,
+is_cuda_available,
+is_datasets_available,
+is_peft_available,
+is_deepspeed_available,
+is_dvclive_available,
+is_fp8_available,
+```
     is_ipex_available,
     is_megatron_lm_available,
     is_mlflow_available,
