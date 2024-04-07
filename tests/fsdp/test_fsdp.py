@@ -25,15 +25,38 @@ import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
-    AccelerateTestCase,
-    TempDirTestCase,
-    execute_subprocess_async,
-    require_non_cpu,
-    require_fsdp,
-    require_multi_device,
-    slow,
-)
-from accelerate.utils.constants import (
+import sys
+import os
+import unittest
+import argparse
+import contextlib
+import distutils.spawn
+import tempfile
+import shutil
+import torch
+import torch.distributed as dist
+import torch.nn as nn
+import torch.optim as optim
+import torch.nn.functional as F
+import torch.utils.data as data
+import torch.distributed.fsdp as fsdp
+from pathlib import Path
+
+# from accelerate.test_utils.common import execute_subprocess_async
+# from accelerate.test_utils.common import require_non_cpu
+# from accelerate.test_utils.common import require_fsdp
+# from accelerate.test_utils.common import require_multi_device
+# from accelerate.test_utils.common import slow
+# from accelerate.test_utils.training import RegressionDataset
+# from accelerate.test_utils import benchmarks
+# from accelerate.test_utils import utils
+from accelerate.test_utils.common import require_non_cpu
+from accelerate.test_utils.common import require_fsdp
+from accelerate.test_utils.common import require_multi_device
+from accelerate.test_utils.common import slow
+from accelerate.test_utils.training import RegressionDataset
+from accelerate.test_utils.benchmarks import benchmarks
+from accelerate.test_utils.utils import utils
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
     FSDP_SHARDING_STRATEGY,
