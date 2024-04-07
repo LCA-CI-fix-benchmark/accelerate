@@ -28,7 +28,7 @@ import torch
 import torch.nn as nn
 
 from ..state import AcceleratorState
-from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
+from .constants import SAFE_WEIGHTS_NAME, WEIGHT
 from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
 from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
 from .offload import load_offloaded_weight, offload_weight, save_offload_index

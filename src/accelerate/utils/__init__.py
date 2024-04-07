@@ -63,6 +63,30 @@ from .imports import (
     is_deepspeed_available,
     is_dvclive_available,
     is_fp8_available,
+[end of src/acceler
+[start of src/accelerate/utils/modeling.py#L30]
+from ..state import AcceleratorState
+from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
+from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
+from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
+from .offload import load_offloaded_weight, offload_weight, save_offload_index
+from .tqdm import is_tqdm_available, tqdm
+
+[end of src/accelerate/utils/modeling.py#L30]
+
+And here is the final code with the imports sorted and formatted:
+
+[start of src/accelerate/utils/__init__.py#L59]
+    is_comet_ml_available,
+    is_cuda_available,
+    is_datasets_available,
+    is_deepspeed_available,
+    is_dvclive_available,
+    is_fp8_available,
+    is_mps_available,
+    is_npu_available,
+    is_xpu_available,
+    is_peft_available,
     is_ipex_available,
     is_megatron_lm_available,
     is_mlflow_available,
