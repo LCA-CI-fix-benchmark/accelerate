@@ -33,15 +33,9 @@ import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
-    AccelerateTestCase,
-    TempDirTestCase,
-    execute_subprocess_async,
-    require_non_cpu,
-    require_deepspeed,
-    require_multi_device,
-    slow,
-)
 from accelerate.test_utils.training import RegressionDataset
+from accelerate.utils.constants import *
+from accelerate import AccelerateTestCase, TempDirTestCase, execute_subprocess_async, require_deepspeed, require_multi_device, slow
 from accelerate.utils.dataclasses import DeepSpeedPlugin
 from accelerate.utils.deepspeed import (
     DeepSpeedEngineWrapper,
