@@ -25,7 +25,12 @@ import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
-    AccelerateTestCase,
+from accelerate.utils.constants import (
+    PYTORCH_MULTI_DEVICE_TEST_SKIP_REASON,
+    PYTORCH_NCCL_NOT_BUILT_TEST_SKIP_REASON,
+)
+
+AccelerateTestCase,
     TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
@@ -33,7 +38,6 @@ from accelerate.test_utils.testing import (
     require_multi_device,
     slow,
 )
-from accelerate.utils.constants import (
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
     FSDP_SHARDING_STRATEGY,
