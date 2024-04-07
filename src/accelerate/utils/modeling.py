@@ -34,7 +34,6 @@ from .imports import is_mps_available, is_npu_available, is_xpu_available, is_pe
 from .offload import load_offloaded_weight, offload_weight, save_offload_index
 from .tqdm import is_tqdm_available, tqdm
 
-
 if is_npu_available(check_device=False):
     import torch_npu  # noqa: F401
 
