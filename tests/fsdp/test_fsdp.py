@@ -25,15 +25,17 @@ import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
+```python
     AccelerateTestCase,
-    TempDirTestCase,
     execute_subprocess_async,
-    require_non_cpu,
     require_fsdp,
     require_multi_device,
+    require_non_cpu,
     slow,
+    TempDirTestCase,
 )
 from accelerate.utils.constants import (
+```
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
     FSDP_SHARDING_STRATEGY,
