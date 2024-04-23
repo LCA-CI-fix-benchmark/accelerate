@@ -1,6 +1,20 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under ttry:
+    mixed_precision = PrecisionType(args.mixed_precision.lower())
+    current_env["ACCELERATE_MIXED_PRECISION"] = str(mixed_precision)
+except ValueError:
+    raise ValueError(
+        f"Unknown mixed_precision mode: {args.mixed_precision.lower()}. Choose between {PrecisionType.list()}."
+    )
+
+try:
+    dynamo_backend = DynamoBackend(args.dynamo_backend.upper())
+    current_env["ACCELERATE_DYNAMO_BACKEND"] = dynamo_backend.value
+except ValueError:
+    raise ValueError(
+        f"Unknown dynamo backend: {args.dynamo_backend.upper()}. Choose between {DynamoBackend.list()}."
+    )se, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

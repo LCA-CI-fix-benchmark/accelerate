@@ -10,7 +10,32 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# WITHOUT WARRANTIES OR for distributed_type in [
+    DistributedType.MULTI_CPU,
+    DistributedType.MULTI_XPU,
+    DistributedType.MULTI_GPU,
+    DistributedType.MULTI_NPU,
+    DistributedType.TPU,
+]:
+    machine_type = str(distributed_type).split(".")[1].replace("MULTI_", "")
+    if machine_type == "TPU":
+        machine_type += " cores"
+    else:
+        machine_type += "(s)"
+    num_processes = _ask_field(
+        f"How many {machine_type} should be used for distributed training? [1]:",
+        int,
+        default=1,
+        error_message="Please enter an integer.",
+    )
+
+for distributed_type in [DistributedType.FSDP, DistributedType.DEEPSPEED, DistributedType.MEGATRON_LM]:
+    num_processes = _ask_field(
+        "How many GPU(s) should be used for distributed training? [1]:",
+        int,
+        default=1,
+        error_message="Please enter an integer.",
+    )ither express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
