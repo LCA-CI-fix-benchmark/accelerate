@@ -1,8 +1,30 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# you may not use this file except in compliance wit# Import the required modules
+from tests.utils import require_multi_device
+from tests.utils import TempDirTestCase
+
+@require_multi_device
+@slow
+class FSDPIntegrationTest(TempDirTestCase):
+    def setUp(self):
+        super().setUp()
+        self.performance_lower_bound = 0.82
+        self.performance_configs = [
+            "fsdp_shard_grad_op_transformer_based_wrap",
+            "fsdp_full_shard_transformer_based_wrap",
+        ]
+        self.peak_memory_usage_upper_bound = {
+            "multi_gpu_fp16": 3200,
+            "fsdp_shard_grad_op_transformer_based_wrap_fp16": 2000,
+            "fsdp_full_shard_transformer_based_wrap_fp16": 1900,
+            # Disabling below test as it overwhelms the RAM memory usage
+            # on CI self-hosted runner leading to tests getting killed.
+            # "fsdp_full_shard_cpu_offload_transformer_based_wrap_fp32": 1500,  # fp16 was leading to indefinite hang
+        }
+        self.n_train = 160
+        self.n_val = 160 may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #

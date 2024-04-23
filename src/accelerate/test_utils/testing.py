@@ -1,8 +1,59 @@
 # Copyright 2021 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# you may not use this fileimport unittest
+import torch
+
+def is_timm_available():
+    # Implement logic to check if timm library is available
+    pass
+
+def is_bnb_available():
+    # Implement logic to check if bitsandbytes library is available
+    pass
+
+def is_tpu_available():
+    # Implement logic to check if TPUs are available
+    pass
+
+def require_transformers(test_case):
+    """
+    Decorator marking a test that requires transformers. These tests are skipped when they are not available.
+    """
+    return unittest.skipUnless(is_timm_available(), "test requires the timm library")(test_case)
+
+def require_bnb(test_case):
+    """
+    Decorator marking a test that requires bitsandbytes. These tests are skipped when they are not available.
+    """
+    return unittest.skipUnless(is_bnb_available(), "test requires the bitsandbytes library")(test_case)
+
+def require_tpu(test_case):
+    """
+    Decorator marking a test that requires TPUs. These tests are skipped when there are no TPUs available.
+    """
+    return unittest.skipUnless(is_tpu_available(), "test requires TPU")(test_case)
+
+def require_single_device(test_case):
+    """
+    Decorator marking a test that requires a single device. These tests are skipped when there is no hardware
+    accelerator available or number of devices is more than one.
+    """
+    return unittest.skipUnless(torch_device != "cpu" and device_count == 1, "test requires a hardware accelerator")(test_case)
+
+def require_single_gpu(test_case):
+    """
+    Decorator marking a test that requires CUDA on a single GPU. These tests are skipped when there are no GPU
+    available or number of GPUs is more than one.
+    """
+    return unittest.skipUnless(torch.cuda.device_count() == 1, "test requires a GPU")(test_case)
+
+def require_single_xpu(test_case):
+    """
+    Decorator marking a test that requires CUDA on a single XPU. These tests are skipped when there are no XPU
+    available or number of xPUs is more than one.
+    """
+    return unittest.skipUnless(torch.xpu.device_count() == 1, "test requires a XPU")(test_case) may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
