@@ -3,7 +3,10 @@ Copyright 2023 The HuggingFace Team. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+You may obtaiThe return block should be introduced with the `Returns:` prefix, followed by a line return and an indentation.
+
+Returns:
+    The return block should be introduced with the `Returns:` prefix, followed by a line return and an indentation.a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
