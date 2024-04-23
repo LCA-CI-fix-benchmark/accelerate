@@ -18,8 +18,12 @@ import argparse
 import importlib
 import logging
 import os
-import subprocess
-import sys
+import subprowith open(".deepspeed_env", "a") as f:
+    # Iterate over the current environment items and write to the file
+    for key, value in current_env.items():
+        if ";" in value or " " in value:
+            continue
+        f.write(f"{key}={value}\n")import sys
 from pathlib import Path
 
 import psutil

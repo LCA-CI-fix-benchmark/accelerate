@@ -1,13 +1,35 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file except in compliance wimport tempfile
+import os
+import json
+
+with tempfile.TemporaryDirectory() as dirpath:
+    # Get the DeepSpeed configuration dictionary for the specified stage
+    ds_config = self.get_config_dict(stage)
+    # Remove the "gradient_accumulation_steps" key from the configuration
+    del ds_config["gradient_accumulation_steps"]
+    
+    # Write the modified DeepSpeed configuration to a JSON file in the temporary directory
+    with open(os.path.join(dirpath, "ds_config.json"), "w") as out_file:
+        json.dump(ds_config, out_file)he License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed uimport inspect
+
+# Dictionary mapping stages to the number of iterations
+stage_iterations = {
+    # "deepspeed_stage_3_cpu_offload_fp16": 1900,
+}
+self.n_train = 160
+self.n_val = 160
+
+# Get the file path of the accelerate.test_utils module
+mod_file = inspect.getfile(accelerate.test_utils)he License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.

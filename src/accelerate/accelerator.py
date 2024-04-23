@@ -52,8 +52,23 @@ from .utils import (
     DistributedType,
     DynamoBackend,
     FP8RecipeKwargs,
-    FullyShardedDataParallelPlugin,
-    GradientAccumulationPlugin,
+    FullyShardedDataParallelPlugimport torch
+
+num_models = 0
+num_optimizers = 0
+model = None
+optimizer = None
+
+for obj in objects:
+    if isinstance(obj, (torch.nn.Module)):
+        model = obj
+        num_models += 1
+    elif isinstance(obj, (torch.optim.Optimizer)):
+        optimizer = obj
+        num_optimizers += 1
+
+if optimizer is None or model is None:
+    raise ValueError("You must pass a model and an optimizer together to `accelerate.prepare()` when using MS-AMP.") GradientAccumulationPlugin,
     GradScalerKwargs,
     InitProcessGroupKwargs,
     KwargsHandler,

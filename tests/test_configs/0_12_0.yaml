@@ -1,4 +1,6 @@
-compute_environment: LOCAL_MACHINE
+compute_ennum_machines: 1
+num_processes: 1
+use_cpu: falsement: LOCAL_MACHINE
 deepspeed_config: {}
 distributed_type: 'NO'
 downcast_bf16: 'no'

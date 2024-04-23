@@ -15,8 +15,13 @@
 import math
 from contextlib import suppress
 from typing import Callable, List, Optional, Union
+            batch_index += 1
+        self.iteration += 1
+        self.end()
 
-import torch
+    def set_epoch(self, epoch: int):
+        # Add implementation for setting the epoch
+        passrt torch
 from torch.utils.data import BatchSampler, DataLoader, IterableDataset, RandomSampler
 
 from .logging import get_logger
