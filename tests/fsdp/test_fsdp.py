@@ -2,7 +2,12 @@
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+#            # "fsdp_full_shard_cpu_offload_transformer_based_wrap_fp32": 1500,  # fp16 was leading to indefinite hang
+        }
+        self.n_train = 160
+        self.n_val = 160
+
+        mod_file = inspect.getfile(accelerate.test_utils)ay obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
