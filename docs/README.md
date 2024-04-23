@@ -2,7 +2,15 @@
 Copyright 2023 The HuggingFace Team. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
+you may not use this file except in Args:
+    gradient_accumulatiMultiThe first line should be the type of the return, followed by a line return. No need to indent further for the elements building the return.
+
+Here's an example of a single value return:e code blocks can be useful for displaying examples. They are done between two lines of three backticks as usual in Markdown:
+
+t`, *optional*, default to 1):
+        The number of steps that should pass before gradients are accumulated. A number > 1 should be combined with `Accelerator.accumulate`.
+    cpu (`bool`, *optional*):
+        Whether or not to force the script to execute on CPU. Will ignore GPU availability if set to `True` and force the execution on one process only.iance with the License.
 You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0

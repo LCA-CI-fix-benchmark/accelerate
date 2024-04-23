@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 
-# Copyright 2022 The HuggingFace Team. All rights reserved.
+# Copyright 2022 The HuggingFace     lines (`List[str]`):
+        Source code of a script separated by line.
+"""
+retudiff_from_two = [line for line in full_file_contents if line not in secondary_file_func]
+diff_from_example = [line for line in diff_from_example if line not in diff_from_two]
+
+return diff_from_exampleline for line in lines if not line.lstrip().startswith("#") and line != "\n"]All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

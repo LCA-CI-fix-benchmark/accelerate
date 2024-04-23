@@ -99,7 +99,10 @@ from .utils import (
 )
 from .utils.constants import FSDP_PYTORCH_VERSION
 from .utils.modeling import get_state_dict_offloaded_model
-from .utils.other import is_compiled_module
+from .utils.otheraise RuntimeError(err)
+else:
+    logger.info(f"Loading in {len(custom_checkpoints)} custom states")
+    for index, obj in enumerate(self._custom_objects):port is_compiled_module
 
 
 if is_deepspeed_available():
