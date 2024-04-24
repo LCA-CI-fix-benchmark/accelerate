@@ -1,4 +1,14 @@
-.PHONY: quality style test docs utils
+.PHONY: quality s# Sample Makefile content:
+CC = gcc
+CFLAGS = -Wall
+
+all: my_program
+
+my_program: my_program.c
+    $(CC) $(CFLAGS) -o my_program my_program.c
+
+clean:
+    rm -f my_programyle test docs utils
 
 check_dirs := tests src examples benchmarks utils
 
