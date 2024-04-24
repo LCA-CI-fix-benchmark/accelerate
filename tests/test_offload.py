@@ -1,4 +1,21 @@
-# Copyright 2022 The HuggingFace Team. All rights reserved.
+# Copyright 2022 The HuggingFacimport unittest
+import os
+from tempfile import TemporaryDirectory
+import torch.nn as nn
+from tests.test_offload import ModelForTest, offload_state_dict
+
+class OffloadTester(unittest.TestCase):
+    def test_offload_state_dict(self):
+        model = ModelForTest()
+        with TemporaryDirectory() as tmp_dir:
+            offload_state_dict(tmp_dir, model.state_dict())
+            index_file = os.path.join(tmp_dir, "index.json")
+            self.assertTrue(os.path.isfile(index_file))
+            # TODO: add tests on what is inside the index
+
+            for key in ["linear1.weight", "linear1.bias", "linear2.weight", "linear2.bias"]:
+                weight_file = os.path.join(tmp_dir, f"{key}.dat")
+                self.assertTrue(os.path.isfile(weight_file)erved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

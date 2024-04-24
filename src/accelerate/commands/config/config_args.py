@@ -2,7 +2,15 @@
 
 # Copyright 2021 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Ap        config_dict["use_cpu"] = False
+        if "debug" not in config_dict:
+            config_dict["debug"] = False
+        extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys()))
+        if extra_keys:
+            raise ValueError(
+                f"The config file at {json_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
+                " version or fix (and potentially remove) these keys from your config file."
+            )nse, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

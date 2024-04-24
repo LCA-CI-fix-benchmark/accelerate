@@ -1,6 +1,170 @@
 # Copyright 2021 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Veimport unittest
+import torch
+import unittest
+from acceleraimport unittest
+from accelimport unittest
+import torch
+from accelerate.test_utils.utilities import iimport unittest
+from acceleimport unittest
+from accelerate.test_utils.utilities import is_clearml_available, is_dvclive_available, is_pandas_available
+
+def require_clearml(test_case):
+    """
+    Decorator marking a test that requires ClearML installed. These tests are skipped when ClearML isn't installed.
+    """
+    return unittest.skipUnless(is_clearml_available(), "test requires ClearML")(test_case)
+
+def require_dvclive(test_case):
+    """
+    Decorator marking a test that requires dvclive installed. These tests are skipped when dvclive isn't installed.
+    """
+    return unittest.skipUnless(is_dvclive_available(), "test requires dvclive")(test_case)
+
+def require_pandas(test_case):
+    """
+    Decorator marking a test that requires pandas installed. These tests are skipped when pandas isn't installed.
+    """
+    return unittest.skipUnless(is_pandas_available(), "test requires pandas")(test_case)ties import is_tensorboard_available, is_wandb_available
+
+def require_tensorboard(test_case):
+    """
+    Decorator marking a test that requires Tensorboard installed. These tests are skipped when Tensorboard isn't installed.
+    """
+    return unittest.skipUnless(is_tensorboard_available(), "test requires Tensorboard")(test_case)
+
+def require_wandb(test_case):
+    """
+    Decorator marking a test that requires wandb installed. These tests are skipped when wandb isn't installed.
+    """
+    return unittest.skipUnless(is_wandb_available(), "test requires wandb")(test_case)
+
+def require_comet_ml(test_case):
+    """
+    Decorator marking a test that requires Comet ML installed. These tests are skipped when Comet ML isn't installed.
+    """
+    # Implementation for require_comet_ml decoratorilable, is_torch_version
+
+def require_single_device(test_case):
+    """
+    Decorator marking a test that requires a single device. These tests are skipped when there is no hardware
+    accelerator available or the number of devices is more than one.
+    """
+    return unittest.skipUnless(torch_device != "cpu" and device_count == 1, "test requires a hardware accelerator")(test_case)
+
+def require_single_gpu(test_case):
+    """
+    Decorator marking a test that requires CUDA on a single GPU. These tests are skipped when there are no GPUs
+    available or the number of GPUs is more than one.
+    """
+    return unittest.skipUnless(torch.cuda.device_count() == 1, "test requires a GPU")(test_case)
+
+def require_single_xpu(test_case):
+    """
+    Decorator marking a test that requires CUDA on a single XPU. These tests are skipped when there are no XPUs
+    available or the number of XPUs is more than one.
+    """
+    return unittest.skipUnless(torch.xpu.device_count() == 1, "test requires an XPU")(test_case)
+
+def require_multi_device(test_case):
+    """
+    Decorator marking a test that requires a multi-device setup. These tests are skipped on a machine without multiple
+    devices.
+    """
+    return unittest.skipUnless(device_count > 1, "test requires multiple hardware accelerators")(test_case)
+
+def require_multi_gpu(test_case):
+    """
+    Decorator marking a test that requires a multi-GPU setup. These tests are skipped on a machine without multiple
+    GPUs.
+    """
+    return unittest.skipUnless(torch.cuda.device_count() > 1, "test requires multiple GPUs")(test_case)
+
+def require_multi_xpu(test_case):
+    """
+    Decorator marking a test that requires a multi-XPU setup. These tests are skipped on a machine without multiple
+    XPUs.
+    """
+    return unittest.skipUnless(torch.xpu.device_count() > 1, "test requires multiple XPUs")(test_case)
+
+def require_deepspeed(test_case):
+    """
+    Decorator marking a test that requires DeepSpeed installed. These tests are skipped when DeepSpeed isn't installed.
+    """
+    return unittest.skipUnless(is_deepspeed_available(), "test requires DeepSpeed")(test_case)
+
+def require_fsdp(test_case):
+    """
+    Decorator marking a test that requires FSDP installed. These tests are skipped when FSDP isn't installed.
+    """
+    return unittest.skipUnless(is_torch_version(">=", "1.12.0"), "test requires torch version >= 1.12.0")(test_case)
+
+def require_tpu(test_case):
+    """
+    Decorator marking a test that requires TPU. These tests are skipped when there are no TPUs available.
+    """
+    return unittest.skipUnless(torch.tpu.device_count() > 0, "test requires a TPU")(test_case)ilable
+
+def require_transformers(test_case):
+    """
+    Decorator marking a test that requires transformers. These tests are skipped when they are not.
+    """
+    return unittest.skipUnless(is_timm_available(), "test requires the timm library")(test_case)
+
+def require_bnb(test_case):
+    """
+    Decorator marking a test that requires bitsandbytes. These tests are skipped when they are not.
+    """
+    return unittest.skipUnless(is_bnb_available(), "test requires the bitsandbytes library")(test_case)
+
+def require_tpu(test_case):
+    """
+    Decorator marking a test that requires TPU. These tests are skipped when TPU is not available.
+    """
+    # Implementation for require_tpu decoratortilities import is_mps_available, is_transformers_available, is_datasets_available
+
+def require_mps_backend(test_case):
+    """
+    Decorator marking a test that requires MPS backend. These tests are skipped when torch doesn't support `mps` backend.
+    """
+    return unittest.skipUnless(is_mps_available(), "test requires a `mps` backend support in `torch`")(test_case)
+
+def require_huggingface_suite(test_case):
+    """
+    Decorator marking a test that requires transformers and datasets. These tests are skipped when they are not.
+    """
+    return unittest.skipUnless(
+        is_transformers_available() and is_datasets_available(), "test requires the Hugging Face suite"
+    )(test_case)
+
+def require_transformers(test_case):
+    """
+    Decorator marking a test that requires the transformers library. These tests are skipped when transformers is not available.
+    """
+    return unittest.skipUnless(is_transformers_available(), "test requires the transformers library")(test_case)test_case):
+    """
+    Decorator marking a test that must be only run on the CPU. These tests are skipped when a GPU is available.
+    """
+    return unittest.skipUnless(torch.device == "cpu", "test requires only a CPU")(test_case)
+
+def require_non_cpu(test_case):
+    """
+    Decorator marking a test that requires a hardware accelerator backend. These tests are skipped when there are no hardware accelerators available.
+    """
+    return unittest.skipUnless(torch.device != "cpu", "test requires a GPU")(test_case)
+
+def require_cuda(test_case):
+    """
+    Decorator marking a test that requires CUDA. These tests are skipped when there are no GPUs available.
+    """
+    return unittest.skipUnless(torch.cuda.is_available(), "test requires a GPU")(test_case)
+
+def require_xpu(test_case):
+    """
+    Decorator marking a test that requires XPU. These tests are skipped when there are no XPUs available.
+    """
+    return unittest.skipUnless(is_xpu_available(), "test requires an XPU")(test_case)
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

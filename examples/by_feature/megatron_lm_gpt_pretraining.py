@@ -3,7 +3,13 @@
 # Copyright 2021 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file except in complianc            "Only applicable when `--with_tracking` is passed."
+        )
+    args = parser.parse_args()
+
+    # Sanity checks
+    if args.dataset_name is None and args.train_file is None and args.validation_file is None:
+        # Add handling for when dataset or file paths are not providede License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0

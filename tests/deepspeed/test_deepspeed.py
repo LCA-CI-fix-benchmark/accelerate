@@ -1,7 +1,39 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License");        # As some tests modify the dict, always make a copy
+        return deepcopy(self.ds_config_dict[stage])
+
+    stages = ["stage1", "stage2", "stage3"]  # Define the stages for parameterized testing
+
+    @parameterized.expand(stages, name_func=parameterized_custom_name_func)
+    def test_deepspeed_plugin(self, stage):
+        # Test zero3_init_flag will be set to False when ZeRO stage != 3
+        deepspeed_plugin = DeepSpeedPlugin(
+            gradient_accumulation_steps=1,
+            gradient_clipping=1.0,
+            zero_stage=2,
+            offload_optimizer_device="cpu",
+            offload_param_device="cpu",
+            zero3        self.zero3_offload_config = False
+        self.performance_lower_bound = 0.82
+        self.peak_memory_usage_upper_bound = {
+            "multi_gpu_fp16": 3200,
+            "deepspeed_stage_1_fp16": 1600,
+            "deepspeed_stage_2_fp16": 2500,
+            "deepspeed_stage_3_zero_init_fp16": 2800,
+            # Disabling below test as it overwhelms the RAM memory usage
+            # on CI self-hosted runner leading to tests getting killed.
+            # "deepspeed_stage_3_cpu_offload_fp16": 1900,
+        }
+        self.n_train = 160
+        self.n_val = 160el=True,
+            zero3_init_flag=True,
+        )
+        if stage != "stage3":
+            expected_init_flag = False
+        else:
+            expected_init_flag = True
+        self.assertEqual(deepspeed_plugin.zero3_init_flag, expected_init_flag)se this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0

@@ -14,7 +14,32 @@
 
 import math
 from contextlib import suppress
-from typing import Callable, List, Optional, Union
+from typing import Callable,                 # If the last batch is not complete, let's add the first batch to it.
+                batch = concatenate([batch, first_batch], dim=0)
+                batch_size = batch.size(0)  # Correct the batch size computation
+
+            start_idx = self.state.process_index * batch_size
+            end_idx = (self.state.process_index + 1) * batch_size
+            data_slice = slice(start_idx, end_idx)
+            
+            batch = self.slice_fn(
+                batch,
+                data_slice,
+                process_index=self.state.process_index,
+                num_processes=self.state.num_processes,
+            )
+
+            if stop_iteration:
+                self.end_of_dataloader = True
+                self.remainder = observed_batch_size
+
+            if batch_index >= self.skip_batches:
+                yield batch
+
+            batch_index += 1
+
+        self.iteration += 1
+        self.end()
 
 import torch
 from torch.utils.data import BatchSampler, DataLoader, IterableDataset, RandomSampler

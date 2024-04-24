@@ -1,6 +1,34 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apacheimport re
+import torch
+
+class CustomDtype:
+    INT4 = "INT4"
+    FP8 = "FP8"
+
+def dtype_byte_size(dtype: torch.dtype):
+    """
+    Returns the size (in bytes) occupied by one parameter of type `dtype`.
+
+    Example:
+
+    ```py
+    >>> dtype_byte_size(torch.float32)
+    4
+    ```
+    """
+    if dtype == torch.bool:
+        return 1 / 8
+    elif dtype == CustomDtype.INT4:
+        return 1 / 2
+    elif dtype == CustomDtype.FP8:
+        return 1
+    bit_search = re.search(r"[^\d](\d+)$", str(dtype))
+    if bit_search is None:
+        raise ValueError(f"`dtype` is not a valid dtype: {dtype}.")
+    bit_size = int(bit_search.groups()[0])
+    return bit_size // 8 "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
