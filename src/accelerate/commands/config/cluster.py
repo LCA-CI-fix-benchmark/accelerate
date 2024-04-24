@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 
-# Copyright 2021 The HuggingFace Team. All rights reserved.
+# Copyright 2021 The HuggingFace    num_machines = 1
+    num_processes = 1
+    gpu_ids = None
+    main_process_ip = None
+    main_process_port = None
+    rdzv_backend = "static"
+    same_network = True
+    debug = Falsell rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

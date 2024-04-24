@@ -28,8 +28,20 @@ from .state import PartialState
 from .utils import (
     LoggerType,
     is_aim_available,
-    is_clearml_available,
-    is_comet_ml_available,
+    is_clearml_ava            for log_type in log_with:
+                if log_type not in LoggerType and not issubclass(type(log_type), GeneralTracker):
+                    raise ValueError(f"Unknown logger type: {log_type}")
+    """
+    loggers = []
+    if log_with is not None:
+        if not isinstance(log_with, (list, tuple)):
+            log_with = [log_with]
+        if "all" in log_with or LoggerType.ALL in log_with:
+            loggers = [o for o in log_with if issubclass(type(o), GeneralTracker)] + get_available_trackers()
+        else:
+            for log_type in log_with:
+                if log_type not in LoggerType and not issubclass(type(log_type), GeneralTracker):
+                    raise ValueError(f"Unknown logger type: {log_type}")t_ml_available,
     is_dvclive_available,
     is_mlflow_available,
     is_tensorboard_available,

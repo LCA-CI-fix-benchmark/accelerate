@@ -4,9 +4,42 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
+#     http:import unittest
+
+def require_tracker(tracker_func, message):
+    """
+    Decorator marking a test that requires a specific tracker installed.
+    These tests are skipped when the tracker isn't installed.
+    """
+    return unittest.skipUnless(tracker_func(), message)
+
+def require_wandb(test_case):
+    return require_tracker(is_wandb_available, "test requires wandb")(test_case)
+
+def require_tensorboard(test_case):
+    return require_tracker(is_tensorboard_available, "test requires Tensorboard")(test_case)
+
+def require_comet_ml(test_case):
+    return require_tracker(is_comet_ml_available, "test requires comet_ml")(test_case)
+
+def require_clearml(test_case):
+    return require_tracker(is_clearml_available, "test requires clearml")(test_case)
+
+def require_dvclive(test_case):
+    return require_tracker(is_dvclive_available, "test requires dvclive")(test_case)
+
+def require_pandas(test_case):
+    return require_tracker(is_pandas_available, "test requires pandas")(test_case)
+
+_atleast_one_tracker_available = (
+    any([
+        is_wandb_available(),
+        is_tensorboard_available(),
+        is_clearml_available(),
+        is_dvclive_available(),
+        is_pandas_available()
+    ]) and not is_comet_ml_available()
+)ss required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and

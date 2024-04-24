@@ -2,9 +2,35 @@
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
+# You may obtain a copy of the Li        output = run_command(
+            self.cmd
+            + [
+                "--config_file",
+                "tests/test_configs/latest.yaml",
+                "--install_accelerate",
+                "--accelerate_version",
+                "12.0.0",
+                "--debug",
+            ],
+            return_stdout=True,
+        )
+        self.assertIn(
+            f'{self.gcloud} test-tpu --zone us-central1-a --command {self.base_output}; pip install accelerate==12.0.0; echo "hello world"; echo "this is a second command" --worker all',
+            output,
+        )
+
+class ModelEstimatorTester(unittest.TestCase):
+    """
+    Test case for checking the output of `accelerate estimate-memory` is correct.
+
+    - Uses `estimate_command` when trying to catch raised errors
+    - Uses `gather_data` when just verifying the calculations are correct
+    """
+
+    parser = estimate_command_parser()
+
+    def test_method_name(self):
+        # Add test method implementation here.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,

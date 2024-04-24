@@ -24,7 +24,22 @@ from pathlib import Path
 import torch
 from parameterized import parameterized
 from torch.utils.data import BatchSampler, DataLoader, RandomSampler, SequentialSampler
-from transformers import AutoConfig, AutoModel, AutoModelForCausalLM, get_scheduler
+from t        self.zero3_offload_config = False
+        self.performance_lower_bound = 0.82
+        self.peak_memory_usage_upper_bound = {
+            "multi_gpu_fp16": 3200,
+            "deepspeed_stage_1_fp16": 1600,
+            "deepspeed_stage_2_fp16": 2500,
+            "deepspeed_stage_3_zero_init_fp16": 2800,
+            # Disabling below test as it overwhelms the RAM memory usage
+            # on CI self-hosted runner leading to tests getting killed.
+            # "deepspeed_stage_3_cpu_offload_fp16": 1900,
+        }
+        self.n_train = 160
+        self.n_val = 160
+
+        mod_file = inspect.getfile(accelerate.test_utils)
+        self.test_scripts_folder = os.path.sep.join(mod_file.split(os.path.sep)[:-1] + ["scripts", "external_deps"])rt AutoConfig, AutoModel, AutoModelForCausalLM, get_scheduler
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available

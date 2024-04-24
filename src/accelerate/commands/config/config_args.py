@@ -2,7 +2,24 @@
 
 # Copyright 2021 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Ap            config_dict["use_cpu            config_dict["dynamo_config"] = {} if dynamo_backend == "NO" else {"dynamo_backend": dynamo_backend}
+        if "use_cpu" not in config_dict:
+            config_dict["use_cpu"] = False
+        if "debug" not in config_dict:
+            config_dict["debug"] = False
+        extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys()))
+        if len(extra_keys) > 0:
+            raise ValueError(
+                f"The config file at {yaml_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate` "
+                "version or fix (and potentially remove) these keys from your config file."
+            )        if "debug" not in config_dict:
+            config_dict["debug"] = False
+        extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys()))
+        if len(extra_keys) > 0:
+            raise ValueError(
+                f"The config file at {json_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate` "
+                "version or fix (and potentially remove) these keys from your config file."
+            )nse, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

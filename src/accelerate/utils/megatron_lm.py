@@ -1,7 +1,10 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may        if args.pipeline_model_parallel_size is not None:
+            args.pipeline_model_parallel_split_rank = args.pipeline_model_parallel_size // 2
+        model = get_model(model_provider_func, model_type)
+        return modelt use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0

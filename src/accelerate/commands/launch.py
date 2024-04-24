@@ -20,10 +20,30 @@ import logging
 import os
 import subprocess
 import sys
-from pathlib import Path
+from pathlib impo    import torch_xla.distributed.xla_multiprocessing as xmp
 
-import psutil
-import torch
+    if args.no_python:
+        raise ValueError("--no_python cannot be used with TPU launcher")
+
+    args, current_env = prepare_tpu(args, {})
+
+    if args.module:
+        mod_name = args.training_script
+    else:
+        # Import training_script as a module
+        script_path = Path(args.training_script)
+        sys.path.append(str(script_path.parent.resolve()))
+        mod_name = script_path.stem
+
+    mod = importlib.import_module(mod_name)
+    if not hasattr(mod, args.main_training_function):
+        raise ValueError(
+            f"Your training script should include a function named {args.main_training_function}, or you should provide a "
+            "different value for `--main_training_function`."
+        )
+
+    # Patch sys.argv
+    sys.argv = [mod.__file__] + args.training_script_argsmport torch
 
 from accelerate.commands.config import default_config_file, load_config_from_file
 from accelerate.commands.config.config_args import SageMakerConfig

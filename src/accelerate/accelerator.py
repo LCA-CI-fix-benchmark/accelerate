@@ -23,8 +23,47 @@ import re
 import shutil
 import sys
 import warnings
-from collections import OrderedDict
-from contextlib import contextmanager
+from collections import OrderedDict    @contextmanager
+    def main_process_first(self):
+        """
+        Lets the main process go first inside a with block.
+
+        The other processes will enter the with block after the main process exits.
+
+        Example:
+
+        ```python
+        >>> from accelerate import Accelerator
+
+        >>> accelerator = Accelerator()
+        >>> with accelerator.main_process_first():
+        ...     # This will be printed first by process 0 then in a seemingly
+        ...     # random order by the other processes.
+        ...     print(f"This will be printed by process {accelerator.process_index}")
+        ```
+        """
+        with self.state.main_process_first():
+            yield
+
+    @contextmanager
+    def local_main_process_first(self):
+        """
+        Lets the local main process go inside a with block.
+
+        The other processes will enter the with block after the main process exits.
+
+        Example:
+
+        ```python
+        >>> from accelerate import Accelerator
+
+        >>> accelerator = Accelerator()
+        >>> with accelerator.local_main_process_first():
+        ...     # Implementation specific to local main process first
+        ```
+        """
+        with self.state.local_main_process_first():
+            yieldager
 from functools import partial
 from types import MethodType
 from typing import Any, Callable, Union

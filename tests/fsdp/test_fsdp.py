@@ -4,7 +4,29 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#           self.test_file_path = os.path.join(self.test_scripts_folder, "test_checkpointing.py")
+        cmd = [
+            "accelerate",
+            "launch",
+            "--num_processes=2",
+            "--num_machines=1",
+            "--machine_rank=0",
+            "--use_fsdp",
+            "--mixed_precision=fp16",
+            "--fsdp_transformer_layer_cls_to_wrap=BertLayer",
+        ]
+
+        for i, strategy in enumerate(FSDP_SHARDING_STRATEGY):
+            cmd_config = cmd.copy()
+            cmd_config.append(f"--fsdp_sharding_strategy={strategy}")
+            if strategy != "FULL_SHARD":
+                continue
+            state_dict_config_index = len(cmd_config)
+            for state_dict_type in FSDP_STATE_DICT_TYPE:
+                # Todo: Currently failing for `LOCAL_STATE_DICT` with error
+                # Unexpected key(s) in state_dict: "_fsdp_wrapped_module._flat_param".
+                if state_dict_type == "LOCAL_STATE_DICT":
+                    continue/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,

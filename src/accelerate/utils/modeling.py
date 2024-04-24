@@ -21,8 +21,46 @@ import os
 import re
 import shutil
 import tempfile
-from collections import OrderedDict, defaultdict
-from typing import Dict, List, Optional, Tuple, Union
+from collections import Ordered    for k in list(max_memory.keys()):
+        if k not in all_devices:
+            raise ValueError(
+                f"Device {k} is not recognized, available devices are integers (for GPU/XPU), 'mps', 'cpu' and 'disk'"
+            )
+    max_memory = {k: max_memory[k] for k in all_devices}defaultdict
+from typing        # Find tied parameter groups that contain the current name
+        tied_param_groups = [
+            tied_group
+            for tied_group in tied_parameters
+            if any(name in k for            raise OSError(
+                f"The safetensors archive passed at {checkpoint_file} does not contain valid metadata. Please ensure "
+                "that you save your model with the `save_pretrained` method."
+            )
+        elif metadata["format"] != "pt":
+            raise ValueError(f"The checkpoint passed was saved with {metadata['format']}, but we need the 'pt' format.")
+        
+        if device_map is None:
+            return safe_load_file(checkpoint_file)
+        else:
+            # Load everything directly if there is only one device
+            if len(set(device_map.values())) == 1:
+                return safe_load_file(checkpoint_file, device=list(device_map.values())[0])
+
+            # Remove "disk" device and ensure "cpu" as a fallback option
+            devices = list(set(device_map.values()) - {"disk"})
+            if "cpu" not in devices:
+                devices.append("cpu") and not all(name in k for k in tied_group)
+        ]
+        
+        # Print the relevant tied parameter groups if verbose mode is enabled
+        if verbose and len(tied_param_groups) > 0:
+            print(f"  Found the relevant tied param groups {tied_param_groups}")
+        
+        # Identify parameters tied to the current module but not in the current module
+        tied_params = sum([[p for p in tied_group if name not in p] for tied_group in tied_param_groups], [])
+        
+        # Print the tied parameters that need to be considered if verbose mode is enabled
+        if verbose and len(tied_params) > 0:
+            print(f"  So those parameters need to be taken into account {tied_params}"), List, Optional, Tuple, Union
 
 import torch
 import torch.nn as nn
