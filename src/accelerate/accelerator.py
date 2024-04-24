@@ -4,9 +4,79 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
+#     http://www.apache.org/licenses/LICENSEif deepspeed_plugin is None:  # init from env variables
+    deepspeed_plugin = (
+        self.state = AcceleratorSif gradient_acraise Value        self.scaler = None
+        self.native_amp = False
+        err = "{mode} mixed precision requires {requirement}"
+        if (
+                ```python
+        # Assume there are two processes
+        from accelerate import Accelerator
+
+        accelerator = Accelerator()
+        with accelerator.split_between_processes(["A", "B", "C"]) as inputs:
+            print(inputs)
+        # Process 0
+        ["A", "B"]
+        # Process 1
+        ["C"]
+
+        with accelerator.split_between_processes(["A", "B", "C"], apply_padding=True) as inputs:
+            print(inputs)
+        # Process 0
+        ["A", "B"]
+        # Process 1
+        ["C", None]
+        ```_precision == "fp16"
+            and self.device.type != "cpu"
+            and self.distributed_type not in (DistributedType.DEEPSPEED, DistributedType.MEGATRON_LM)
+        ):
+            self.native_amp = True
+            if self.device.type not in ("xpu", "cuda", "mps", "npu"):
+                raise ValueError(err.format(mode="fp16", requirement="a GPU"))
+            if self.scaler_handler is not None:
+                kwargs = self.scaler_handler.to_kwargs()
+            
+            if self.distributed_type == DistributedType.FSDP:
+                from torch.distributed.fsdp.sharded_grad_scaler import ShardedGradScaleradient accumulation is not supported on TPU. Please set `gradient_accumulation_steps` to 1 and do not pass in a `GradientAccumulationPlugin` object."
+)ulation_steps != 1 and gradient_accumulation_plugin is not None:
+    raise ValueError(
+        "You can only pass one of `gradient_accumulation_steps` and `gradient_accumulation_plugin`. Please only pass in either `gradient_accumulation_steps` or `gradient_accumulation_plugin`."
+    )(
+    mixed_precision=mixed_precision,
+    cpu=cpu,
+    dynamo_plugin=dynamo_plugin,
+    deepspeed_plugin=deepspeed_plugin,
+    fsdp_plugin=fsdp_plugin,
+    megatron_lm_plugin=megatron_lm_plugin,
+    _from_accelerator=True,
+    **kwargs,
+)
+
+if log_with is not None:
+    trackers = filter_trackers(log_with, self.logging_dir)
+    if len(trackers) < 1:
+        warnings.warn(f"`log_with={log_with}` was passed but no supported trackers are currently installed.")
+    self.log_with = trackers
+
+if (
+    (mixed_precision != "bf16")
+    and getattr(self.state, "downcast_bfloat", False)
+    and (self.state.distributedType != DistributedType.TPU)
+):
+    raise ValueError("Can only use `downcast_bf16` when using `mixed_precision='bf16'` and on a TPU")s.environ.get("ACCELERATE_USE_DEEPSPEED", "false") == "true" else None
+    )
+else:
+    assert isinstance(
+        deepspeed_plugin, DeepSpeedPlugin
+    ), "`deepspeed_plugin` must be an `accelerate.utils.DeepSpeedPlugin` object."
+    if deepspeed_plugin:
+        if not is_deepspeed_available():
+            raise ImportError("DeepSpeed is not installed => run `pip install deepspeed` or build it from source.")
+        if compare_versions("deepspeed", "<", "0.9.3"):
+            raise ImportError("DeepSpeed version must be >= 0.9.3. Please update DeepSpeed.")
+    os.environ["ACCELERATE_USE_DEEPSPEED"] = "true"  # use DeepSpeed if plugin is provided required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and

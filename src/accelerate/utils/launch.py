@@ -7,8 +7,29 @@
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# distributed under the License is distributed on an "AS IS" BAS    source_dir = os.path.dirname(args.training_script)
+    if not source_dir:  # checks if string is empty
+        source_dir = "."
+    entry_point = os.path.basename(args.training_script)
+    if not entry_point.endswith(".py"):
+        raise ValueError(f'Your training script should be a python script and not "{entry_point}"')
+
+    print("Converting Arguments to Hyperparameters")
+    hyperparameters = _convert_nargs_to_dict(args.training_script_args)
+
+    try:
+        mixed_precision = PrecisionType(args.mixed_precision.lower())
+    except ValueError:
+        raise ValueError(
+            f"Unknown mixed_precision mode: '{args.mixed_precision.lower()}'. Choose between {PrecisionType.list()}."
+        )
+
+    try:
+        dynamo_backend = DynamoBackend(args.dynamo_backend.upper())
+    except ValueError:
+        raise ValueError(
+            f"Unknown dynamo backend: '{args.dynamo_backend.upper()}'. Choose between {DynamoBackend.list()}."
+        )S OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 

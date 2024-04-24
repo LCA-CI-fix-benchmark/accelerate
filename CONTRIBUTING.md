@@ -2,9 +2,75 @@
 Copyright 2022 The HuggingFace Team. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+you may not use this file exce   If you prefer to run the checks one after the other, the following command applies the
+   style corrections:
 
+   ```bash
+   $ make style
+   ```
+
+   `accelerate` also uses a few custom scripts to check for coding mistakes. Quality
+   control runs in CI, however you can also run the same checks with:
+
+   ```bash
+   $ make quality
+   ```
+
+   Once you're happy with your changes, add changed files using `git add` and
+   make a commit with `git commit` to record your changes locally:
+
+   ```bash
+   $ git add modified_file.py
+   $ git commit
+   ```
+
+   Please write [good commit messages](https://chris.beams.io/posts/git-commit/).
+
+   It is a good idea to sync your copy of the code with the original
+   repository regularly. This way you can quickly account for changes:
+
+   ```bash
+   $ git fetch upstream
+   $ git rebase upstream/main
+   ```
+
+   Push the changes to your account using:
+
+   ```bash
+   $ git push -u origin a-descriptive-name-for-my-changes
+   ```
+
+6. Once you are satisfied (**and the checklist below is happy too**), go to the
+   webpage of your fork on GitHub. Click on 'Pull request' to send your changes
+   to the project maintainers for review.
+
+7. It's ok if maintainers ask you for changes. It happens to core contributors
+   too! So everyone can see the changes in the Pull request, work in your local
+   branch and push the changes to your fork. They will automatically appear in
+   the pull request.
+
+
+### Checklist
+
+1. The title of your pull request should be a summary of its contribution;
+2. If your pull request addresses an issue, please mention the issue number in
+   the pull request description to make sure they are linked (and people
+   consulting the issue know you are working on it);
+3. To indicate a work in progress please prefix the title with `[WIP]`, or mark
+   the PR as a draft PR. These are useful to avoid duplicated work, and to differentiate
+   it from PRs ready to be merged;
+4. Make sure existing tests pass;
+5. Add high-coverage tests. No quality testing = no merge.
+
+See an example of a good PR here: https://github.com/huggingface/accelerate/pull/255
+
+### Tests
+
+An extensive test suite is included to test the library behavior and several examples. Library tests can be found in
+the [tests folder](https://github.com/huggingface/accelerate/tree/main/tests).
+
+We use `pytest` in order to run the tests. From the root of the
+repository, here's how to run tests with `pytest` for the library:
     http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
