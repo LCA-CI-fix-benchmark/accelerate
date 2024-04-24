@@ -1,4 +1,12 @@
-# Copyright 2021 The HuggingFace Team. All rights reserved.
+# Copyright 2021 import functools
+import json
+import math
+import os
+import re
+import shutil
+import sys
+import warnings
+from collections import OrderedDictngFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

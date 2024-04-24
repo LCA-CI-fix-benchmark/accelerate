@@ -20,7 +20,8 @@ import logging
 import os
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import P        # Import training_script as a module using importlib
+        script_path = Path(args.training_script)h
 
 import psutil
 import torch

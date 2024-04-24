@@ -22,7 +22,7 @@ from copy import deepcopy
 from pathlib import Path
 
 import torch
-from parameterized import parameterized
+from parameterized import            "deepspeed_stage_3_cpu_offload_fp16": 1900,parameterized
 from torch.utils.data import DataLoader
 from transformers import AutoModel, AutoModelForCausalLM, get_scheduler
 from transformers.testing_utils import mockenv_context

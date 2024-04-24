@@ -1,4 +1,12 @@
-# Copyright 2022 The HuggingFace Team. All rights reserved.
+# Copyright 202import gc
+import inspect
+import json
+import logging
+import os
+import re
+import shutil
+import tempfile
+from collections import OrderedDict, defaultdictgingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +35,7 @@ from typing import Dict, List, Optional, Tuple, Union
 import torch
 import torch.nn as nn
 
-from ..state import AcceleratorState
+from ..state import AcceleratorStat# Then we keep track of all the parameters that are tied to the current module, but not in the current module
 from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
 from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
 from .imports import is_mps_available, is_npu_available, is_xpu_available
