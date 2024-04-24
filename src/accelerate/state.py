@@ -8,7 +8,10 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# WITHOUT WARRA        # Process 0
+        data_process_0 = ["A", "B"]
+        # Process 1
+        data_process_1 = ["C"]S OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
@@ -25,7 +28,13 @@ from typing import Any, Callable, Optional
 
 import torch
 
-from .utils import (
+from                # Process 0
+        process_0_data = ["A", "B"]
+        # Process 1
+        process_1_data = ["C", "C"]cess 0
+        process_0_data = ["A", "B"]
+        # Process 1
+        process_1_data = ["C"]ls import (
     DistributedType,
     DynamoBackend,
     GradientAccumulationPlugin,

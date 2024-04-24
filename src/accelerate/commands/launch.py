@@ -22,7 +22,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-import psutil
+i        script_path = Path(args.training_script)ort psutil
 import torch
 
 from accelerate.commands.config import default_config_file, load_config_from_file
