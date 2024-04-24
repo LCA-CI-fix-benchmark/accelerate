@@ -1,6 +1,10 @@
 # Copyright 2021 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed import sys
+from pathlib import Path
+
+script_fpath = Path(args.training_script).resolve()
+sys.path.append(str(script_fpath.parent))der the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

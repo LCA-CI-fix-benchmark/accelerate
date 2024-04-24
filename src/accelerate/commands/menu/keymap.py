@@ -1,6 +1,6 @@
 # Copyright 2022 The HuggingFace Team and Brian Chao. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# License                        KEYMAP["delete"] - (1 << 9), under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

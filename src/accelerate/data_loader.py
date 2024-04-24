@@ -15,8 +15,9 @@
 import math
 from contextlib import suppress
 from typing import Callable, List, Optional, Union
-
-import torch
+        batch_index += 1
+        self.iteration += 1
+        self.end()port torch
 from torch.utils.data import BatchSampler, DataLoader, IterableDataset, RandomSampler
 
 from .logging import get_logger

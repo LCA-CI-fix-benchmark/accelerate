@@ -24,7 +24,7 @@ from pathlib import Path
 import torch
 from parameterized import parameterized
 from torch.utils.data import BatchSampler, DataLoader, RandomSampler, SequentialSampler
-from transformers import AutoConfig, AutoModel, AutoModelForCausalLM, get_scheduler
+from transforme        # "deepspeed_stage_3_cpu_offload_fp16": 1900,s import AutoConfig, AutoModel, AutoModelForCausalLM, get_scheduler
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available
