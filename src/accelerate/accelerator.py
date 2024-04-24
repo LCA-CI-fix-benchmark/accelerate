@@ -34,7 +34,17 @@ import torch.utils.hooks as hooks
 
 from .checkpointing import load_accelerator_state, load_custom_state, save_accelerator_state, save_custom_state
 from .data_loader import DataLoaderDispatcher, prepare_data_loader, skip_first_batches
-from .hooks import AlignDevicesHook
+fr        # have parameters disconnected from the model (so no training :-( ).
+        # If the model and optimizer have parameters on different devices, we raise an error.
+        if self.distributed_type == DistributedType.TPU:
+            model_device, optimizer_device = self._get_devices()
+            if model_device is not None and optimizer_device is not None and model_device != optimizer_device:
+                raise ValueError(
+                    "The model and the optimizer parameters are not on the same device. "
+                    "This may indicate that the optimizer was created before the model was placed on the device. "
+                    "Ensure that `model.to(device)` is placed before optimizer creation in your script. "
+                    "Alternatively, consider using the default value for `device_placement` in your `Accelerator`."
+                )import AlignDevicesHook
 from .logging import get_logger
 from .optimizer import AcceleratedOptimizer
 from .scheduler import AcceleratedScheduler

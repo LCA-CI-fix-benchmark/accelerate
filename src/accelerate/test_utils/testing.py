@@ -4,9 +4,12 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
+#     http:def require_any_tracker(test_case):
+    """
+    Decorator marking a test that requires at least one tracker (Wandb or Tensorboard) installed.
+    These tests are skipped when both Wandb and Tensorboard aren't installed
+    """
+    return unittest.skipUnless(_atleast_one_tracker_available, "test requires at least one tracker (Wandb or Tensorboard)")(test_case)ss required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and

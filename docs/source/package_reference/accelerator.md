@@ -1,7 +1,17 @@
 <!--Copyright 2021 The HuggingFace Team. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
-the License. You may obtain a copy of the License at
+t- accelerator = Accelerator()
++ accelerator = Accelerator(gradient_accumulation_steps=2)
+
+  for (input, label) in training_dataloader:
++     with accelerator.accumulate(model):
+          predictions = model(input)
+          loss = loss_function(predictions, labels)
+          accelerator.backward(loss)
+          optimizer.step()
+          scheduler.step()
+          optimizer.zero_grad()y obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 

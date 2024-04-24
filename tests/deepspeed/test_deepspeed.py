@@ -1,8 +1,40 @@
 # Copyright 2022 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# you may not use this file except in compliance wit        # Test if `gradient_accumulation_steps` is set to 1 when removed from config
+        del ds_config["gradient_accumulation_steps"]
+        with open(os.path.join(dirpath, "ds_config.json"), "w") as out_file:
+            json.dump(ds_config, out_file)
+        deepspeed_plugin = DeepSpeedPlugin(hf_ds_config=os.path.join(dirpath, "ds_config.json"))
+        self.assertEqual(deepspeed_plugin.deepspeed_config["gradient_accumulation_steps"], 1)
+        deepspeed_plugin.deepspeed_config = None
+
+        # Test `ValueError` is raised if `zero_optimization` is unavailable in config file
+        with tempfile.TemporaryDirectory() as dirpath:
+            ds_config = self.get_config_dict(stage)
+                 self.zero3_offload_config = False
+        self.performance_lower_bound = 0.82
+        self.peak_memory_usage_upper_bound = {
+            "multi_gpu_fp16": 3200,
+            "deepspeed_stage_1_fp16": 1600,
+            "deepspeed_stage_2_fp16": 2500,
+            "deepspeed_stage_3_zero_init_fp16": 2800,
+            # Disabling below test as it overwhelms the RAM memory usage
+            # on CI self-hosted runner leading to tests getting killed.
+            # "deepspeed_stage_3_cpu_offload_fp16": 1900,
+        }
+        self.n_train = 160
+        self.n_val = 160
+
+        mod_file = inspect.getfile(accelerate.test_utils)g["zero_optimization"]
+            with open(os.path.join(dirpath, "ds_config.json"), "w") as out_file:
+                json.dump(ds_config, out_file)
+            with self.assertRaises(ValueError) as cm:
+                deepspeed_plugin = DeepSpeedPlugin(hf_ds_config=os.path.join(dirpath, "ds_config.json"))
+            self.assertTrue(
+                "Please specify the ZeRO optimization config in the DeepSpeed config." in str(cm.exception)
+            )
+            deepspeed_plugin.deepspeed_config = None may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #

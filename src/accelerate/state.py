@@ -29,8 +29,33 @@ from .utils import (
     DistributedType,
     DynamoBackend,
     GradientAccumulationPlugin,
-    check_cuda_p2p_ib_support,
-    check_fp8_capability,
+    check_cuda_p2p_i    @contextmanager
+    def split_between_processes(self, inputs, apply_padding=True):
+        """
+        Split the inputs between different processes.
+        """
+        with PartialState().split_between_processes(inputs, apply_padding=apply_padding) as inputs:
+            yield inputs
+
+    @contextmanager
+    def main_process_first(self):
+        """
+        Lets the main process go first inside a with block.
+
+        The other processes will enter the with block after the main process exits.
+        """
+        with PartialState().main_process_first():
+            yield
+
+    @contextmanager
+    def local_main_process_first(self):
+        """
+        Lets the local main process go inside a with block.
+
+        The other processes will enter the with block after the main process exits.
+        """
+        with PartialState().local_main_process_first():
+            yieldbility,
     get_ccl_version,
     get_int_from_env,
     is_ccl_available,

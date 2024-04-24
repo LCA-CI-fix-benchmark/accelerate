@@ -1,6 +1,22 @@
 # Copyright 2021 The HuggingFace Team. All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+#     parser.add_argument("training_script_args", nargs=REMAINDER)
+
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+
+    # Import training_script as a module.
+    script_fpath = Path(args.training_script)
+    sys.path.append(str(script_fpath.parent.resolve()))
+    mod_name = script_fpath.stem
+    mod = importlib.import_module(mod_name)
+
+    # Patch sys.argv
+    sys.argv = [args.training_script] + args.training_script_args + ["--tpu_num_cores", str(args.num_cores)]
+    xmp.spawn(mod._mp_fn, args=(args,), nprocs=args.num_cores)Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #

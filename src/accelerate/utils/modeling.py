@@ -30,7 +30,16 @@ import torch.nn as nn
 from ..state import AcceleratorState
 from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
 from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
-from .imports import is_mps_available, is_npu_available, is_xpu_available
+from .imports import is_mps_avail        # and the other is not.
+        tied_param_groups = [
+            tied_group
+            for tied_group in tied_parameters
+            if any(name in k for k in tied_group) and not all(name in k for k in tied_group)
+        ]
+        if verbose and len(tied_param_groups) > 0:
+            print(f"  Found the relevant tied param groups {tied_param_groups}")
+        # Then we keep track of all the parameters that are tied to the current module, but not in the current module
+        tied_params = sum([[p for p in tied_group if name not in p] for tied_group in tied_param_groups], [])pu_available, is_xpu_available
 from .offload import load_offloaded_weight, offload_weight, save_offload_index
 from .tqdm import is_tqdm_available, tqdm
 

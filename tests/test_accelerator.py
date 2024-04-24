@@ -9,8 +9,31 @@ from parameterized import parameterized
 from torch.utils.data import DataLoader, TensorDataset
 
 from accelerate import DistributedType, infer_auto_device_map, init_empty_weights, load_checkpoint_and_dispatch
-from accelerate.accelerator import Accelerator
-from accelerate.state import GradientState, PartialState
+from accelerate.accelerator         with init_empty_weights():
+            model = AutoModelForCausalLM.from_pretrained(
+                "EleutherAI/gpt-neo-125m",
+            )
+            model.tie_weights()
+            device_map = infer_auto_device_map(model)
+            device_map["lm_head"] = 1
+
+            model = AutoModelForCausalLM.from_pretrained(
+                "EleutherAI/gpt-neo-125m",
+                load_in_8bit=True,
+                device_map=device_map,
+            )
+            accelerator = Accelerator()
+
+            # This should not work and get value error
+            with self.assertRaises(ValueError):
+                _ = accelerator.prepare(model)
+
+        PartialState._reset_state()
+
+    @slow
+    @require_bnb
+    @require_multi_gpu
+    def test_accelerator_bnb_multi_gpu_no_distributed(self):celerate.state import GradientState, PartialState
 from accelerate.test_utils import require_bnb, require_multi_gpu, slow
 from accelerate.test_utils.testing import AccelerateTestCase, require_cuda
 from accelerate.utils import patch_environment

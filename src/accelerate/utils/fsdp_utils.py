@@ -1,4 +1,18 @@
-# Copyright 2023 The HuggingFace Team. All rights reserved.
+# Copyright 20import torch
+
+from ..logging import get_logger
+from ..constants import FSDP_MODEL_NAME, FS    accelerator.wait_for_everyone()
+    if fsdp_plugin.state_dict_type == StateDictType.FULL_STATE_DICT:
+        # FSDP raises an error when a single GPU is used with `offload_to_cpu=True` for FULL_STATE_DICT
+        # so, only enable it when num_processes > 1
+        is_multi_process = accelerator.num_processes > 1
+        if is_multi_process:
+            fsdp_plugin.state_dict_config.offload_to_cpu = is_multi_process
+            fsdp_plugin.state_dict_config.rank0_only = is_multi_process
+    with FSDP.state_dict_type(
+        model, fsdp_plugin.state_dict_type, fsdp_plugin.state_dict_config, fsdp_plugin.optim_state_dict_config
+    ):
+        if fsdp_plugin.state_dict_type == StateDictType.FULL_STATE_DICT and type(model) != FSDP and accelerator.process_index != 0:ERSION, OPTIMIZER_NAMEe HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
