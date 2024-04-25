@@ -382,6 +382,7 @@ def attach_align_device_hook(
         weights_map (`Mapping[str, torch.Tensor]`, *optional*):
             When the model weights are offloaded, a (potentially lazy) map from param names to the tensor values.
         offload_buffers (`bool`, *optional*, defaults to `False`):
+            Placeholder for the description of the offload_buffers parameter.
             Whether or not to include the associated module's buffers when offloading.
         module_name (`str`, *optional*, defaults to `""`):
             The name of the module.

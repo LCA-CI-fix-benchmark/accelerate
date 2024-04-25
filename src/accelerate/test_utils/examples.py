@@ -67,7 +67,7 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
     `examples/by_feature/*` scripts.
 
     It utilizes `nlp_example.py` to extract out all of the repeated training code, so that only the new additional code
-    is examined and checked. If something *other* than `nlp_example.py` should be used, such as `cv_example.py` for the
+    is examined and checked. If something other than `nlp_example.py` should be used, such as `cv_example.py` for the
     `complete_cv_example.py` script, it should be passed in for the `secondary_filename` parameter.
 
     Args:
