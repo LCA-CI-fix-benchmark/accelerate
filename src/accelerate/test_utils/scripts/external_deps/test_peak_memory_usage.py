@@ -253,19 +253,19 @@ def main():
     parser.add_argument(
         "--n_train",
         type=int,
-        default=320,
+        default=800,
         help="Number of training examples to use.",
     )
     parser.add_argument(
         "--n_val",
         type=int,
-        default=160,
+        default=400,
         help="Number of validation examples to use.",
     )
     parser.add_argument(
         "--num_epochs",
         type=int,
-        default=1,
+        default=5,
         help="Number of train epochs.",
     )
     args = parser.parse_args()

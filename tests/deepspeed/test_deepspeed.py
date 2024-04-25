@@ -891,8 +891,8 @@ class DeepSpeedIntegrationTest(TempDirTestCase):
             "deepspeed_stage_1_fp16": 1600,
             "deepspeed_stage_2_fp16": 2500,
             "deepspeed_stage_3_zero_init_fp16": 2800,
-            # Disabling below test as it overwhelms the RAM memory usage
-            # on CI self-hosted runner leading to tests getting killed.
+            "deepspeed_stage_4_fp16": 2000,
+        }
             # "deepspeed_stage_3_cpu_offload_fp16": 1900,
         }
         self.n_train = 160
