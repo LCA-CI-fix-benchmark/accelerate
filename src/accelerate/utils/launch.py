@@ -440,11 +440,12 @@ def prepare_sagemager_args_inputs(
         )
 
     try:
-        dynamo_backend = DynamoBackend(args.dynamo_backend.upper())
-    except ValueError:
-        raise ValueError(
-            f"Unknown dynamo backend: {args.dynamo_backend.upper()}. Choose between {DynamoBackend.list()}."
-        )
+try:
+    dynamo_backend = DynamoBackend(args.dynamo_backend.upper())
+except ValueError:
+    raise ValueError(
+        f"Unknown dynamo backend: {args.dynamo_backend.upper()}. Choose between {DynamoBackend.list()}."
+    )
 
     # Environment variables to be set for use during training job
     environment = {
