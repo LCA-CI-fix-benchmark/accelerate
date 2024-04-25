@@ -83,20 +83,20 @@ def get_raw_chars():
                     WIN_CH_BUFFER.append(chr(KEYMAP["mod_int"]))
                     WIN_CH_BUFFER.append(chx)
                     if ord(chx) in (
-                        KEYMAP["insert"] - 1 << 9,
-                        KEYMAP["delete"] - 1 << 9,
-                        KEYMAP["pg_up"] - 1 << 9,
-                        KEYMAP["pg_down"] - 1 << 9,
-                    ):
-                        WIN_CH_BUFFER.append(chr(126))
-                    ch = chr(KEYMAP["esc"])
-                except KeyError:
-                    ch = ch2[1]
-            else:
-                ch = ch.decode(encoding)
+                    KEYMAP["insert"] - 1 << 9,
+                    KEYMAP["delete"] - 1 << 9,
+                    KEYMAP["pg_up"] - 1 << 9,
+                    KEYMAP["pg_down"] - 1 << 9,
+                ):
+                    WIN_CH_BUFFER.append(chr(126))
+                ch = chr(KEYMAP["esc"])
+            except KeyError:
+                ch = ch2[1]
         else:
-            ch = WIN_CH_BUFFER.pop(0)
-    elif os.name == "posix":
+            ch = ch.decode(encoding)
+    else:
+        ch = WIN_CH_BUFFER.pop(0)
+elif os.name == "posix":
         import termios
         import tty
 

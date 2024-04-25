@@ -130,19 +130,21 @@ def training_function(config, args):
     starting_epoch = 0
 
     # Now we train the model
-    metric = evaluate.load("glue", "mrpc")
-    best_performance = 0
-    performance_metric = {}
-    expected_lr_after_first_optim_step = lr * (
-        1 - 1 / (max_training_steps / accelerator.num_processes / accelerator.gradient_accumulation_steps)
-    )
-    lr_scheduler_check_completed = False
-    for epoch in range(starting_epoch, num_epochs):
-        model.train()
-        for step, batch in enumerate(train_dataloader):
-            with accelerator.accumulate(model):
-                outputs = model(**batch)
-                loss = outputs.loss
+import evaluate  # Import the evaluate module if not already imported
+
+metric = evaluate.load("glue", "mrpc")
+best_performance = 0
+performance_metric = {}
+expected_lr_after_first_optim_step = lr * (
+    1 - 1 / (max_training_steps / accelerator.num_processes / accelerator.gradient_accumulation_steps)
+)
+lr_scheduler_check_completed = False
+for epoch in range(starting_epoch, num_epochs):
+    model.train()
+    for step, batch in enumerate(train_dataloader):
+        with accelerator.accumulate(model):
+            outputs = model(**batch)
+            loss = outputs.loss
                 accelerator.backward(loss)
                 optimizer.step()
                 lr_scheduler.step()
