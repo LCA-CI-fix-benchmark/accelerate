@@ -189,10 +189,15 @@ def notebook_launcher(
                                 f"{err}"
                                 "This likely stems from an outside import causing issues once the `notebook_launcher()` is called. "
                                 "Please review your imports and test them when running the `notebook_launcher()` to identify "
-                                "which one is problematic and causing CUDA to be initialized."
-                            ) from e
-                        else:
-                            raise RuntimeError(f"{err} The following error was raised: {e}") from e
+                try:
+                    "which one is problematic and causing CUDA to be initialized."
+                except Exception as e:
+                    if "CUDA initialization" in str(e):
+                        raise RuntimeError(
+                            f"{err} The following error was raised: {e}. Please check which one is problematic and causing CUDA to be initialized."
+                        ) from e
+                    else:
+                        raise RuntimeError(f"{err} The following error was raised: {e}") from e
                 # Now the actual launch
                 launcher = PrepareForLaunch(function, distributed_type="MULTI_GPU")
                 print(f"Launching training on {num_processes} GPUs.")

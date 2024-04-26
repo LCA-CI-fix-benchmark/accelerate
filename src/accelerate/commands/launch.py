@@ -727,6 +727,8 @@ def deepspeed_launcher(args):
 
 def tpu_launcher(args):
     import torch_xla.distributed.xla_multiprocessing as xmp
+    from pathlib import Path
+    import sys
 
     if args.no_python:
         raise ValueError("--no_python cannot be used with TPU launcher")
