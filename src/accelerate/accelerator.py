@@ -824,7 +824,6 @@ class Accelerator:
         The other processes will enter the with block after the main process exits.
 
         Example:
-
         ```python
         >>> from accelerate import Accelerator
 
@@ -1410,9 +1409,8 @@ class Accelerator:
         return model
 
     def _prepare_deepspeed(self, *args):
+    def _prepare_deepspeed(self, *args):
         import deepspeed
-
-        deepspeed_plugin = self.state.deepspeed_plugin
 
         is_dataloader_present = any(isinstance(obj, torch.utils.data.DataLoader) for obj in args)
         if deepspeed_plugin.deepspeed_config["train_micro_batch_size_per_gpu"] == "auto" or is_dataloader_present:
@@ -3046,6 +3044,9 @@ class Accelerator:
         self._custom_objects.extend(objects)
 
     @contextmanager
+from contextlib import contextmanager
+
+    @contextmanager
     def autocast(self, cache_enabled: bool = False, autocast_handler: AutocastKwargs = None):
         """
         Will apply automatic mixed-precision inside the block inside this context manager, if it is enabled. Nothing
@@ -3053,8 +3054,6 @@ class Accelerator:
 
         A different `autocast_handler` can be passed in to override the one set in the `Accelerator` object. This is
         useful in blocks under `autocast` where you want to revert to fp32.
-
-        Example:
 
         ```python
         >>> from accelerate import Accelerator

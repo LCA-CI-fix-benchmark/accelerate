@@ -726,11 +726,15 @@ def deepspeed_launcher(args):
 
 
 def tpu_launcher(args):
-    import torch_xla.distributed.xla_multiprocessing as xmp
+import torch_xla.distributed.xla_multiprocessing as xmp
+from pathlib import Path
 
     if args.no_python:
         raise ValueError("--no_python cannot be used with TPU launcher")
 
+    if 'args' not in locals() or 'args' not in globals():
+        raise ValueError("args variable is not defined")
+    
     args, current_env = prepare_tpu(args, {})
 
     if args.module:

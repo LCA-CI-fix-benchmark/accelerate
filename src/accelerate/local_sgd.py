@@ -44,13 +44,11 @@ class LocalSGD:
             self.model_sync_obj.__enter__()
 
         return self
-
     def __exit__(self, type, value, tb):
         if self.enabled:
             # Average all models on exit
             self._sync_and_avg_model_params()
             self.model_sync_obj.__exit__(type, value, tb)
-
     def __init__(self, accelerator: Accelerator, model: torch.nn.Module, local_sgd_steps: int, enabled: bool = True):
         """
         Constructor.

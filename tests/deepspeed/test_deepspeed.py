@@ -20,6 +20,7 @@ import os
 import tempfile
 from copy import deepcopy
 from pathlib import Path
+import unittest
 
 import torch
 from parameterized import parameterized
@@ -766,7 +767,6 @@ class DeepSpeedIntegrationTest(TempDirTestCase):
         )
 
         self.stages = [1, 2, 3]
-        self.zero3_offload_config = False
         self.performance_lower_bound = 0.82
         self.peak_memory_usage_upper_bound = {
             "multi_gpu_fp16": 3200,
@@ -775,6 +775,7 @@ class DeepSpeedIntegrationTest(TempDirTestCase):
             "deepspeed_stage_3_zero_init_fp16": 2800,
             # Disabling below test as it overwhelms the RAM memory usage
             # on CI self-hosted runner leading to tests getting killed.
+            # "deepspeed_stage_3_cpu_offload_fp16": 1900,
             # "deepspeed_stage_3_cpu_offload_fp16": 1900,
         }
         self.n_train = 160

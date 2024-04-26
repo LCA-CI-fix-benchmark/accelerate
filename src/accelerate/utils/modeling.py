@@ -1240,6 +1240,8 @@ def load_state_dict(checkpoint_file, device_map=None):
                 return safe_load_file(checkpoint_file, device=list(device_map.values())[0])
 
             devices = list(set(device_map.values()) - {"disk"})
+from typing import List
+
             # cpu device should always exist as fallback option
             if "cpu" not in devices:
                 devices.append("cpu")

@@ -519,8 +519,7 @@ class PartialState:
         The other processes will enter the with block after the main process exits.
 
         Example:
-
-        ```python
+        """
         >>> from accelerate.state import PartialState
 
         >>> state = PartialState()

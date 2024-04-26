@@ -269,6 +269,9 @@ def require_comet_ml(test_case):
 
 
 def require_clearml(test_case):
+import unittest
+from path.to.is_clearml_available_module import is_clearml_available
+
     """
     Decorator marking a test that requires clearml installed. These tests are skipped when clearml isn't installed
     """

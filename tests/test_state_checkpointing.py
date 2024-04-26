@@ -416,6 +416,9 @@ if __name__ == "__main__":
     ), f"Loaded optimizer states did not match, expected to be loaded on {accelerator.device} but got {param_device}"
 
     # Check error
+import shutil
+import pytest
+
     with pytest.raises(TypeError, match="Unsupported optimizer map location passed"):
         accelerator.load_state(os.path.join(savedir, "checkpoints", "checkpoint_0"), map_location="invalid")
     accelerator.wait_for_everyone()
