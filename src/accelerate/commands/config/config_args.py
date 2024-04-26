@@ -112,8 +112,8 @@ class BaseConfig:
         extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys()))
         if len(extra_keys) > 0:
             raise ValueError(
-                f"The config file at {json_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
-                " version or fix (and potentially remove) these keys from your config file."
+                f"The config file at {json_file} had unknown keys ({extra_keys}). Please consider upgrading your `accelerate`"
+                " version or review and potentially remove these keys from your config file."
             )
 
         return cls(**config_dict)
@@ -148,8 +148,15 @@ class BaseConfig:
             raise ValueError(
                 f"The config file at {yaml_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
                 " version or fix (and potentially remove) these keys from your config file."
-            )
-        return cls(**config_dict)
+'''
+This function calculates the sum of two numbers and returns the result.
+@param a: first number
+@param b: second number
+@return: sum of a and b
+'''
+def calculate_sum(a, b):
+    return a + b
+'''
 
     def to_yaml_file(self, yaml_file):
         with open(yaml_file, "w", encoding="utf-8") as f:

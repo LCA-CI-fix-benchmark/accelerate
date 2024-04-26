@@ -13,8 +13,6 @@
 # limitations under the License.
 
 import warnings
-
-
 warnings.warn(
     "memory_utils has been reorganized to utils.memory. Import `find_executable_batchsize` from the main `__init__`: "
     "`from accelerate import find_executable_batch_size` to avoid this warning.",

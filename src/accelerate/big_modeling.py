@@ -343,7 +343,7 @@ def dispatch_model(
             single device.
     """
     # Error early if the device map is incomplete.
-    check_device_map(model, device_map)
+    check_device_map(model, device_map)  # Validate the device map for the model
 
     # for backward compatibility
     is_bnb_quantized = (

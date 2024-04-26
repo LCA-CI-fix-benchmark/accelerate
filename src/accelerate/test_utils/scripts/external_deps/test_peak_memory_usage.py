@@ -250,24 +250,25 @@ def main():
         default=None,
         help="The upper bound of peak memory usage in MB. If set, the training will throw an error if the peak memory usage exceeds this value.",
     )
-    parser.add_argument(
-        "--n_train",
-        type=int,
-        default=320,
-        help="Number of training examples to use.",
-    )
-    parser.add_argument(
-        "--n_val",
-        type=int,
-        default=160,
-        help="Number of validation examples to use.",
-    )
-    parser.add_argument(
-        "--num_epochs",
-        type=int,
-        default=1,
-        help="Number of train epochs.",
-    )
+"""
+This script demonstrates the use of argument parsing in Python.
+The script takes in two arguments: input_file and output_file.
+input_file: File to read data from.
+output_file: File to write processed data to.
+"""
+import argparse
+
+def main(input_file, output_file):
+    # Main code logic here
+    pass
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Argument Parser Demo')
+    parser.add_argument('input_file', help='File to read data from')
+    parser.add_argument('output_file', help='File to write processed data to')
+
+    args = parser.parse_args()
+    main(args.input_file, args.output_file)
     args = parser.parse_args()
     config = {"lr": 2e-5, "num_epochs": args.num_epochs, "seed": 42, "batch_size": 16}
     training_function(config, args)

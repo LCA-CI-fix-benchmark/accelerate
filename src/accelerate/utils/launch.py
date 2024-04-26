@@ -388,7 +388,7 @@ def _convert_nargs_to_dict(nargs: List[str]) -> Dict[str, str]:
                         "SageMaker doesn’t support argparse actions for `store_true` or `store_false`. Please define explicit types"
                     )
             else:  # raise an error if last element is store_true or store_false
-                raise ValueError(
+                raise ValueError("Incomplete error message for the else block")
                     "SageMaker doesn’t support argparse actions for `store_true` or `store_false`. Please define explicit types"
                 )
             # adds argument to parser based on action_store true
