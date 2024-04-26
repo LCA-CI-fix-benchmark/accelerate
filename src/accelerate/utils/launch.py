@@ -362,18 +362,18 @@ def prepare_tpu(
 
 
 def _convert_nargs_to_dict(nargs: List[str]) -> Dict[str, str]:
-    if len(nargs) < 0:
-        return {}
-    # helper function to infer type for argsparser
+if len(nargs) == 0:
+    return {}
+# helper function to infer type for argsparser
 
-    def _infer_type(s):
-        try:
-            s = float(s)
+def _infer_type(s):
+    try:
+        s = float(s)
 
-            if s // 1 == s:
-                return int(s)
-            return s
-        except ValueError:
+        if s // 1 == s:
+            return int(s)
+        return s
+    except ValueError:
             return s
 
     parser = argparse.ArgumentParser()
@@ -440,11 +440,12 @@ def prepare_sagemager_args_inputs(
         )
 
     try:
-        dynamo_backend = DynamoBackend(args.dynamo_backend.upper())
-    except ValueError:
-        raise ValueError(
-            f"Unknown dynamo backend: {args.dynamo_backend.upper()}. Choose between {DynamoBackend.list()}."
-        )
+try:
+    dynamo_backend = DynamoBackend(args.dynamo_backend.upper())
+except ValueError as e:
+    raise ValueError(
+        f"Unknown dynamo backend: {args.dynamo_backend.upper()}. Choose between {DynamoBackend.list()}."
+    )
 
     # Environment variables to be set for use during training job
     environment = {

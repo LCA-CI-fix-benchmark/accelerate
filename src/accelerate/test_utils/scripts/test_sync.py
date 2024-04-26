@@ -36,10 +36,8 @@ def check_model_parameters(model_a, model_b, did_step, iteration):
                 torch.allclose(param.grad, grad_param.grad) is False
             ), f"Gradients in sync when they should not be at iteration {iteration}:\nmodel_a grad ({param.grad}) == model_b grad ({grad_param.grad})"
         else:
-            # Grads should be in sync
-            assert (
-                torch.allclose(param.grad, grad_param.grad) is True
-            ), f"Gradients not in sync when they should be at iteration {iteration}:\nmodel_a grad ({param.grad}) != model_b grad ({grad_param.grad})"
+# Grads should be in sync
+assert torch.allclose(param.grad, grad_param.grad), f"Gradients not in sync at iteration {iteration}:\nmodel_a grad ({param.grad}) != model_b grad ({grad_param.grad})"
 
 
 def step_model(model, input, target, accelerator, do_backward=True):

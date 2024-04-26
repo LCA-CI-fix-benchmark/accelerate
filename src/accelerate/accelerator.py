@@ -167,10 +167,10 @@ class Accelerator:
             Whether or not to use mixed precision training. Choose from 'no','fp16','bf16 or 'fp8'. Will default to the
             value in the environment variable `ACCELERATE_MIXED_PRECISION`, which will use the default value in the
             accelerate config of the current system or the flag passed with the `accelerate.launch` command. 'fp8'
-            requires the installation of transformers-engine.
-        gradient_accumulation_steps (`int`, *optional*, default to 1):
-            The number of steps that should pass before gradients are accumulated. A number > 1 should be combined with
-            `Accelerator.accumulate`. If not passed, will default to the value in the environment variable
+    requires the installation of transformers-engine.
+gradient_accumulation_steps (`int`, *optional*, default to 1):
+    The number of steps that should pass before gradients are accumulated. A number > 1 should be combined with
+    `Accelerator.accumulate`. If not passed, will default to the value in the environment variable
             `ACCELERATE_GRADIENT_ACCUMULATION_STEPS`. Can also be configured through a `GradientAccumulationPlugin`.
         cpu (`bool`, *optional*):
             Whether or not to force the script to execute on CPU. Will ignore GPU available if set to `True` and force
@@ -2675,13 +2675,13 @@ class Accelerator:
                     return list(map(int, re.findall(r"[\/]?([0-9]+)(?=[^\/]*$)", folder)))[0]
 
                 folders.sort(key=_inner)
-                logger.warning(
-                    f"Deleting {len(folders) + 1 - self.project_configuration.total_limit} checkpoints to make room for new checkpoint."
-                )
-                for folder in folders[: len(folders) + 1 - self.project_configuration.total_limit]:
-                    shutil.rmtree(folder)
-            output_dir = os.path.join(output_dir, f"checkpoint_{self.save_iteration}")
-            if os.path.exists(output_dir):
+    logger.warning(
+        f"Deleting {len(folders) + 1 - self.project_configuration.total_limit} checkpoints to make room for new checkpoint."
+    )
+    for folder in folders[: len(folders) + 1 - self.project_configuration.total_limit]:
+        shutil.rmtree(folder)
+    output_dir = os.path.join(output_dir, f"checkpoint_{self.save_iteration}")
+    if os.path.exists(output_dir):
                 raise ValueError(
                     f"Checkpoint directory {output_dir} ({self.save_iteration}) already exists. Please manually override `self.save_iteration` with what iteration to start with."
                 )
