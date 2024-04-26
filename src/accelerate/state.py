@@ -493,7 +493,6 @@ class PartialState:
                 return inputs
 
         yield _split_values(inputs, start_index, end_index)
-
     @contextmanager
     def main_process_first(self):
         """
@@ -516,6 +515,7 @@ class PartialState:
         yield from self._goes_first(self.is_main_process)
 
     @contextmanager
+    @contextmanager
     def local_main_process_first(self):
         """
         Lets the local main process go inside a with block.
@@ -526,8 +526,6 @@ class PartialState:
 
         ```python
         >>> from accelerate.state import PartialState
-
-        >>> state = PartialState()
         >>> with state.local_main_process_first():
         ...     # This will be printed first by local process 0 then in a seemingly
         ...     # random order by the other processes.
@@ -961,6 +959,8 @@ class AcceleratorState:
             yield inputs
 
     @contextmanager
+
+    @contextmanager
     def main_process_first(self):
         """
         Lets the main process go first inside a with block.
@@ -989,8 +989,6 @@ class GradientState:
     Singleton class that has information related to gradient synchronization for gradient accumulation
 
     **Available attributes:**
-
-        - **end_of_dataloader** (`bool`) -- Whether we have reached the end the current dataloader
         - **remainder** (`int`) -- The number of extra samples that were added from padding the dataloader
         - **sync_gradients** (`bool`) -- Whether the gradients should be synced across all devices
         - **active_dataloader** (`Optional[DataLoader]`) -- The dataloader that is currently being iterated over

@@ -272,7 +272,6 @@ def test_gradient_accumulation_with_opt_and_scheduler(split_batches=False, dispa
             ddp_opt.step()
             ddp_sched.step()
             ddp_opt.zero_grad()
-
         # Learning rates should be the same
         assert (
             opt.param_groups[0]["lr"] == ddp_opt.param_groups[0]["lr"]
