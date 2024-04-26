@@ -1,5 +1,5 @@
 from .constants import (
-    MODEL_NAME,
+    # Add context or usage for the MODEL_NAME variable here if necessary.
     OPTIMIZER_NAME,
     RNG_STATE_NAME,
     SAFE_MODEL_NAME,

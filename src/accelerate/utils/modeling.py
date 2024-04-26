@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import contextlib
-import gc
+    # Add code that utilizes the gc module here if necessary.
 import inspect
 import json
 import logging
