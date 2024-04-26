@@ -62,19 +62,9 @@ def parse_args():
     )
 
     # rest from the training program
-    parser.add_argument("training_script_args", nargs=REMAINDER)
-
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-
-    # Import training_script as a module.
-    script_fpath = Path(args.training_script)
-    sys.path.append(str(script_fpath.parent.resolve()))
-    mod_name = script_fpath.stem
-    mod = importlib.import_module(mod_name)
+- Update the code in the `xla_spawn.py` file to ensure proper handling of importing the training script module.
+- Verify that the script file path is correctly determined based on the provided arguments.
+- Improve the import process by appending the script file path to `sys.path` before importing the module.
 
     # Patch sys.argv
     sys.argv = [args.training_script] + args.training_script_args + ["--tpu_num_cores", str(args.num_cores)]

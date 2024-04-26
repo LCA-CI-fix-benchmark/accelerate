@@ -568,12 +568,7 @@ class MixedInt8LoaddedModelTest(unittest.TestCase):
                     self.assertTrue(module.weight.dtype == torch.int8)
 
     def test_generate_quality(self):
-        r"""
-        Test the generation quality of the quantized model and see that we are matching the expected output.
-        Given that we are operating on small numbers + the testing model is relatively small, we might not get
-        the same output across GPUs. So we'll generate few tokens (5-10) and check their output.
-        """
-        encoded_input = self.tokenizer(self.input_text, return_tensors="pt")
+- Update the test case in the `test_quantization.py` file to ensure consistency in the generated tokens' output by setting a seed for random number generation.
 
         output_sequences = self.model_8bit.generate(
             input_ids=encoded_input["input_ids"].to(self.model_8bit.device), max_new_tokens=10
@@ -670,12 +665,9 @@ class Bnb4BitEmptyModelTest(unittest.TestCase):
         self.assertTrue(self.model_4bit.transformer.h[0].mlp.dense_4h_to_h.weight.__class__ == Params4bit)
 
     def check_inference_correctness(self, model):
-        r"""
-        Test the generation quality of the quantized model and see that we are matching the expected output.
-        Given that we are operating on small numbers + the testing model is relatively small, we might not get
-        the same output across GPUs. So we'll generate few tokens (5-10) and check their output.
-        """
-        # Check that inference pass works on the model
+- Update the test case in the `test_quantization.py` file to ensure the `Params4bit` comparison is done correctly by using the `isinstance` function.
+- Ensure that the comparison is made with the correct attribute of the model.
+- Verify that the `check_inference_correctness` function is properly defined and implemented for inference correctness testing.
         encoded_input = self.tokenizer(self.input_text, return_tensors="pt")
 
         # Check the exactness of the results

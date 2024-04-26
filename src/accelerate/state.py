@@ -516,16 +516,8 @@ class PartialState:
         yield from self._goes_first(self.is_main_process)
 
     @contextmanager
-    def local_main_process_first(self):
-        """
-        Lets the local main process go inside a with block.
-
-        The other processes will enter the with block after the main process exits.
-
-        Example:
-
-        ```python
-        >>> from accelerate.state import PartialState
+- Update the `state.py` file to ensure the `local_main_process_first` function is properly defined and documented.
+- Verify that the example usage in the docstring is relevant and aligns with the function's purpose.
 
         >>> state = PartialState()
         >>> with state.local_main_process_first():

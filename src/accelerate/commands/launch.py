@@ -732,20 +732,10 @@ def deepspeed_launcher(args):
 
 
 def tpu_launcher(args):
-    import torch_xla.distributed.xla_multiprocessing as xmp
-
-    if args.no_python:
-        raise ValueError("--no_python cannot be used with TPU launcher")
-
-    args, current_env = prepare_tpu(args, {})
-
-    if args.module:
-        mod_name = args.training_script
-    else:
-        # Import training_script as a module
-        script_path = Path(args.training_script)
-        sys.path.append(str(script_path.parent.resolve()))
-        mod_name = script_path.stem
+- Update the code in the `launch.py` file to ensure proper handling of the `--no_python` flag with the TPU launcher.
+- Verify that the `prepare_tpu` function is correctly called with the appropriate arguments.
+- Ensure that the module name is determined correctly based on the provided arguments.
+- Improve the handling of importing the training script module by appending the script path to `sys.path`.
 
     mod = importlib.import_module(mod_name)
     if not hasattr(mod, args.main_training_function):
