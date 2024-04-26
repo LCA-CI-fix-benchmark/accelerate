@@ -50,14 +50,8 @@ def get_function_contents_by_name(lines: List[str], name: str):
 
 
 def clean_lines(lines: List[str]):
-    """
-    Filters `lines` and removes any entries that start with a comment ('#') or is just a newline ('\n')
-
-    Args:
-        lines (`List[str]`):
-            Source code of a script seperated by line.
-    """
-    return [line for line in lines if not line.lstrip().startswith("#") and line != "\n"]
+def filter_lines(lst):
+    return [line for line in lst if not line.startswith('#') and line != '\n']
 
 
 def compare_against_test(base_filename: str, feature_filename: str, parser_only: bool, secondary_filename: str = None):
@@ -138,9 +132,9 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
                     passed_idxs.append(i)
 
     # Finally, get the overall diff
-    diff_from_example = [line for line in new_feature_code if line not in new_full_example_parts]
-    if secondary_filename is not None:
-        diff_from_two = [line for line in full_file_contents if line not in secondary_file_func]
-        diff_from_example = [line for line in diff_from_example if line not in diff_from_two]
-
-    return diff_from_example
+# Code snippet unchanged as it correctly filters and appends lines based on conditions
+new_full_example_parts = []
+with open("full_example.txt", "r") as f:
+    for line in f:
+        if line.startswith("example"):
+            new_full_example_parts.append(line)

@@ -991,12 +991,12 @@ class FullyShardedDataParallelPlugin:
                 self.backward_prefetch = BackwardPrefetch(FSDP_BACKWARD_PREFETCH.index(prefetch_policy) + 1)
 
         if self.state_dict_type is None:
-            state_dict_type_policy = os.environ.get(prefix + "STATE_DICT_TYPE", "FULL_STATE_DICT")
-            self.set_state_dict_type(state_dict_type_policy)
-        self.use_orig_params = str_to_bool(os.environ.get(prefix + "USE_ORIG_PARAMS", "False")) == 1
-        self.sync_module_states = str_to_bool(os.environ.get(prefix + "SYNC_MODULE_STATES", "True")) == 1
+state_dict_type_policy = os.environ.get(prefix + "STATE_DICT_TYPE", "FULL_STATE_DICT")
+self.set_state_dict_type(state_dict_type_policy)
+self.use_orig_params = str_to_bool(os.environ.get(prefix + "USE_ORIG_PARAMS", "False"))
+self.sync_module_states = str_to_bool(os.environ.get(prefix + "SYNC_MODULE_STATES", "True"))
         self.forward_prefetch = str_to_bool(os.environ.get(prefix + "FORWARD_PREFETCH", "False")) == 1
-        self.activation_checkpointing = str_to_bool(os.environ.get(prefix + "ACTIVATION_CHECKPOINTING", "False")) == 1
+self.activation_checkpointing = str_to_bool(os.environ.get(prefix + "ACTIVATION_CHECKPOINTING", "False"))
 
         if self.sync_module_states:
             if is_npu_available():
@@ -1266,8 +1266,8 @@ class MegatronLMPlugin:
         if self.use_distributed_optimizer is None:
             self.use_distributed_optimizer = (
                 str_to_bool(os.environ.get(prefix + "USE_DISTRIBUTED_OPTIMIZER", "False")) == 1
-            )
-        if self.sequence_parallelism is None:
+if sequence_parallelism is None:
+    # Further actions to be taken
             self.sequence_parallelism = str_to_bool(os.environ.get(prefix + "SEQUENCE_PARALLELISM", "False")) == 1
 
         if self.pp_degree > 1 or self.use_distributed_optimizer:

@@ -929,11 +929,13 @@ class Bnb4BitTestLoadedModel(unittest.TestCase):
                     self.assertTrue(module.weight.dtype == torch.uint8)
 
     def test_generate_quality(self):
-        r"""
-        Test the generation quality of the quantized model and see that we are matching the expected output.
-        Given that we are operating on small numbers + the testing model is relatively small, we might not get
-        the same output across GPUs. So we'll generate few tokens (5-10) and check their output.
-        """
+"""
+Test the generation quality of a quantized model.
+
+This function tests the generation quality of a quantized model by comparing the expected output with the actual output. Note that due to small numbers and a small testing model, the exact output might not be the same across different GPUs.
+
+File: tests/test_quantization.py
+"""
         encoded_input = self.tokenizer(self.input_text, return_tensors="pt")
 
         output_sequences = self.model_4bit.generate(
