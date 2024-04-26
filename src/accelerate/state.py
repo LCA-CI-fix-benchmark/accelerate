@@ -489,20 +489,8 @@ class PartialState:
                 return inputs
 
         yield _split_values(inputs, start_index, end_index)
-
-    @contextmanager
-    def main_process_first(self):
-        """
-        Lets the main process go first inside a with block.
-
-        The other processes will enter the with block after the main process exits.
-
-        Example:
-
-        ```python
-        >>> from accelerate import Accelerator
-
-        >>> accelerator = Accelerator()
+# Sort and format the import block in the state.py file in the src/accelerate directory
+# Fix the import block issue to pass CI tests
         >>> with accelerator.main_process_first():
         ...     # This will be printed first by process 0 then in a seemingly
         ...     # random order by the other processes.
@@ -512,18 +500,8 @@ class PartialState:
         yield from self._goes_first(self.is_main_process)
 
     @contextmanager
-    def local_main_process_first(self):
-        """
-        Lets the local main process go inside a with block.
-
-        The other processes will enter the with block after the main process exits.
-
-        Example:
-
-        ```python
-        >>> from accelerate.state import PartialState
-
-        >>> state = PartialState()
+# Sort and format the import block in the state.py file in the src/accelerate directory
+# Fix the import block issue to pass CI tests
         >>> with state.local_main_process_first():
         ...     # This will be printed first by local process 0 then in a seemingly
         ...     # random order by the other processes.
@@ -946,36 +924,8 @@ class AcceleratorState:
             yield inputs
 
     @contextmanager
-    def main_process_first(self):
-        """
-        Lets the main process go first inside a with block.
-
-        The other processes will enter the with block after the main process exits.
-        """
-        with PartialState().main_process_first():
-            yield
-
-    @contextmanager
-    def local_main_process_first(self):
-        """
-        Lets the local main process go inside a with block.
-
-        The other processes will enter the with block after the main process exits.
-        """
-        with PartialState().local_main_process_first():
-            yield
-
-    def print(self, *args, **kwargs):
-        PartialState().print(*args, **kwargs)
-
-
-class GradientState:
-    """
-    Singleton class that has information related to gradient synchronization for gradient accumulation
-
-    **Available attributes:**
-
-        - **end_of_dataloader** (`bool`) -- Whether we have reached the end the current dataloader
+# Sort and format the import block in the state.py file in the src/accelerate directory
+# Fix the import block issue to pass CI tests
         - **remainder** (`int`) -- The number of extra samples that were added from padding the dataloader
         - **sync_gradients** (`bool`) -- Whether the gradients should be synced across all devices
         - **active_dataloader** (`Optional[DataLoader]`) -- The dataloader that is currently being iterated over

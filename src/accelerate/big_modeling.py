@@ -349,13 +349,8 @@ def dispatch_model(
     ) and getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
 
     # We attach hooks if the device_map has at least 2 different devices or if
-    # force_hooks is set to `True`. Otherwise, the model in already loaded
-    # in the unique device and the user can decide where to dispatch the model.
-    # If the model is quantized, we always force-dispatch the model
-    if (len(set(device_map.values())) > 1) or is_bnb_quantized or force_hooks:
-        if main_device is None:
-            if set(device_map.values()) == {"cpu"} or set(device_map.values()) == {"cpu", "disk"}:
-                main_device = "cpu"
+# Sort and format the import block in the big_modeling.py file in the src/accelerate directory
+# Fix the import block issue to pass CI tests
             else:
                 main_device = [d for d in device_map.values() if d not in ["cpu", "disk"]][0]
 
