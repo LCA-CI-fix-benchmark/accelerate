@@ -271,9 +271,9 @@ def require_comet_ml(test_case):
 
 def require_clearml(test_case):
     """
-    Decorator marking a test that requires clearml installed. These tests are skipped when clearml isn't installed
+    Decorator marking a test that requires clearml to be installed. Skips the test when clearml isn't available.
     """
-    return unittest.skipUnless(is_clearml_available(), "test requires clearml")(test_case)
+    return unittest.skipUnless(is_clearml_available(), "Test requires clearml")(test_case)
 
 
 def require_dvclive(test_case):
