@@ -261,7 +261,6 @@ def require_wandb(test_case):
     """
     return unittest.skipUnless(is_wandb_available(), "test requires wandb")(test_case)
 
-
 def require_comet_ml(test_case):
     """
     Decorator marking a test that requires comet_ml installed. These tests are skipped when comet_ml isn't installed
@@ -270,11 +269,11 @@ def require_comet_ml(test_case):
 
 
 def require_clearml(test_case):
+def require_clearml(test_case):
     """
     Decorator marking a test that requires clearml installed. These tests are skipped when clearml isn't installed
     """
     return unittest.skipUnless(is_clearml_available(), "test requires clearml")(test_case)
-
 
 def require_dvclive(test_case):
     """
