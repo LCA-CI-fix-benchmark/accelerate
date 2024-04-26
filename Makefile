@@ -15,7 +15,24 @@ quality:
 	black --required-version 23 --check $(check_dirs)
 	ruff $(check_dirs)
 	doc-builder style src/accelerate docs/source --max_len 119 --check_only
+# Makefile
 
+CC = gcc
+CFLAGS = -Wall
+
+all: my_program
+
+my_program: main.o utils.o
+	$(CC) $(CFLAGS) -o my_program main.o utils.o
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c
+
+utils.o: utils.c
+	$(CC) $(CFLAGS) -c utils.c
+
+clean:
+	rm -f *.o my_program
 # Format source code automatically and check is there are any problems left that need manual fixing
 style:
 	black --required-version 23 $(check_dirs)

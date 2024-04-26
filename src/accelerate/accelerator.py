@@ -574,13 +574,22 @@ class Accelerator:
         ["C"]
 
         with accelerator.split_between_processes(["A", "B", "C"], apply_padding=True) as inputs:
-            print(inputs)
+    def process_inputs(self, inputs, apply_padding=False):
+        """
+        Process the inputs.
+        
+        Args:
+            inputs: The inputs to be processed.
+            apply_padding: Boolean flag to apply padding.
+        """
+        print(inputs)
+        
         # Process 0
         ["A", "B"]
+        
         # Process 1
         ["C", "C"]
-        ```
-        """
+        
         with PartialState().split_between_processes(inputs, apply_padding=apply_padding) as inputs:
             yield inputs
 

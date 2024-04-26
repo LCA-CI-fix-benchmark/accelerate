@@ -492,7 +492,9 @@ def get_cluster_input():
         )
     elif distributed_type in [DistributedType.FSDP, DistributedType.DEEPSPEED, DistributedType.MEGATRON_LM]:
         num_processes = _ask_field(
-            "How many GPU(s) should be used for distributed training? [1]:",
+    if use_gpu:
+        num_processes = get_user_input(
+            "Enter the number of GPU(s) to be used for distributed training [1]:",
             int,
             default=1,
             error_message="Please enter an integer.",

@@ -991,11 +991,11 @@ class FullyShardedDataParallelPlugin:
                 self.backward_prefetch = BackwardPrefetch(FSDP_BACKWARD_PREFETCH.index(prefetch_policy) + 1)
 
         if self.state_dict_type is None:
-            state_dict_type_policy = os.environ.get(prefix + "STATE_DICT_TYPE", "FULL_STATE_DICT")
-            self.set_state_dict_type(state_dict_type_policy)
-        self.use_orig_params = str_to_bool(os.environ.get(prefix + "USE_ORIG_PARAMS", "False")) == 1
-        self.sync_module_states = str_to_bool(os.environ.get(prefix + "SYNC_MODULE_STATES", "True")) == 1
-        self.forward_prefetch = str_to_bool(os.environ.get(prefix + "FORWARD_PREFETCH", "False")) == 1
+state_dict_type_policy = os.environ.get(prefix + "STATE_DICT_TYPE", "FULL_STATE_DICT")
+self.set_state_dict_type(state_dict_type_policy)
+self.use_orig_params = str_to_bool(os.environ.get(prefix + "USE_ORIG_PARAMS", "False"))
+self.sync_module_states = str_to_bool(os.environ.get(prefix + "SYNC_MODULE_STATES", "True"))
+self.forward_prefetch = str_to_bool(os.environ.get(prefix + "FORWARD_PREFETCH", "False"))
         self.activation_checkpointing = str_to_bool(os.environ.get(prefix + "ACTIVATION_CHECKPOINTING", "False")) == 1
 
         if self.sync_module_states:
