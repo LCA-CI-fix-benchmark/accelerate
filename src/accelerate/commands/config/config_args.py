@@ -101,15 +101,22 @@ class BaseConfig:
         if "mixed_precision" not in config_dict:
             config_dict["mixed_precision"] = "fp16" if ("fp16" in config_dict and config_dict["fp16"]) else None
         if "fp16" in config_dict:  # Convert the config to the new format.
-            del config_dict["fp16"]
+        import json  # Import the necessary module for JSON operations
+
+        del config_dict["fp16"]
+        
         if "dynamo_backend" in config_dict:  # Convert the config to the new format.
             dynamo_backend = config_dict.pop("dynamo_backend")
             config_dict["dynamo_config"] = {} if dynamo_backend == "NO" else {"dynamo_backend": dynamo_backend}
+        
         if "use_cpu" not in config_dict:
             config_dict["use_cpu"] = False
+        
         if "debug" not in config_dict:
             config_dict["debug"] = False
-        extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys()))
+        
+        extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys())
+        
         if len(extra_keys) > 0:
             raise ValueError(
                 f"The config file at {json_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
@@ -148,8 +155,9 @@ class BaseConfig:
             raise ValueError(
                 f"The config file at {yaml_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
                 " version or fix (and potentially remove) these keys from your config file."
-            )
-        return cls(**config_dict)
+    def __post_init__(self):
+        if isinstance(self.compute_environment, str):
+            # Add any necessary conditions or statements here if required
 
     def to_yaml_file(self, yaml_file):
         with open(yaml_file, "w", encoding="utf-8") as f:

@@ -574,12 +574,11 @@ class Accelerator:
         ["C"]
 
         with accelerator.split_between_processes(["A", "B", "C"], apply_padding=True) as inputs:
-            print(inputs)
+        print(inputs)
         # Process 0
         ["A", "B"]
         # Process 1
         ["C", "C"]
-        ```
         """
         with PartialState().split_between_processes(inputs, apply_padding=apply_padding) as inputs:
             yield inputs
@@ -1184,10 +1183,11 @@ class Accelerator:
                 )
 
         # On TPUs, putting the model on the XLA device will create new parameters, so the corresponding optimizer will
+        # On TPUs, putting the model on the XLA device will create new parameters, so the corresponding optimizer will
         # have parameters disconnected from the model (so no training :-( ).
         # If the model and optimizer have parameters on different devices we raise an error.
         if self.distributed_type == DistributedType.TPU:
-            model_device, optimizer_device = self._get_devices()
+            # Add any additional conditions or statements here if needed
             if model_device is not None and optimizer_device is not None and model_device != optimizer_device:
                 raise ValueError(
                     "The model and the optimizer parameters are not on the same device, which probably means you "

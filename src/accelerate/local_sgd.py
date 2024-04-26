@@ -44,7 +44,6 @@ class LocalSGD:
             self.model_sync_obj.__enter__()
 
         return self
-
     def __exit__(self, type, value, tb):
         if self.enabled:
             # Average all models on exit

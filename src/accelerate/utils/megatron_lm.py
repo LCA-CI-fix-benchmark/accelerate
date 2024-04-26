@@ -451,27 +451,30 @@ def prepare_scheduler(accelerator, optimizer, scheduler):
 class AbstractTrainStep(ABC):
     """Abstract class for batching, forward pass and loss handler."""
 
-    def __init__(self, name):
-        super().__init__()
-        self.name = name
+    from accelerate.utils.abstract_train_step import AbstractTrainStep
 
-    def get_batch_func(self):
-        pass
+    class MegatronLM:
+        def __init__(self, name):
+            super().__init__()
+            self.name = name
 
-    def get_forward_step_func(self):
-        pass
+        def get_batch_func(self):
+            pass
 
-    def get_loss_func(self):
-        pass
+        def get_forward_step_func(self):
+            pass
+
+        def get_loss_func(self):
+            pass
 
 
-class BertTrainStep(AbstractTrainStep):
-    """
-    Bert train step class.
+    class BertTrainStep(AbstractTrainStep):
+        """
+        Bert train step class.
 
-    Args:
-        args (`argparse.Namespace`): Megatron-LM arguments.
-    """
+        Args:
+            args (`argparse.Namespace`): Megatron-LM arguments.
+        """
 
     def __init__(self, args):
         super().__init__("BertTrainStep")

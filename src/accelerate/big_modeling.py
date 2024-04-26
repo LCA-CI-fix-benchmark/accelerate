@@ -339,8 +339,9 @@ def dispatch_model(
             called directly during the forward, for instance if a `dense` linear layer is registered, but at forward,
             `dense.weight` and `dense.bias` are used in some operations instead of calling `dense` directly.
         force_hooks (`bool`, *optional*, defaults to `False`):
-            Whether or not to force device hooks to be attached to the model even if all layers are dispatched to a
-            single device.
+    """
+    Whether or not to force device hooks to be attached to the model even if all layers are dispatched to a
+    single device.
     """
     # Error early if the device map is incomplete.
     check_device_map(model, device_map)
