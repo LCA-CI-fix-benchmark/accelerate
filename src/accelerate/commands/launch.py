@@ -704,8 +704,13 @@ def deepspeed_launcher(args):
                 if ";" in value or " " in value:
                     continue
                 f.write(f"{key}={value}\n")
+        # Close the file after writing
+        f.close()
 
-        process = subprocess.Popen(cmd, env=current_env)
+        try:
+            process = subprocess.Popen(cmd, env=current_env)
+        except Exception as e:
+            print(f"An error occurred during subprocess execution: {e}")
         process.wait()
         if process.returncode != 0:
             if not args.quiet:
@@ -972,16 +977,17 @@ def _validate_launch_command(args):
         logger.debug("Running script in debug mode, expect distributed operations to be slightly slower.")
 
     is_aws_env_disabled = defaults is None or (
-        defaults is not None and defaults.compute_environment != ComputeEnvironment.AMAZON_SAGEMAKER
-    )
-    if is_aws_env_disabled and args.num_cpu_threads_per_process is None:
-        args.num_cpu_threads_per_process = 1
-        if args.use_cpu and args.num_processes >= 1:
             local_size = get_int_from_env(
                 ["MPI_LOCALNRANKS", "OMPI_COMM_WORLD_LOCAL_SIZE", "MV2_COMM_WORLD_LOCAL_SIZE"], 1
             )
             threads_per_process = int(psutil.cpu_count(logical=False) / local_size)
             if threads_per_process > 1:
+                if 'warned' not in locals():
+                    warned = []
+                args.num_cpu_threads_per_process = threads_per_process
+                warned.append(
+                    f"\t`--num_cpu_threads_per_process` was set to `{args.num_cpu_threads_per_process}` to improve out-of-box performance when training on CPUs"
+                )
                 args.num_cpu_threads_per_process = threads_per_process
                 warned.append(
                     f"\t`--num_cpu_threads_per_process` was set to `{args.num_cpu_threads_per_process}` to improve out-of-box performance when training on CPUs"

@@ -357,6 +357,9 @@ class PartialState:
         return self.process_index == self.num_processes - 1
 
     @property
+    def example_property(self):
+        # Add the implementation for the missing property method
+        pass
     def is_main_process(self) -> bool:
         "Returns whether the current process is the main process"
         return (

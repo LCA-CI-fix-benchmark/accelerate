@@ -814,8 +814,8 @@ class DeepSpeedPlugin:
             ):
                 ds_config["train_micro_batch_size_per_gpu"] = 1
             if ds_config.get("train_batch_size", None) == "auto":
-                del ds_config["train_batch_size"]
-
+                if "train_batch_size" in ds_config:
+                    del ds_config["train_batch_size"]
             if compare_versions("transformers", "<", "4.33"):
                 from transformers.deepspeed import HfDeepSpeedConfig
             else:
@@ -1003,10 +1003,10 @@ class FullyShardedDataParallelPlugin:
         if self.state_dict_type is None:
             state_dict_type_policy = os.environ.get(prefix + "STATE_DICT_TYPE", "FULL_STATE_DICT")
             self.set_state_dict_type(state_dict_type_policy)
-        self.use_orig_params = str_to_bool(os.environ.get(prefix + "USE_ORIG_PARAMS", "False")) == 1
-        self.sync_module_states = str_to_bool(os.environ.get(prefix + "SYNC_MODULE_STATES", "True")) == 1
-        self.forward_prefetch = str_to_bool(os.environ.get(prefix + "FORWARD_PREFETCH", "False")) == 1
-        self.activation_checkpointing = str_to_bool(os.environ.get(prefix + "ACTIVATION_CHECKPOINTING", "False")) == 1
+        self.use_orig_params = str_to_bool(os.environ.get(prefix + "USE_ORIG_PARAMS", "False"))
+        self.sync_module_states = str_to_bool(os.environ.get(prefix + "SYNC_MODULE_STATES", "True"))
+        self.forward_prefetch = str_to_bool(os.environ.get(prefix + "FORWARD_PREFETCH", "False"))
+        self.activation_checkpointing = str_to_bool(os.environ.get(prefix + "ACTIVATION_CHECKPOINTING", "False"))
 
         if self.sync_module_states:
             if is_npu_available():
@@ -1278,7 +1278,7 @@ class MegatronLMPlugin:
                 str_to_bool(os.environ.get(prefix + "USE_DISTRIBUTED_OPTIMIZER", "False")) == 1
             )
         if self.sequence_parallelism is None:
-            self.sequence_parallelism = str_to_bool(os.environ.get(prefix + "SEQUENCE_PARALLELISM", "False")) == 1
+            self.sequence_parallelism = str_to_bool(os.environ.get(prefix + "SEQUENCE_PARALLELISM", "False"))
 
         if self.pp_degree > 1 or self.use_distributed_optimizer:
             self.DDP_impl = "local"

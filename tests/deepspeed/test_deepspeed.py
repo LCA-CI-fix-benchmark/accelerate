@@ -176,13 +176,19 @@ class DeepSpeedConfigIntegration(AccelerateTestCase):
             self.assertTrue(deepspeed_plugin.zero3_init_flag)
 
         # Test `gradient_accumulation_steps` is set to 1 if unavailable in config file
+        # Use a temporary directory for file operations
         with tempfile.TemporaryDirectory() as dirpath:
+            # Get the DeepSpeed config dictionary for the specified stage
             ds_config = self.get_config_dict(stage)
             del ds_config["gradient_accumulation_steps"]
+            # Write the DeepSpeed config to a JSON file in the temporary directory
             with open(os.path.join(dirpath, "ds_config.json"), "w") as out_file:
                 json.dump(ds_config, out_file)
+            # Initialize DeepSpeedPlugin with the DeepSpeed config file
             deepspeed_plugin = DeepSpeedPlugin(hf_ds_config=os.path.join(dirpath, "ds_config.json"))
+            # Assert that gradient_accumulation_steps is set to 1 in the DeepSpeed config
             self.assertEqual(deepspeed_plugin.deepspeed_config["gradient_accumulation_steps"], 1)
+            # Reset deepspeed_config attribute to None after the test
             deepspeed_plugin.deepspeed_config = None
 
         # Test `ValueError` is raised if `zero_optimization` is unavailable in config file
@@ -884,12 +890,6 @@ class DeepSpeedIntegrationTest(TempDirTestCase):
         )
 
         self.stages = [1, 2, 3]
-        self.zero3_offload_config = False
-        self.performance_lower_bound = 0.82
-        self.peak_memory_usage_upper_bound = {
-            "multi_gpu_fp16": 3200,
-            "deepspeed_stage_1_fp16": 1600,
-            "deepspeed_stage_2_fp16": 2500,
             "deepspeed_stage_3_zero_init_fp16": 2800,
             # Disabling below test as it overwhelms the RAM memory usage
             # on CI self-hosted runner leading to tests getting killed.
@@ -899,6 +899,12 @@ class DeepSpeedIntegrationTest(TempDirTestCase):
         self.n_val = 160
 
         mod_file = inspect.getfile(accelerate.test_utils)
+        self.test_scripts_folder = os.path.sep.join(mod_file.split(os.path.sep)[:-1] + ["scripts", "external_deps"])
+
+    def test_performance(self):
+        self.test_file_path = os.path.join(self.test_scripts_folder, "test_performance.py")
+        cmd = [
+            "accelerate",
         self.test_scripts_folder = os.path.sep.join(mod_file.split(os.path.sep)[:-1] + ["scripts", "external_deps"])
 
     def test_performance(self):

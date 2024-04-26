@@ -173,6 +173,7 @@ class Accelerator:
             `Accelerator.accumulate`. If not passed, will default to the value in the environment variable
             `ACCELERATE_GRADIENT_ACCUMULATION_STEPS`. Can also be configured through a `GradientAccumulationPlugin`.
         cpu (`bool`, *optional*):
+            Flag to indicate whether to use CPU for processing. Defaults to False.
             Whether or not to force the script to execute on CPU. Will ignore GPU available if set to `True` and force
             the execution on one process only.
         deepspeed_plugin (`DeepSpeedPlugin`, *optional*):
@@ -1774,8 +1775,12 @@ class Accelerator:
             import msamp
 
         model, optimizer = None, None
-        num_models, num_optimizers = 0, 0
         result = [obj for obj in args]
+        model = None
+        optimizer = None
+        num_models = 0
+        num_optimizers = 0
+        
         for obj in result:
             if isinstance(obj, torch.nn.Module):
                 model = obj
@@ -1783,17 +1788,20 @@ class Accelerator:
             elif isinstance(obj, (torch.optim.Optimizer)):
                 optimizer = obj
                 num_optimizers += 1
+        
         if optimizer is None or model is None:
             raise ValueError(
                 "You must pass a model and an optimizer together to `accelerate.prepare()` when using MS-AMP."
             )
         elif num_models > 1 or num_optimizers > 1:
             raise ValueError(
-                f"You can't use multiple models ({num_models}) or optimizers {num_optimizers} with MS-AMP."
+                f"You can't use multiple models ({num_models}) or optimizers ({num_optimizers}) with MS-AMP."
             )
         else:
             model, optimizer = msamp.initialize(model, optimizer, opt_level=self.fp8_recipe_handler.opt_level)
+        
         for i in range(len(result)):
+            if isinstance(result[i], torch.nn.Module):
             if isinstance(result[i], torch.nn.Module):
                 result[i] = model
             elif isinstance(result[i], (torch.optim.Optimizer)):
@@ -2691,15 +2699,16 @@ class Accelerator:
                     return list(map(int, re.findall(r"[\/]?([0-9]+)(?=[^\/]*$)", folder)))[0]
 
                 folders.sort(key=_inner)
-                logger.warning(
-                    f"Deleting {len(folders) + 1 - self.project_configuration.total_limit} checkpoints to make room for new checkpoint."
-                )
-                for folder in folders[: len(folders) + 1 - self.project_configuration.total_limit]:
-                    shutil.rmtree(folder)
-            output_dir = os.path.join(output_dir, f"checkpoint_{self.save_iteration}")
-            if os.path.exists(output_dir):
-                raise ValueError(
                     f"Checkpoint directory {output_dir} ({self.save_iteration}) already exists. Please manually override `self.save_iteration` with what iteration to start with."
+                )
+            self.wait_for_everyone()
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+            logger.info(f"Saving current state to {output_dir}")
+
+        if self.distributed_type == DistributedType.TPU:
+            # Finish running the previous step before checkpointing
+            xm.mark_step()
                 )
             self.wait_for_everyone()
         os.makedirs(output_dir, exist_ok=True)

@@ -137,6 +137,7 @@ def training_function(config, args):
         1 - 1 / (max_training_steps / accelerator.num_processes / accelerator.gradient_accumulation_steps)
     )
     lr_scheduler_check_completed = False
+    
     for epoch in range(starting_epoch, num_epochs):
         model.train()
         for step, batch in enumerate(train_dataloader):

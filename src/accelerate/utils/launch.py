@@ -381,9 +381,9 @@ def _convert_nargs_to_dict(nargs: List[str]) -> Dict[str, str]:
     for index, argument in enumerate(unknown):
         if argument.startswith(("-", "--")):
             action = None
-            if index + 1 < len(unknown):  # checks if next index would be in list
-                if unknown[index + 1].startswith(("-", "--")):  # checks if next element is an key
-                    # raise an error if element is store_true or store_false
+            if index + 1 < len(unknown):  # checks if the next index would be in the list
+                if unknown[index + 1].startswith(("-", "--")):  # checks if the next element is a key
+                    # Raise an error if the element is store_true or store_false
                     raise ValueError(
                         "SageMaker doesn’t support argparse actions for `store_true` or `store_false`. Please define explicit types"
                     )
