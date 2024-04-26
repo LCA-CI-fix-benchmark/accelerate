@@ -266,6 +266,7 @@ def require_comet_ml(test_case):
     Decorator marking a test that requires comet_ml installed. These tests are skipped when comet_ml isn't installed
     """
     return unittest.skipUnless(is_comet_ml_available(), "test requires comet_ml")(test_case)
+    return unittest.skipUnless(is_comet_ml_available(), "test requires comet_ml")(test_case)
 
 
 def require_clearml(test_case):
