@@ -830,6 +830,7 @@ class Accelerator:
 
         ```python
         >>> from accelerate import Accelerator
+        ```
 
         >>> accelerator = Accelerator()
         >>> with accelerator.local_main_process_first():

@@ -733,6 +733,8 @@ def deepspeed_launcher(args):
 
 def tpu_launcher(args):
     import torch_xla.distributed.xla_multiprocessing as xmp
+    from pathlib import Path
+    import sys
 
     if args.no_python:
         raise ValueError("--no_python cannot be used with TPU launcher")
@@ -742,7 +744,7 @@ def tpu_launcher(args):
     if args.module:
         mod_name = args.training_script
     else:
-        # Import training_script as a module
+        # Import training_script as a module for further processing
         script_path = Path(args.training_script)
         sys.path.append(str(script_path.parent.resolve()))
         mod_name = script_path.stem

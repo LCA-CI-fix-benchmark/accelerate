@@ -526,6 +526,7 @@ class PartialState:
 
         ```python
         >>> from accelerate.state import PartialState
+        ```
 
         >>> state = PartialState()
         >>> with state.local_main_process_first():

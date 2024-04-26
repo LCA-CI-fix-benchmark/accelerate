@@ -62,10 +62,17 @@ def parse_args():
     )
 
     # rest from the training program
+import argparse
+import sys
+import importlib
+from pathlib import Path
+from argparse import REMAINDER
+
+def parse_args():
+    parser = argparse.ArgumentParser()
     parser.add_argument("training_script_args", nargs=REMAINDER)
 
     return parser.parse_args()
-
 
 def main():
     args = parse_args()
