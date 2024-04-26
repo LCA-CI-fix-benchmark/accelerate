@@ -2920,6 +2920,7 @@ class Accelerator:
                 load_custom_state(obj, input_dir, index)
 
     def free_memory(self):
+        pass
         """
         Will release all references to the internal objects stored and call the garbage collector. You should call this
         method between two trainings with different models/optimizers. Also will reset `Accelerator.step` to 0.

@@ -35,6 +35,9 @@ payload = [
 ]
 
 total_num_failed = 0
+failed = []
+total_num_failed = 0
+
 for log in Path().glob("*.log"):
     section_num_failed = 0
     with open(log, "r") as f:
@@ -73,13 +76,14 @@ if total_num_failed > 0:
                 failed_table.append(data)
 
             files = [test[0] for test in failed_table]
-            individual_files = list(set(files))
-            # Count number of instances in failed_tests
-            table = []
             for file in individual_files:
                 table.append([file, len(files2failed[file])])
 
             failed_table = tabulate(
+                table,
+                headers=["Test Location", "Num Failed"],
+                tablefmt=hf_table_format,
+            )
                 table,
                 headers=["Test Location", "Num Failed"],
                 tablefmt=hf_table_format,

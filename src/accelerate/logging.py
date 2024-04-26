@@ -30,6 +30,8 @@ class MultiProcessAdapter(logging.LoggerAdapter):
     """
 
     @staticmethod
+    def log(self, msg, *args, **kwargs):
+        pass
     def _should_log(main_process_only):
         "Check if log should be performed"
         state = PartialState()

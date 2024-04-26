@@ -16,7 +16,7 @@
 """
 A collection of utilities for comparing `examples/complete_*_example.py` scripts with the capabilities inside of each
 `examples/by_feature` example. `compare_against_test` is the main function that should be used when testing, while the
-others are used to either get the code that matters, or to preprocess them (such as stripping comments)
+others are used to either get the code that matters, or to preprocess them (such as stripping comments)"
 """
 
 import os
@@ -29,7 +29,7 @@ def get_function_contents_by_name(lines: List[str], name: str):
 
     Args:
         lines (`List[str]`):
-            Source code of a script seperated by line.
+            Source code of a script separated by line.
         name (`str`):
             The name of the function to extract. Should be either `training_function` or `main`
     """
@@ -55,11 +55,9 @@ def clean_lines(lines: List[str]):
 
     Args:
         lines (`List[str]`):
-            Source code of a script seperated by line.
+            Source code of a script separated by line.
     """
     return [line for line in lines if not line.lstrip().startswith("#") and line != "\n"]
-
-
 def compare_against_test(base_filename: str, feature_filename: str, parser_only: bool, secondary_filename: str = None):
     """
     Tests whether the additional code inside of `feature_filename` was implemented in `base_filename`. This should be
@@ -67,10 +65,11 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
     `examples/by_feature/*` scripts.
 
     It utilizes `nlp_example.py` to extract out all of the repeated training code, so that only the new additional code
+
+    It utilizes `nlp_example.py` to extract out all of the repeated training code, so that only the new additional code
     is examined and checked. If something *other* than `nlp_example.py` should be used, such as `cv_example.py` for the
     `complete_cv_example.py` script, it should be passed in for the `secondary_filename` parameter.
 
-    Args:
         base_filename (`str` or `os.PathLike`):
             The filepath of a single "complete" example script to test, such as `examples/complete_cv_example.py`
         feature_filename (`str` or `os.PathLike`):
@@ -137,6 +136,7 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
                     new_full_example_parts.append(line)
                     passed_idxs.append(i)
 
+    # Finally, get the overall diff
     # Finally, get the overall diff
     diff_from_example = [line for line in new_feature_code if line not in new_full_example_parts]
     if secondary_filename is not None:

@@ -205,8 +205,6 @@ def estimate_command_parser(subparsers=None):
                 should only be used for repositories you trust and in which you have read the code, as it will execute
                 code present on the Hub on your local machine.""",
     )
-
-    if subparsers is not None:
         parser.set_defaults(func=estimate_command)
     return parser
 

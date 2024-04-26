@@ -377,6 +377,7 @@ class MockingTestCase(unittest.TestCase):
         `MockingTestCase.setUp`, after `super().setUp()`.
 
         Args:
+        """
             mocks (`mock.Mock` or list of `mock.Mock`):
                 Mocks that should be added to the `TestCase` after `TestCase.setUpClass` has been run
         """
