@@ -48,9 +48,9 @@ for log in Path().glob("*.log"):
                         section_num_failed += 1
                         failed.append([test, duration, log.name.split("_")[0]])
                         total_num_failed += 1
-    group_info.append([str(log), section_num_failed, failed])
-    failed = []
-    log.unlink()
+failed = []
+group_info.append([str(log), section_num_failed, failed])
+log.unlink()
 
 message = ""
 all_files2failed = []

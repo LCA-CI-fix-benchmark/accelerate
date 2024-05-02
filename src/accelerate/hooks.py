@@ -204,13 +204,13 @@ class AlignDevicesHook(ModelHook):
     associated module, potentially offloading the weights after the forward pass.
 
     Args:
-        execution_device (`torch.device`, *optional*):
+        execution_device (`torch.device`, optional):
             The device on which inputs and model weights should be placed before the forward pass.
-        offload (`bool`, *optional*, defaults to `False`):
+        offload (`bool`, optional, defaults to `False`):
             Whether or not the weights should be offloaded after the forward pass.
-        io_same_device (`bool`, *optional*, defaults to `False`):
+        io_same_device (`bool`, optional, defaults to `False`):
             Whether or not the output should be placed on the same device as the input was.
-        weights_map (`Mapping[str, torch.Tensor]`, *optional*):
+        weights_map (`Mapping[str, torch.Tensor]`, optional):
             When the model weights are offloaded, a (potentially lazy) map from param names to the tensor values.
         offload_buffers (`bool`, *optional*, defaults to `False`):
             Whether or not to include the associated module's buffers when offloading.
@@ -375,11 +375,11 @@ def attach_align_device_hook(
     Args:
         module (`torch.nn.Module`):
             The module where we want to attach the hooks.
-        execution_device (`torch.device`, *optional*):
+        execution_device (`torch.device`, optional):
             The device on which inputs and model weights should be placed before the forward pass.
-        offload (`bool`, *optional*, defaults to `False`):
+        offload (`bool`, optional, defaults to `False`):
             Whether or not the weights should be offloaded after the forward pass.
-        weights_map (`Mapping[str, torch.Tensor]`, *optional*):
+        weights_map (`Mapping[str, torch.Tensor]`, optional):
             When the model weights are offloaded, a (potentially lazy) map from param names to the tensor values.
         offload_buffers (`bool`, *optional*, defaults to `False`):
             Whether or not to include the associated module's buffers when offloading.

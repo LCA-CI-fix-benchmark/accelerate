@@ -66,10 +66,7 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
     used when testing to see if `complete_*_.py` examples have all of the implementations from each of the
     `examples/by_feature/*` scripts.
 
-    It utilizes `nlp_example.py` to extract out all of the repeated training code, so that only the new additional code
-    is examined and checked. If something *other* than `nlp_example.py` should be used, such as `cv_example.py` for the
-    `complete_cv_example.py` script, it should be passed in for the `secondary_filename` parameter.
-
+It utilizes `nlp_example.py` to extract out all of the repeated training code so that only the new additional code is examined and checked. If something other than `nlp_example.py` should be used, such as `cv_example.py` for the `complete_cv_example.py` script, it should be passed in for the `secondary_filename` parameter.
     Args:
         base_filename (`str` or `os.PathLike`):
             The filepath of a single "complete" example script to test, such as `examples/complete_cv_example.py`
@@ -137,10 +134,14 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
                     new_full_example_parts.append(line)
                     passed_idxs.append(i)
 
-    # Finally, get the overall diff
-    diff_from_example = [line for line in new_feature_code if line not in new_full_example_parts]
-    if secondary_filename is not None:
-        diff_from_two = [line for line in full_file_contents if line not in secondary_file_func]
-        diff_from_example = [line for line in diff_from_example if line not in diff_from_two]
+    new_full_example_parts.append(line)
+    passed_idxs.append(i)
 
-    return diff_from_example
+# Get the overall diff from the new feature code
+diff_from_example = [line for line in new_feature_code if line not in new_full_example_parts]
+
+if secondary_filename is not None:
+    # Get the diff between two files
+    diff_from_two = [line for line in full_file_contents if line not in secondary_file_func]
+    # Refine the diff from the new feature code
+    diff_from_example = [line for line in diff_from_example if line not in diff_from_two]
