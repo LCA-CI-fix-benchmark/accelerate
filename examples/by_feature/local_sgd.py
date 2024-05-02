@@ -187,6 +187,7 @@ def training_function(config, args):
                     lr_scheduler.step()
                     optimizer.zero_grad()
                     # LocalSGD-specific line
+                    local_sgd.step(optimizer)
                     local_sgd.step()
 
         model.eval()
