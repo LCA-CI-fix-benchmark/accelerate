@@ -448,12 +448,6 @@ def prepare_sagemager_args_inputs(
 
     # Environment variables to be set for use during training job
     environment = {
-        "ACCELERATE_USE_SAGEMAKER": "true",
-        "ACCELERATE_MIXED_PRECISION": str(mixed_precision),
-        "ACCELERATE_DYNAMO_BACKEND": dynamo_backend.value,
-        "ACCELERATE_DYNAMO_MODE": args.dynamo_mode,
-        "ACCELERATE_DYNAMO_USE_FULLGRAPH": str(args.dynamo_use_fullgraph),
-        "ACCELERATE_DYNAMO_USE_DYNAMIC": str(args.dynamo_use_dynamic),
         "ACCELERATE_SAGEMAKER_DISTRIBUTED_TYPE": sagemaker_config.distributed_type.value,
     }
     # configure distribution set up

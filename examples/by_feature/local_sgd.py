@@ -168,6 +168,8 @@ def training_function(config, args):
     )
 
     # Now we train the model
+    from optimization.local_sgd import LocalSGD
+    
     for epoch in range(num_epochs):
         model.train()
         with LocalSGD(
@@ -179,7 +181,7 @@ def training_function(config, args):
                 # New code #
                 # We use the new `accumulate` context manager to perform gradient accumulation
                 # We also currently do not support TPUs nor advise it as bugs were found on the XLA side when running our tests.
-                with accelerator.accumulate(model):
+                with local_sgd.accumulate(model):
                     output = model(**batch)
                     loss = output.loss
                     accelerator.backward(loss)
