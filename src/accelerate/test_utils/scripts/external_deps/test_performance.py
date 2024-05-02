@@ -142,6 +142,10 @@ def training_function(config, args):
         for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(model):
                 outputs = model(**batch)
+        
+        # Add logic to update best performance based on evaluation metric
+        
+        # Check and update lr scheduler after the first optimization step
                 loss = outputs.loss
                 accelerator.backward(loss)
                 optimizer.step()

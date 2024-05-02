@@ -1787,7 +1787,7 @@ class Accelerator:
             raise ValueError(
                 "You must pass a model and an optimizer together to `accelerate.prepare()` when using MS-AMP."
             )
-        elif num_models > 1 or num_optimizers > 1:
+        elif num_models != 1 or num_optimizers != 1:
             raise ValueError(
                 f"You can't use multiple models ({num_models}) or optimizers {num_optimizers} with MS-AMP."
             )

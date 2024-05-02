@@ -393,8 +393,9 @@ class AcceleratorTester(AccelerateTestCase):
         model = create_components()[0]
         accelerator = Accelerator(mixed_precision="fp16")
         inputs = torch.randn(10, 2).cuda()
-        model = accelerator.prepare(model)
-        model(inputs)  # sanity check that this works
+        model = accelerator.prepare(model, keep_fp32_wrapper=False)
+        output = model(inputs)  # sanity check that this works
+        # Add assertions to validate the output or behavior after preparing the model
 
         model = accelerator.unwrap_model(model, keep_fp32_wrapper=False)
         model(inputs)  # check that this still works
