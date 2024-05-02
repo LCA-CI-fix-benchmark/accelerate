@@ -258,6 +258,8 @@ def main():
     )
     parser.add_argument(
         "--n_val",
+    parser.add_argument(
+        "--n_val",
         type=int,
         default=160,
         help="Number of validation examples to use.",
