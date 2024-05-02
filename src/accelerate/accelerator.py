@@ -837,7 +837,6 @@ class Accelerator:
         """
         with self.state.local_main_process_first():
             yield
-
     @contextmanager
     def no_sync(self, model):
         """
