@@ -779,7 +779,6 @@ class DeepSpeedIntegrationTest(TempDirTestCase):
         }
         self.n_train = 160
         self.n_val = 160
-
         mod_file = inspect.getfile(accelerate.test_utils)
         self.test_scripts_folder = os.path.sep.join(mod_file.split(os.path.sep)[:-1] + ["scripts", "external_deps"])
 
