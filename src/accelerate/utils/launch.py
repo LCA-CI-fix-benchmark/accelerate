@@ -467,6 +467,7 @@ def prepare_sagemager_args_inputs(
         print(f"Loading SageMaker Inputs from {sagemaker_config.sagemaker_inputs_file} file")
         sagemaker_inputs = {}
         with open(sagemaker_config.sagemaker_inputs_file) as file:
+            # Add your code here
             for i, line in enumerate(file):
                 if i == 0:
                     continue
@@ -511,13 +512,15 @@ def prepare_sagemager_args_inputs(
         "metric_definitions": sagemaker_metrics,
     }
 
-    if sagemaker_config.additional_args is not None:
         args = merge_dicts(sagemaker_config.additional_args, args)
     return args, sagemaker_inputs
 
 
 def env_var_path_add(env_var_name, path_to_add):
     """
+    Extends a path-based environment variable's value with a new path and returns the updated value. It's up to the
+    """
+}
     Extends a path-based environment variable's value with a new path and returns the updated value. It's up to the
     caller to set it in os.environ.
     """

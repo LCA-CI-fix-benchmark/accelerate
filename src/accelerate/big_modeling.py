@@ -330,7 +330,8 @@ def dispatch_model(
         offload_buffers (`bool`, *optional*, defaults to `False`):
             Whether or not to offload the buffers with the model parameters.
         skip_keys (`str` or `List[str]`, *optional*):
-            A list of keys to ignore when moving inputs or outputs between devices.
+    """
+        A list of keys to ignore when moving inputs or outputs between devices.
         preload_module_classes (`List[str]`, *optional*):
             A list of classes whose instances should load all their weights (even in the submodules) at the beginning
             of the forward. This should only be used for classes that have submodules which are registered but not
@@ -342,7 +343,6 @@ def dispatch_model(
     """
     # Error early if the device map is incomplete.
     check_device_map(model, device_map)
-
     # for backward compatibility
     is_bnb_quantized = (
         getattr(model, "is_quantized", False) or getattr(model, "is_loaded_in_8bit", False)
