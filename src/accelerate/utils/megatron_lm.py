@@ -471,6 +471,16 @@ class BertTrainStep(AbstractTrainStep):
 
     Args:
         args (`argparse.Namespace`): Megatron-LM arguments.
+
+    Implement methods and attributes specific to BertTrainStep here.
+    Example:
+    def __init__(self, args):
+        super().__init__()
+        self.args = args
+    def some_method(self):
+        # Implementation details
+    def another_method(self):
+        # Implementation details
     """
 
     def __init__(self, args):
