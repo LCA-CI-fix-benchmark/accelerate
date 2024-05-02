@@ -45,6 +45,9 @@ class LocalSGD:
 
         return self
 
+    def __enter__(self):
+        return self
+
     def __exit__(self, type, value, tb):
         if self.enabled:
             # Average all models on exit

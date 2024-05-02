@@ -115,7 +115,6 @@ class BaseConfig:
                 f"The config file at {json_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
                 " version or fix (and potentially remove) these keys from your config file."
             )
-
         return cls(**config_dict)
 
     def to_json_file(self, json_file):
