@@ -146,8 +146,7 @@ class BaseConfig:
         extra_keys = sorted(set(config_dict.keys()) - set(cls.__dataclass_fields__.keys()))
         if len(extra_keys) > 0:
             raise ValueError(
-                f"The config file at {yaml_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate`"
-                " version or fix (and potentially remove) these keys from your config file."
+                f"The config file at {yaml_file} had unknown keys ({extra_keys}), please try upgrading your `accelerate` version or fix (and potentially remove) these keys from your config file."
             )
         return cls(**config_dict)
 

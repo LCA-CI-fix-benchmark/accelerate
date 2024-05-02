@@ -418,7 +418,7 @@ if __name__ == "__main__":
     # Check error
     with pytest.raises(TypeError, match="Unsupported optimizer map location passed"):
         accelerator.load_state(os.path.join(savedir, "checkpoints", "checkpoint_0"), map_location="invalid")
-    accelerator.wait_for_everyone()
-    if accelerator.process_index == 0:
-        shutil.rmtree(savedir)
+        accelerator.wait_for_everyone()
+        if accelerator.process_index == 0:
+            shutil.rmtree(savedir)
     accelerator.wait_for_everyone()

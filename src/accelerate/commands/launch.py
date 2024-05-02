@@ -731,6 +731,8 @@ def deepspeed_launcher(args):
                     raise
 
 
+import sys
+
 def tpu_launcher(args):
     import torch_xla.distributed.xla_multiprocessing as xmp
 
