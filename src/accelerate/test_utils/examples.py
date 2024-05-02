@@ -142,5 +142,11 @@ def compare_against_test(base_filename: str, feature_filename: str, parser_only:
     if secondary_filename is not None:
         diff_from_two = [line for line in full_file_contents if line not in secondary_file_func]
         diff_from_example = [line for line in diff_from_example if line not in diff_from_two]
+    else:
+        diff_from_two = []
 
-    return diff_from_example
+    try:
+        return diff_from_example
+    except ValueError as e:
+        print("Error: Files should be restyled!")
+        return diff_from_example + diff_from_two

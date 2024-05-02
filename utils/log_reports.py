@@ -54,6 +54,7 @@ for log in Path().glob("*.log"):
 
 message = ""
 all_files2failed = []
+message = ""  # Initialize the message variable
 if total_num_failed > 0:
     for name, num_failed, failed_tests in group_info:
         if num_failed > 0:
