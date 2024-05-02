@@ -19,6 +19,7 @@ import json
 import os
 import tempfile
 from copy import deepcopy
+from deepspeed import DeepSpeedConfig, deepspeed
 from pathlib import Path
 
 import torch

@@ -19,6 +19,7 @@ import os
 import torch
 from transformers import AutoModel
 from transformers.testing_utils import mockenv_context
+from fairscale.nn import FullyShardedDataParallel
 from transformers.trainer_utils import set_seed
 
 import accelerate
