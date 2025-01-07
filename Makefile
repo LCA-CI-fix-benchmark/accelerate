@@ -14,7 +14,7 @@ extra_quality_checks:
 quality:
 	black --required-version 23 --check $(check_dirs)
 	ruff $(check_dirs)
-	doc-builder style src/accelerate docs/source --max_len 119 --check_only
+	doc-builder style src/accelerate docs/source --max-line-length 119 --check-only
 
 # Format source code automatically and check is there are any problems left that need manual fixing
 style:
