@@ -64,7 +64,7 @@ def init_empty_weights(include_buffers: bool = None):
     import torch.nn as nn
     from accelerate import init_empty_weights
 
-    # Initialize a model with 100 billions parameters in no time and without using any RAM.
+    # Initialize a model with 100 billion parameters in no time and without using any RAM.
     with init_empty_weights():
         tst = nn.Sequential(*[nn.Linear(10000, 10000) for _ in range(1000)])
     ```
@@ -109,7 +109,7 @@ def init_on_device(device: torch.device, include_buffers: bool = None):
     # TODO(shingjan): remove the torch version check once older versions are deprecated
     if is_torch_version(">=", "2.0") and include_buffers:
         with device:
-            yield
+            yield None
         return
 
     old_register_parameter = nn.Module.register_parameter
@@ -162,7 +162,7 @@ def init_on_device(device: torch.device, include_buffers: bool = None):
 def cpu_offload(
     model: nn.Module,
     execution_device: Optional[torch.device] = None,
-    offload_buffers: bool = False,
+    offload_buffers: bool = False,  # Default is False
     state_dict: Optional[Dict[str, torch.Tensor]] = None,
     preload_module_classes: Optional[List[str]] = None,
 ):
@@ -190,7 +190,9 @@ def cpu_offload(
     if execution_device is None:
         execution_device = next(iter(model.parameters())).device
     if state_dict is None:
-        state_dict = {n: p.to("cpu") for n, p in model.state_dict().items()}
+        state_dict = {
+            n: p.to("cpu") for n, p in model.state_dict().items()
+        }
 
     add_hook_to_module(model, AlignDevicesHook(io_same_device=True), append=True)
     attach_align_device_hook(
