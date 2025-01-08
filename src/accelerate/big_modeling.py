@@ -56,7 +56,7 @@ def init_empty_weights(include_buffers: bool = None):
 
     Args:
         include_buffers (`bool`, *optional*):
-            Whether or not to also put all buffers on the meta device while initializing.
+            Whether to also put all buffers on the meta device while initializing.
 
     Example:
 
@@ -73,7 +73,7 @@ def init_empty_weights(include_buffers: bool = None):
 
     Any model created under this context manager has no weights. As such you can't do something like
     `model.to(some_device)` with it. To load weights inside your empty model, see [`load_checkpoint_and_dispatch`].
-    Make sure to overwrite the default device_map param, otherwise dispatch is not called.
+    Make sure to overwrite the default device_map parameter, otherwise dispatch is not called.
     </Tip>
     """
     if include_buffers is None:
