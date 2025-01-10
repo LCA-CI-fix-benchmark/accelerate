@@ -167,6 +167,12 @@ def cpu_offload(
     preload_module_classes: Optional[List[str]] = None,
 ):
     """
+    Add input validation to ensure execution_device is a valid device.
+    """
+    if execution_device is not None and not isinstance(execution_device, torch.device):
+        raise ValueError("execution_device must be a valid torch.device")
+
+    """
     Activates full CPU offload for a model. As a result, all parameters of the model will be offloaded and only one
     copy of the state dict of the model will be kept. During the forward pass, parameters will be extracted from that
     state dict and put on the execution device passed as they are needed, then offloaded again.
