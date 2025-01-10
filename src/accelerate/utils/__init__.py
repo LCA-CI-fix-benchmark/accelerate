@@ -13,6 +13,56 @@ from .constants import (
     WEIGHTS_INDEX_NAME,
     WEIGHTS_NAME,
 )
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+if is_deepspeed_available():
+    from .deepspeed import (
+        DeepSpeedEngineWrapper,
+        DeepSpeedOptimizerWrapper,
+        DeepSpeedSchedulerWrapper,
+        DummyOptim,
+        DummyScheduler,
+        HfDeepSpeedConfig,
+    )
+from .fsdp_utils import (
+    load_fsdp_model,
+    load_fsdp_optimizer,
+    save_fsdp_model,
+    save_fsdp_optimizer,
+)
+from .imports import (
+    get_ccl_version,
+    is_4bit_bnb_available,
+    is_8bit_bnb_available,
+    is_aim_available,
+    is_bf16_available,
+    is_bnb_available,
+    is_boto3_available,
+    is_ccl_available,
+    is_clearml_available,
+    is_comet_ml_available,
+    is_cuda_available,
+    is_datasets_available,
+    is_deepspeed_available,
+    is_dvclive_available,
+    is_fp8_available,
+    is_ipex_available,
+    is_megatron_lm_available,
+    is_mlflow_available,
+    is_mps_available,
+    is_msamp_available,
+    is_npu_available,
+    is_pandas_available,
+    is_peft_available,
+    is_rich_available,
+    is_sagemaker_available,
+    is_tensorboard_available,
+    is_timm_available,
+    is_tpu_available,
+    is_transformer_engine_available,
+    is_transformers_available,
+    is_wandb_available,
+    is_xpu_available,
+)
 from .dataclasses import (
     AutocastKwargs,
     BnbQuantizationConfig,
