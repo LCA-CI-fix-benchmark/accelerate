@@ -136,8 +136,25 @@ from .operations import (
     reduce,
     send_to_device,
     slice_tensors,
+) from .other import (
+    check_os_kernel,
+    clean_state_dict_for_safetensors,
+    clear_environment,
+    convert_bytes,
+    extract_model_from_parallel,
+    get_pretty_name,
+    is_port_in_use,
+    merge_dicts,
+    patch_environment,
+    save,
+    wait_for_everyone,
+    write_basic_config,
 )
-from .versions import compare_versions, is_torch_version
+from .random import set_seed, synchronize_rng_state, synchronize_rng_states
+from .torch_xla import install_xla
+from .tqdm import tqdm
+from .transformer_engine import convert_model, has_transformer_engine_layers
+from .versions import compare_versions
 
 
 if is_deepspeed_available():
@@ -150,8 +167,6 @@ if is_deepspeed_available():
         HfDeepSpeedConfig,
     )
 
-from .bnb import has_4bit_bnb_layers, load_and_quantize_model
-from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
 from .launch import (
     PrepareForLaunch,
     _filter_args,
