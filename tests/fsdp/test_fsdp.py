@@ -29,10 +29,11 @@ from accelerate.test_utils.testing import (
     TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
-    require_fsdp,
     require_multi_device,
+    require_fsdp,
     slow,
 )
+import accelerate
 from accelerate.utils.constants import (
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
