@@ -13,23 +13,23 @@
 # limitations under the License.
 
 import inspect
-import io
 import itertools
+import io
 import json
 import os
-import tempfile
 from copy import deepcopy
 from pathlib import Path
+import tempfile
 
 import torch
+
+import accelerate
 from parameterized import parameterized
 from torch.utils.data import DataLoader
 from transformers import AutoModel, AutoModelForCausalLM, get_scheduler
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available
-
-import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
@@ -77,7 +77,6 @@ else:
     dtypes = [FP16]
 
 
-def parameterized_custom_name_func(func, param_num, param):
     # customize the test name generator function as we want both params to appear in the sub-test
     # name, as by default it shows only the first param
     param_based_name = parameterized.to_safe_name("_".join(str(x) for x in param.args))
