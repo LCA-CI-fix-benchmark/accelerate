@@ -1,4 +1,5 @@
-from .constants import (
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+from .constants import(
     MODEL_NAME,
     OPTIMIZER_NAME,
     RNG_STATE_NAME,
@@ -37,6 +38,14 @@ from .dataclasses import (
     TensorInformation,
     TorchDynamoPlugin,
 )
+from .deepspeed import (
+    DeepSpeedEngineWrapper,
+    DeepSpeedOptimizerWrapper,
+    DeepSpeedSchedulerWrapper,
+    DummyOptim,
+    DummyScheduler,
+    HfDeepSpeedConfig,
+)
 from .environment import (
     are_libraries_initialized,
     check_cuda_p2p_ib_support,
@@ -45,6 +54,16 @@ from .environment import (
     parse_choice_from_env,
     parse_flag_from_env,
     str_to_bool,
+)
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
+from .launch import (
+    PrepareForLaunch,
+    _filter_args,
+    prepare_deepspeed_cmd_env,
+    prepare_multi_gpu_env,
+    prepare_sagemager_args_inputs,
+    prepare_simple_launcher_cmd_env,
+    prepare_tpu,
 )
 from .imports import (
     get_ccl_version,
@@ -76,6 +95,21 @@ from .imports import (
     is_timm_available,
     is_tpu_available,
     is_transformer_engine_available,
+)
+from .megatron_lm import (
+    AbstractTrainStep,
+    BertTrainStep,
+    GPTTrainStep,
+    MegatronEngine,
+    MegatronLMDummyDataLoader,
+    MegatronLMDummyScheduler,
+    MegatronLMOptimizerWrapper,
+    MegatronLMSchedulerWrapper,
+    T5TrainStep,
+    avg_losses_across_data_parallel_group,
+    gather_across_data_parallel_groups,
+    initialize as megatron_lm_initialize,
+    prepare_data_loader as megatron_lm_prepare_data_loader,
     is_transformers_available,
     is_wandb_available,
     is_xpu_available,
@@ -189,11 +223,47 @@ from .other import (
     get_pretty_name,
     is_port_in_use,
     merge_dicts,
+    offload_state_dict,
+    offload_weight,
     patch_environment,
     save,
     wait_for_everyone,
     write_basic_config,
 )
+from .offload import (
+    OffloadedWeightsLoader,
+    PrefixedDataset,
+    extract_submodules_state_dict,
+    load_offloaded_weight,
+    save_offload_index,
+)
+from .operations import (
+    CannotPadNestedTensorWarning,
+    broadcast,
+    broadcast_object_list,
+    concatenate,
+    convert_outputs_to_fp32,
+    convert_to_fp32,
+    find_batch_size,
+    find_device,
+    gather,
+    gather_object,
+    get_data_structure,
+    honor_type,
+    initialize_tensors,
+    is_namedtuple,
+    is_tensor_information,
+    is_torch_tensor,
+    listify,
+    load_checkpoint_in_model,
+    pad_across_processes,
+    recursively_apply,
+    reduce,
+    send_to_device,
+    slice_tensors,
+)
+from .versions import compare_versions, is_torch_version
+
 from .random import set_seed, synchronize_rng_state, synchronize_rng_states
 from .torch_xla import install_xla
 from .tqdm import tqdm
