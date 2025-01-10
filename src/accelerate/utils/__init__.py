@@ -90,6 +90,7 @@ from .modeling import (
     convert_file_size_to_int,
     dtype_byte_size,
     find_tied_parameters,
+    is_peft_model,
     get_balanced_memory,
     get_max_layer_size,
     get_max_memory,
@@ -114,22 +115,22 @@ from .offload import (
     save_offload_index,
 )
 from .operations import (
-    CannotPadNestedTensorWarning,
     broadcast,
     broadcast_object_list,
+    CannotPadNestedTensorWarning,
     concatenate,
     convert_outputs_to_fp32,
     convert_to_fp32,
     find_batch_size,
     find_device,
     gather,
-    gather_object,
     get_data_structure,
     honor_type,
     initialize_tensors,
+    gather_object,
     is_namedtuple,
-    is_tensor_information,
     is_torch_tensor,
+    is_tensor_information,
     listify,
     pad_across_processes,
     recursively_apply,
@@ -174,10 +175,10 @@ from .megatron_lm import (
     avg_losses_across_data_parallel_group,
     gather_across_data_parallel_groups,
 )
-from .megatron_lm import initialize as megatron_lm_initialize
 from .megatron_lm import prepare_data_loader as megatron_lm_prepare_data_loader
-from .megatron_lm import prepare_model as megatron_lm_prepare_model
+from .megatron_lm import initialize as megatron_lm_initialize
 from .megatron_lm import prepare_optimizer as megatron_lm_prepare_optimizer
+from .megatron_lm import prepare_model as megatron_lm_prepare_model
 from .megatron_lm import prepare_scheduler as megatron_lm_prepare_scheduler
 from .memory import find_executable_batch_size, release_memory
 from .other import (
@@ -186,12 +187,12 @@ from .other import (
     clear_environment,
     convert_bytes,
     extract_model_from_parallel,
-    get_pretty_name,
     is_port_in_use,
     merge_dicts,
     patch_environment,
     save,
     wait_for_everyone,
+    get_pretty_name,
     write_basic_config,
 )
 from .random import set_seed, synchronize_rng_state, synchronize_rng_states
