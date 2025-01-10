@@ -105,9 +105,7 @@ def init_on_device(device: torch.device, include_buffers: bool = None):
     """
     if include_buffers is None:
         include_buffers = parse_flag_from_env("ACCELERATE_INIT_INCLUDE_BUFFERS", False)
-
-    # TODO(shingjan): remove the torch version check once older versions are deprecated
-    if is_torch_version(">=", "2.0") and include_buffers:
+    if is_torch_version(">=", "2.0.0") and include_buffers:
         with device:
             yield
         return
@@ -188,9 +186,7 @@ def cpu_offload(
             `dense.weight` and `dense.bias` are used in some operations instead of calling `dense` directly.
     """
     if execution_device is None:
-        execution_device = next(iter(model.parameters())).device
-    if state_dict is None:
-        state_dict = {n: p.to("cpu") for n, p in model.state_dict().items()}
+        execution_device = next(iter(model.parameters())).device if len(list(model.parameters())) > 0 else "cpu"
 
     add_hook_to_module(model, AlignDevicesHook(io_same_device=True), append=True)
     attach_align_device_hook(
@@ -198,7 +194,7 @@ def cpu_offload(
         execution_device=execution_device,
         offload=True,
         offload_buffers=offload_buffers,
-        weights_map=state_dict,
+        weights_map=state_dict or {n: p.to("cpu") for n, p in model.state_dict().items()},
         preload_module_classes=preload_module_classes,
     )
 
@@ -344,9 +340,7 @@ def dispatch_model(
     check_device_map(model, device_map)
 
     # for backward compatibility
-    is_bnb_quantized = (
-        getattr(model, "is_quantized", False) or getattr(model, "is_loaded_in_8bit", False)
-    ) and getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
+    is_bnb_quantized = (getattr(model, "is_quantized", False) or getattr(model, "is_loaded_in_8bit", False)) and getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
 
     # We attach hooks if the device_map has at least 2 different devices or if
     # force_hooks is set to `True`. Otherwise, the model in already loaded
