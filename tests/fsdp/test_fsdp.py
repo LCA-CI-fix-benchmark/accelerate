@@ -13,15 +13,14 @@
 # limitations under the License.
 
 
-import inspect
 import os
+import inspect
 
 import torch
 from transformers import AutoModel
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 
-import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
@@ -42,6 +41,7 @@ from accelerate.utils.constants import (
 from accelerate.utils.dataclasses import FullyShardedDataParallelPlugin
 from accelerate.utils.other import patch_environment
 
+import accelerate
 
 set_seed(42)
 
