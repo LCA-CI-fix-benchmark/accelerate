@@ -46,6 +46,17 @@ from .environment import (
     parse_flag_from_env,
     str_to_bool,
 )
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
+from .launch import (
+    PrepareForLaunch,
+    _filter_args,
+    prepare_deepspeed_cmd_env,
+    prepare_multi_gpu_env,
+    prepare_sagemager_args_inputs,
+    prepare_simple_launcher_cmd_env,
+    prepare_tpu,
+)
 from .imports import (
     get_ccl_version,
     is_4bit_bnb_available,
@@ -194,7 +205,18 @@ from .other import (
     wait_for_everyone,
     write_basic_config,
 )
+)
 from .random import set_seed, synchronize_rng_state, synchronize_rng_states
 from .torch_xla import install_xla
 from .tqdm import tqdm
 from .transformer_engine import convert_model, has_transformer_engine_layers
+from .versions import compare_versions, is_torch_version
+if is_deepspeed_available():
+    from .deepspeed import (
+        DeepSpeedEngineWrapper,
+        DeepSpeedOptimizerWrapper,
+        DeepSpeedSchedulerWrapper,
+        DummyOptim,
+        DummyScheduler,
+        HfDeepSpeedConfig,
+    )
