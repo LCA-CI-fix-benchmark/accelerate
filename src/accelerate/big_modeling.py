@@ -299,7 +299,8 @@ def dispatch_model(
     model: nn.Module,
     device_map: Dict[str, Union[str, int, torch.device]],
     main_device: Optional[torch.device] = None,
-    state_dict: Optional[Dict[str, torch.Tensor]] = None,
+    state_dict: Optional[Dict[str, torch.Tensor]] = None, 
+
     offload_dir: Optional[Union[str, os.PathLike]] = None,
     offload_index: Optional[Dict[str, str]] = None,
     offload_buffers: bool = False,
@@ -364,8 +365,10 @@ def dispatch_model(
             if state_dict is None and len(cpu_modules) > 0:
                 state_dict = extract_submodules_state_dict(model.state_dict(), cpu_modules)
 
-        disk_modules = [name for name, device in device_map.items() if device == "disk"]
-        if offload_dir is None and offload_index is None and len(disk_modules) > 0:
+        disk_modules = [
+            name for name, device in device_map.items() if device == "disk"
+        ]
+        if offload_dir is None and offload_index is None and len(disk_modules) > 0: 
             raise ValueError(
                 "We need an `offload_dir` to dispatch this model according to this `device_map`, the following submodules "
                 f"need to be offloaded: {', '.join(disk_modules)}."
@@ -373,7 +376,8 @@ def dispatch_model(
         if (
             len(disk_modules) > 0
             and offload_index is None
-            and (not os.path.isdir(offload_dir) or not os.path.isfile(os.path.join(offload_dir, "index.json")))
+            and (not os.path.isdir(offload_dir) 
+                 or not os.path.isfile(os.path.join(offload_dir, "index.json")))
         ):
             disk_state_dict = extract_submodules_state_dict(model.state_dict(), disk_modules)
             offload_state_dict(offload_dir, disk_state_dict)
@@ -394,8 +398,7 @@ def dispatch_model(
             weights_map = None
 
         tied_params = find_tied_parameters(model)
-        attach_align_device_hook_on_blocks(
-            model,
+        attach_align_device_hook_on_blocks(model,
             execution_device=execution_device,
             offload=offload,
             offload_buffers=offload_buffers,
