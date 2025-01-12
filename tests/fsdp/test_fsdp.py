@@ -17,9 +17,6 @@ import inspect
 import os
 
 import torch
-from transformers import AutoModel
-from transformers.testing_utils import mockenv_context
-from transformers.trainer_utils import set_seed
 
 import accelerate
 from accelerate.accelerator import Accelerator
@@ -33,6 +30,9 @@ from accelerate.test_utils.testing import (
     require_multi_device,
     slow,
 )
+from transformers import AutoModel
+from transformers.testing_utils import mockenv_context
+from transformers.trainer_utils import set_seed
 from accelerate.utils.constants import (
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
