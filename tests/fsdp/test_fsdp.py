@@ -15,13 +15,12 @@
 
 import inspect
 import os
-
 import torch
+
+import accelerate
 from transformers import AutoModel
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
-
-import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
