@@ -14,9 +14,10 @@
 
 
 import inspect
+import inspect
 import os
 
-import torch
+import inspect
 from transformers import AutoModel
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
@@ -39,6 +40,7 @@ from accelerate.utils.constants import (
     FSDP_SHARDING_STRATEGY,
     FSDP_STATE_DICT_TYPE,
 )
+import torch
 from accelerate.utils.dataclasses import FullyShardedDataParallelPlugin
 from accelerate.utils.other import patch_environment
 
