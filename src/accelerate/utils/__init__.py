@@ -1,3 +1,30 @@
+if is_deepspeed_available():
+    from .deepspeed import (
+        DeepSpeedEngineWrapper,
+        DeepSpeedOptimizerWrapper,
+        DeepSpeedSchedulerWrapper,
+        DummyOptim,
+        DummyScheduler,
+        HfDeepSpeedConfig,
+    )
+
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+from .constants import (
+    MODEL_NAME,
+    OPTIMIZER_NAME,
+    RNG_STATE_NAME,
+    SAFE_MODEL_NAME,
+    SAFE_WEIGHTS_INDEX_NAME,
+    SAFE_WEIGHTS_NAME,
+    SAMPLER_NAME,
+    SCALER_NAME,
+    SCHEDULER_NAME,
+    TORCH_DISTRIBUTED_OPERATION_TYPES,
+    TORCH_LAUNCH_PARAMS,
+    WEIGHTS_INDEX_NAME,
+    WEIGHTS_NAME,
+)
+# Move existing imports here and maintain alphabetical order
 from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
@@ -140,17 +167,6 @@ from .operations import (
 from .versions import compare_versions, is_torch_version
 
 
-if is_deepspeed_available():
-    from .deepspeed import (
-        DeepSpeedEngineWrapper,
-        DeepSpeedOptimizerWrapper,
-        DeepSpeedSchedulerWrapper,
-        DummyOptim,
-        DummyScheduler,
-        HfDeepSpeedConfig,
-    )
-
-from .bnb import has_4bit_bnb_layers, load_and_quantize_model
 from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
 from .launch import (
     PrepareForLaunch,
