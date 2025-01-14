@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from safetensors import safe_open
+from safetensors.torch import load_file as safe_load_file
 import contextlib
 import gc
 import inspect
@@ -38,8 +40,6 @@ from .tqdm import is_tqdm_available, tqdm
 if is_npu_available(check_device=False):
     import torch_npu  # noqa: F401
 
-from safetensors import safe_open
-from safetensors.torch import load_file as safe_load_file
 
 
 WEIGHTS_INDEX_NAME = "pytorch_model.bin.index.json"
