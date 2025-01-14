@@ -92,6 +92,16 @@ def convert_file_size_to_int(size: Union[int, str]):
 
     Example:
 
+    
+def convert_file_size_to_int(size: Union[int, str]):
+    """
+    Converts a size expressed as a string with digits an unit (like `"5MB"`) to an integer (in bytes).
+
+    Args:
+        size (`int` or `str`): The size to convert. Will be directly returned if an `int`.
+
+    Example:
+
     ```py
     >>> convert_file_size_to_int("1MiB")
     1048576
