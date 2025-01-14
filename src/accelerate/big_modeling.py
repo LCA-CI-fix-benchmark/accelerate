@@ -434,7 +434,7 @@ def dispatch_model(
         else:
             model.cuda = add_warning(model.cuda, model)
 
-    else:
+    if not force_hooks:
         device = list(device_map.values())[0]
         # `torch.Tensor.to(<int num>)` is not supported by `torch_npu` (see this [issue](https://github.com/Ascend/pytorch/issues/16)).
         if is_npu_available() and isinstance(device, int):
