@@ -66,8 +66,8 @@ from .imports import (
     is_ipex_available,
     is_megatron_lm_available,
     is_mlflow_available,
-    is_mps_available,
     is_msamp_available,
+    is_mps_available,
     is_npu_available,
     is_pandas_available,
     is_rich_available,
@@ -82,8 +82,8 @@ from .imports import (
 )
 from .modeling import (
     is_peft_model,
-    calculate_maximum_sizes,
     check_device_map,
+    calculate_maximum_sizes,
     check_tied_parameters_in_config,
     check_tied_parameters_on_same_device,
     compute_module_sizes,

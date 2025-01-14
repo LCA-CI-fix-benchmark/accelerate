@@ -30,8 +30,8 @@ import torch.nn as nn
 from ..state import AcceleratorState
 from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
 from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
-from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
-from .offload import load_offloaded_weight, offload_weight, save_offload_index
+from .imports import is_mps_available, is_npu_available, is_peft_available, is_xpu_available
+from .offload import load_offloaded_weight, save_offload_index, offload_weight
 from .tqdm import is_tqdm_available, tqdm
 
 
@@ -40,7 +40,6 @@ if is_npu_available(check_device=False):
 
 from safetensors import safe_open
 from safetensors.torch import load_file as safe_load_file
-
 
 WEIGHTS_INDEX_NAME = "pytorch_model.bin.index.json"
 
