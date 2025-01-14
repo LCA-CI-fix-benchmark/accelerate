@@ -39,6 +39,7 @@ from accelerate.utils.constants import (
     FSDP_SHARDING_STRATEGY,
     FSDP_STATE_DICT_TYPE,
 )
+from accelerate.utils.other import FSDP_AVAILABLE
 from accelerate.utils.dataclasses import FullyShardedDataParallelPlugin
 from accelerate.utils.other import patch_environment
 

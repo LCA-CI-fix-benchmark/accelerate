@@ -14,7 +14,6 @@
 
 import inspect
 import io
-import itertools
 import json
 import os
 import tempfile
@@ -78,7 +77,7 @@ else:
 
 
 def parameterized_custom_name_func(func, param_num, param):
-    # customize the test name generator function as we want both params to appear in the sub-test
+    # Customize the test name generator function as we want both params to appear in the sub-test
     # name, as by default it shows only the first param
     param_based_name = parameterized.to_safe_name("_".join(str(x) for x in param.args))
     return f"{func.__name__}_{param_based_name}"
@@ -91,6 +90,9 @@ optim_scheduler_params = list(itertools.product(optims, schedulers))
 
 @require_deepspeed
 @require_non_cpu
+@parameterized.expand(params, name_func=parameterized_custom_name_func)
+@parameterized.expand(optim_scheduler_params, name_func=parameterized_custom_name_func)
+@patch_environment()
 class DeepSpeedConfigIntegration(AccelerateTestCase):
     def setUp(self):
         super().setUp()
@@ -147,8 +149,8 @@ class DeepSpeedConfigIntegration(AccelerateTestCase):
         deepspeed_plugin = DeepSpeedPlugin(
             gradient_accumulation_steps=1,
             gradient_clipping=1.0,
-            zero_stage=3,
-            offload_optimizer_device="cpu",
+            zero_stage=ZERO3,
+            offload_optimizer_device=None,
             offload_param_device="cpu",
             zero3_save_16bit_model=True,
             zero3_init_flag=True,
@@ -234,14 +236,14 @@ class DeepSpeedConfigIntegration(AccelerateTestCase):
         self.assertTrue("`optimizer.params.lr` not found in kwargs." in str(cm.exception))
 
     @parameterized.expand([FP16, BF16], name_func=parameterized_custom_name_func)
-    def test_accelerate_state_deepspeed(self, dtype):
+    def test_accelerator_state_deepspeed(self, dtype):
         AcceleratorState._reset_state(True)
         deepspeed_plugin = DeepSpeedPlugin(
             gradient_accumulation_steps=1,
             gradient_clipping=1.0,
             zero_stage=ZERO2,
-            offload_optimizer_device="cpu",
-            offload_param_device="cpu",
+            offload_optimizer_device=None,
+            offload_param_device=None,
             zero3_save_16bit_model=True,
             zero3_init_flag=True,
         )
