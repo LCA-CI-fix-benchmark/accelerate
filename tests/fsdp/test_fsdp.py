@@ -18,8 +18,8 @@ import os
 
 import torch
 from transformers import AutoModel
-from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
+from transformers.testing_utils import mockenv_context
 
 import accelerate
 from accelerate.accelerator import Accelerator
@@ -28,9 +28,9 @@ from accelerate.test_utils.testing import (
     AccelerateTestCase,
     TempDirTestCase,
     execute_subprocess_async,
-    require_non_cpu,
     require_fsdp,
     require_multi_device,
+    require_non_cpu,
     slow,
 )
 from accelerate.utils.constants import (
