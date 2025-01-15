@@ -347,8 +347,9 @@ def dispatch_model(
     is_bnb_quantized = (
         getattr(model, "is_quantized", False) or getattr(model, "is_loaded_in_8bit", False)
     ) and getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
-
-    # We attach hooks if the device_map has at least 2 different devices or if
+    
+    # We attach hooks if the device_map has at least 2 different devices or if 
+    # the model is quantized or if force_hooks is set to `True`.
     # force_hooks is set to `True`. Otherwise, the model in already loaded
     # in the unique device and the user can decide where to dispatch the model.
     # If the model is quantized, we always force-dispatch the model
@@ -368,7 +369,8 @@ def dispatch_model(
         if offload_dir is None and offload_index is None and len(disk_modules) > 0:
             raise ValueError(
                 "We need an `offload_dir` to dispatch this model according to this `device_map`, the following submodules "
-                f"need to be offloaded: {', '.join(disk_modules)}."
+                f"need to be offloaded: "
+                f"{', '.join(disk_modules)}."
             )
         if (
             len(disk_modules) > 0
@@ -436,7 +438,8 @@ def dispatch_model(
 
     else:
         device = list(device_map.values())[0]
-        # `torch.Tensor.to(<int num>)` is not supported by `torch_npu` (see this [issue](https://github.com/Ascend/pytorch/issues/16)).
+        # `torch.Tensor.to(<int num>)` is not supported by `torch_npu` 
+        # (see this [issue](https://github.com/Ascend/pytorch/issues/16)).
         if is_npu_available() and isinstance(device, int):
             device = f"npu:{device}"
         if device != "disk":
