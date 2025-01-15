@@ -15,6 +15,36 @@
 
 import inspect
 import os
+import torch
+from torch.distributed.fsdp.fully_sharded_data_parallel import ShardingStrategy
+from torch.distributed.fsdp.fully_sharded_data_parallel import BackwardPrefetch
+from torch.distributed.fsdp.fully_sharded_data_parallel import StateDictType
+from torch.distributed.fsdp.fully_sharded_data_parallel import CPUOffload
+from torch.distributed.fsdp.fully_sharded_data_parallel import MixedPrecision
+from torch.distributed.fsdp.sharded_grad_scaler import ShardedGradScaler
+from transformers import AutoModel
+from transformers.testing_utils import mockenv_context
+from transformers.trainer_utils import set_seed
+import accelerate
+from accelerate.accelerator import Accelerator
+from accelerate.state import AcceleratorState
+from accelerate.test_utils.testing import (
+    AccelerateTestCase,
+    TempDirTestCase,
+    execute_subprocess_async,
+    require_non_cpu,
+    require_fsdp,
+    require_multi_device,
+    slow,
+)
+from accelerate.utils.constants import (
+    FSDP_AUTO_WRAP_POLICY,
+    FSDP_BACKWARD_PREFETCH,
+    FSDP_SHARDING_STRATEGY,
+    FSDP_STATE_DICT_TYPE,
+)
+from accelerate.utils.dataclasses import FullyShardedDataParallelPlugin
+from accelerate.utils.other import patch_environment
 
 import torch
 from transformers import AutoModel
