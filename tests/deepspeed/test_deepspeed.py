@@ -21,6 +21,7 @@ import tempfile
 from copy import deepcopy
 from pathlib import Path
 
+import accelerate
 import torch
 from parameterized import parameterized
 from torch.utils.data import DataLoader
@@ -29,15 +30,14 @@ from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available
 
-import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
     TempDirTestCase,
     execute_subprocess_async,
-    require_non_cpu,
     require_deepspeed,
+    require_non_cpu,
     require_multi_device,
     slow,
 )
