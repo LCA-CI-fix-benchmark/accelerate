@@ -461,7 +461,7 @@ def load_checkpoint_and_dispatch(
     offload_state_dict: Optional[bool] = None,
     skip_keys: Optional[Union[str, List[str]]] = None,
     preload_module_classes: Optional[List[str]] = None,
-    force_hooks: bool = False,
+    force_hooks: bool = False
 ):
     """
     Loads a (potentially sharded) checkpoint inside a model, potentially sending weights to a given device as they are
@@ -477,9 +477,11 @@ def load_checkpoint_and_dispatch(
         device_map (`Dict[str, Union[int, str, torch.device]]`, *optional*):
             A map that specifies where each submodule should go. It doesn't need to be refined to each parameter/buffer
             name, once a given module name is inside, every submodule of it will be sent to the same device.
-
-            To have Accelerate compute the most optimized `device_map` automatically, set `device_map="auto"`. For more
-            information about each option see [here](../concept_guides/big_model_inference#designing-a-device-map).
+            
+            To have Accelerate compute the most optimized `device_map` automatically, set `device_map="auto"`. For 
+            more information about each option see 
+            [here](../concept_guides/big_model_inference#designing-a-device-map).
+            
             Defaults to None, which means `dispatch_model` will not be called.
         max_memory (`Dict`, *optional*):
             A dictionary device identifier to maximum memory. Will default to the maximum memory available for each GPU
