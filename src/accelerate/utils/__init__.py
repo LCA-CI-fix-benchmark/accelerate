@@ -1,3 +1,5 @@
+from safetensors import safe_open
+
 from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
@@ -13,6 +15,7 @@ from .constants import (
     WEIGHTS_INDEX_NAME,
     WEIGHTS_NAME,
 )
+
 from .dataclasses import (
     AutocastKwargs,
     BnbQuantizationConfig,
@@ -55,8 +58,8 @@ from .imports import (
     is_bnb_available,
     is_boto3_available,
     is_ccl_available,
-    is_clearml_available,
     is_comet_ml_available,
+    is_clearml_available,
     is_cuda_available,
     is_datasets_available,
     is_peft_available,
@@ -104,6 +107,7 @@ from .modeling import (
     set_module_tensor_to_device,
     shard_checkpoint,
 )
+
 from .offload import (
     OffloadedWeightsLoader,
     PrefixedDataset,
@@ -113,6 +117,7 @@ from .offload import (
     offload_weight,
     save_offload_index,
 )
+
 from .operations import (
     CannotPadNestedTensorWarning,
     broadcast,
@@ -137,6 +142,7 @@ from .operations import (
     send_to_device,
     slice_tensors,
 )
+
 from .versions import compare_versions, is_torch_version
 
 
