@@ -24,12 +24,13 @@ import tempfile
 from collections import OrderedDict, defaultdict
 from typing import Dict, List, Optional, Tuple, Union
 
-import torch
-import torch.nn as nn
-
 from ..state import AcceleratorState
 from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
 from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
+
+import torch
+import torch.nn as nn
+
 from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
 from .offload import load_offloaded_weight, offload_weight, save_offload_index
 from .tqdm import is_tqdm_available, tqdm
