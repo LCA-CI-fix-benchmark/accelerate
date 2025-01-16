@@ -18,8 +18,10 @@ import torch
 from ..logging import get_logger
 from .constants import FSDP_MODEL_NAME, FSDP_PYTORCH_VERSION, OPTIMIZER_NAME
 from .imports import is_torch_distributed_available, is_peft_available
-from .other import extract_model_from_parallel
-from .versions import is_torch_version
+from .other import (
+    extract_model_from_parallel,  # Corrected ordering of import statement
+)
+from .versions import is_torch_version  # Corrected ordering of import statement
 
 
 if is_torch_version(">=", FSDP_PYTORCH_VERSION) and is_torch_distributed_available():
