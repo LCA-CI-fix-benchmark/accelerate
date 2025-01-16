@@ -49,12 +49,10 @@ def _get_model_state_dict(model, adapter_only=False):
 
 
 def _set_model_state_dict(model, state_dict, adapter_only=False):
-    if adapter_only and _is_peft_model(model):
-        from peft import set_peft_model_state_dict
-
-        return set_peft_model_state_dict(model, state_dict, adapter_name=model.active_adapter)
-    else:
-        return model.load_state_dict(state_dict)
+    from black import format_file
+    # Removed the check for _is_peft_model and the import of set_peft_model_state_dict
+    # The function is simplified to just call model.load_state_dict
+    return model.load_state_dict(state_dict)
 
 
 def save_fsdp_model(fsdp_plugin, accelerator, model, output_dir, model_index=0, adapter_only=False):
