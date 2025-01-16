@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
+import os
 
 import torch
 
@@ -58,7 +59,15 @@ def _set_model_state_dict(model, state_dict, adapter_only=False):
 
 
 def save_fsdp_model(fsdp_plugin, accelerator, model, output_dir, model_index=0, adapter_only=False):
+
     os.makedirs(output_dir, exist_ok=True)
+
+    if fsdp_plugin.state_dict_type == StateDictType.FULL_STATE_DICT:
+        # FSDP raises error when single GPU is used with `offload_to_cpu=True` for FULL_STATE_DICT
+        # so, only enable it when num_processes>1
+        is_multi_process = accelerator.num_processes > 1
+        fsdp_plugin.state_dict_config.offload_to_cpu = is_multi_process
+        fsdp_plugin.state_dict_config.rank0_only = is_multi_process
 
     if fsdp_plugin.state_dict_type == StateDictType.FULL_STATE_DICT:
         # FSDP raises error when single GPU is used with `offload_to_cpu=True` for FULL_STATE_DICT
@@ -71,6 +80,13 @@ def save_fsdp_model(fsdp_plugin, accelerator, model, output_dir, model_index=0, 
         model, fsdp_plugin.state_dict_type, fsdp_plugin.state_dict_config, fsdp_plugin.optim_state_dict_config
     ):
         state_dict = _get_model_state_dict(model, adapter_only=adapter_only)
+
+        if fsdp_plugin.state_dict_type == StateDictType.FULL_STATE_DICT:
+            # FSDP raises error when single GPU is used with `offload_to_cpu=True` for FULL_STATE_DICT
+            # so, only enable it when num_processes>1
+            is_multi_process = accelerator.num_processes > 1
+            fsdp_plugin.state_dict_config.offload_to_cpu = is_multi_process
+            fsdp_plugin.state_dict_config.rank0_only = is_multi_process
         if fsdp_plugin.state_dict_type == StateDictType.FULL_STATE_DICT:
             weights_name = f"{FSDP_MODEL_NAME}.bin" if model_index == 0 else f"{FSDP_MODEL_NAME}_{model_index}.bin"
             output_model_file = os.path.join(output_dir, weights_name)
