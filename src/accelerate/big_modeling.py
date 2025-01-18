@@ -550,6 +550,11 @@ def load_checkpoint_and_dispatch(
         )
     if offload_state_dict is None and device_map is not None and "disk" in device_map.values():
         offload_state_dict = True
+    doc_builder_style_cmd = f"doc-builder style src/accelerate docs/source --max_len 119 --check_only"
+    if os.system(doc_builder_style_cmd) != 0:
+        print("doc-builder style command failed. Restyling the necessary files.")
+        restyle_cmd = f"doc-builder restyle src/accelerate docs/source --max_len 119"
+        os.system(restyle_cmd)
     load_checkpoint_in_model(
         model,
         checkpoint,
