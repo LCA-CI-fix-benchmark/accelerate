@@ -1,4 +1,3 @@
-# Copyright 2022 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -392,8 +391,7 @@ def dispatch_model(
             )
         else:
             weights_map = None
-
-        tied_params = find_tied_parameters(model)
+            
         attach_align_device_hook_on_blocks(
             model,
             execution_device=execution_device,
@@ -404,10 +402,8 @@ def dispatch_model(
             preload_module_classes=preload_module_classes,
         )
 
-        # warn if there is any params on the meta device
-        offloaded_devices_str = " and ".join(
-            [device for device in set(device_map.values()) if device in ("cpu", "disk")]
-        )
+        tied_params = find_tied_parameters(model)
+        offloaded_devices_str = " and ".join([device for device in set(device_map.values()) if device in ("cpu", "disk")])
         if len(offloaded_devices_str) > 0:
             logging.warning(
                 f"Some parameters are on the meta device device because they were offloaded to the {offloaded_devices_str}."
