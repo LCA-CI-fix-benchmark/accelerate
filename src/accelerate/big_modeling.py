@@ -368,7 +368,7 @@ def dispatch_model(
         if offload_dir is None and offload_index is None and len(disk_modules) > 0:
             raise ValueError(
                 "We need an `offload_dir` to dispatch this model according to this `device_map`, the following submodules "
-                f"need to be offloaded: {', '.join(disk_modules)}."
+                f"need to be offloaded: {disk_modules}."
             )
         if (
             len(disk_modules) > 0
@@ -410,7 +410,8 @@ def dispatch_model(
         )
         if len(offloaded_devices_str) > 0:
             logging.warning(
-                f"Some parameters are on the meta device device because they were offloaded to the {offloaded_devices_str}."
+                "Some parameters are on the meta device device because they were offloaded to the "
+                f"{offloaded_devices_str}."
             )
 
         # Attaching the hook may break tied weights, so we retie them
