@@ -1,3 +1,5 @@
+from safetensors import safe_open
+
 from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
@@ -13,6 +15,7 @@ from .constants import (
     WEIGHTS_INDEX_NAME,
     WEIGHTS_NAME,
 )
+
 from .dataclasses import (
     AutocastKwargs,
     BnbQuantizationConfig,
@@ -37,6 +40,7 @@ from .dataclasses import (
     TensorInformation,
     TorchDynamoPlugin,
 )
+
 from .environment import (
     are_libraries_initialized,
     check_cuda_p2p_ib_support,
@@ -46,6 +50,7 @@ from .environment import (
     parse_flag_from_env,
     str_to_bool,
 )
+
 from .imports import (
     get_ccl_version,
     is_4bit_bnb_available,
@@ -80,6 +85,7 @@ from .imports import (
     is_wandb_available,
     is_xpu_available,
 )
+
 from .modeling import (
     is_peft_model,
     calculate_maximum_sizes,
@@ -104,6 +110,7 @@ from .modeling import (
     set_module_tensor_to_device,
     shard_checkpoint,
 )
+
 from .offload import (
     OffloadedWeightsLoader,
     PrefixedDataset,
@@ -113,6 +120,7 @@ from .offload import (
     offload_weight,
     save_offload_index,
 )
+
 from .operations import (
     CannotPadNestedTensorWarning,
     broadcast,
