@@ -1,3 +1,14 @@
+if is_deepspeed_available():
+    from .deepspeed import (
+        DeepSpeedEngineWrapper,
+        DeepSpeedOptimizerWrapper,
+        DeepSpeedSchedulerWrapper,
+        DummyOptim,
+        DummyScheduler,
+        HfDeepSpeedConfig,
+    )
+
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
 from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
@@ -80,6 +91,35 @@ from .imports import (
     is_wandb_available,
     is_xpu_available,
 )
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
+from .launch import (
+    PrepareForLaunch,
+    _filter_args,
+    prepare_deepspeed_cmd_env,
+    prepare_multi_gpu_env,
+    prepare_sagemager_args_inputs,
+    prepare_simple_launcher_cmd_env,
+    prepare_tpu,
+)
+from .megatron_lm import (
+    AbstractTrainStep,
+    BertTrainStep,
+    GPTTrainStep,
+    MegatronEngine,
+    MegatronLMDummyDataLoader,
+    MegatronLMDummyScheduler,
+    MegatronLMOptimizerWrapper,
+    MegatronLMSchedulerWrapper,
+    T5TrainStep,
+    avg_losses_across_data_parallel_group,
+    gather_across_data_parallel_groups,
+)
+from .megatron_lm import initialize as megatron_lm_initialize
+from .megatron_lm import prepare_data_loader as megatron_lm_prepare_data_loader
+from .megatron_lm import prepare_model as megatron_lm_prepare_model
+from .megatron_lm import prepare_optimizer as megatron_lm_prepare_optimizer
+from .megatron_lm import prepare_scheduler as megatron_lm_prepare_scheduler
+from .memory import find_executable_batch_size, release_memory
 from .modeling import (
     is_peft_model,
     calculate_maximum_sizes,
@@ -103,15 +143,6 @@ from .modeling import (
     retie_parameters,
     set_module_tensor_to_device,
     shard_checkpoint,
-)
-from .offload import (
-    OffloadedWeightsLoader,
-    PrefixedDataset,
-    extract_submodules_state_dict,
-    load_offloaded_weight,
-    offload_state_dict,
-    offload_weight,
-    save_offload_index,
 )
 from .operations import (
     CannotPadNestedTensorWarning,
