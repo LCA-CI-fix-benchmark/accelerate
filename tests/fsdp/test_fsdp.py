@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-import inspect
-import os
-
 import torch
 from transformers import AutoModel
 from transformers.testing_utils import mockenv_context
@@ -23,6 +19,8 @@ from transformers.trainer_utils import set_seed
 
 import accelerate
 from accelerate.accelerator import Accelerator
+import inspect
+import os
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,

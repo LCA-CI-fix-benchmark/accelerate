@@ -18,7 +18,6 @@ import itertools
 import json
 import os
 import tempfile
-from copy import deepcopy
 from pathlib import Path
 
 import torch
@@ -29,6 +28,7 @@ from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available
 
+from copy import deepcopy
 import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
