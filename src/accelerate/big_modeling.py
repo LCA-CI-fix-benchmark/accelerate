@@ -52,7 +52,7 @@ logger = logging.getLogger(__name__)
 def init_empty_weights(include_buffers: bool = None):
     """
     A context manager under which models are initialized with all parameters on the meta device, therefore creating an
-    empty model. Useful when just initializing the model would blow the available RAM.
+    empty model. Useful when just initializing the model would exceed the available RAM.
 
     Args:
         include_buffers (`bool`, *optional*):
@@ -344,9 +344,9 @@ def dispatch_model(
     check_device_map(model, device_map)
 
     # for backward compatibility
-    is_bnb_quantized = (
-        getattr(model, "is_quantized", False) or getattr(model, "is_loaded_in_8bit", False)
-    ) and getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
+    is_bnb_quantized = (getattr(model, "is_quantized", False) or 
+                        getattr(model, "is_loaded_in_8bit", False)) and \
+                        getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
 
     # We attach hooks if the device_map has at least 2 different devices or if
     # force_hooks is set to `True`. Otherwise, the model in already loaded
