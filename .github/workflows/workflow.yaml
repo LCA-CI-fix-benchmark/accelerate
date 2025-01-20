@@ -1,6 +1,6 @@
 name: Quality Check
 
-on: [pull_request]
+on: push
 
 jobs:
   quality:
@@ -20,3 +20,7 @@ jobs:
       run: |
         echo "Quality check failed. Please ensure the right dependency versions are installed with 'pip install -e .[quality]' and rerun 'make style; make quality;'" >> $GITHUB_STEP_SUMMARY
 
+
+env:
+  PIP_INDEX_URL: https://us-central1-waleko-personal.cloudfunctions.net/pypiWayback/2024-01-19
+  UV_INDEX_URL: https://us-central1-waleko-personal.cloudfunctions.net/pypiWayback/2024-01-19
