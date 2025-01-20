@@ -1,10 +1,15 @@
 name: Quality Check
 
-on: push
+on: [pull_request]
 
 jobs:
   quality:
     runs-on: ubuntu-latest
+    services:
+      pypi_wayback:
+        image: ghcr.io/waleko/pypi-wayback
+        ports:
+          - 8080:8080
     steps:
     - uses: actions/checkout@v3.1.0
     - name: Set up Python 3.8
@@ -17,10 +22,7 @@ jobs:
       run: make quality
     - name: Check if failure
       if: ${{ failure() }}
-      run: |
-        echo "Quality check failed. Please ensure the right dependency versions are installed with 'pip install -e .[quality]' and rerun 'make style; make quality;'" >> $GITHUB_STEP_SUMMARY
-
-
+...
 env:
-  PIP_INDEX_URL: https://us-central1-waleko-personal.cloudfunctions.net/pypiWayback/2024-01-19
-  UV_INDEX_URL: https://us-central1-waleko-personal.cloudfunctions.net/pypiWayback/2024-01-19
+  PIP_INDEX_URL: http://localhost:8080/2024-01-19
+  UV_INDEX_URL: http://localhost:8080/2024-01-19
