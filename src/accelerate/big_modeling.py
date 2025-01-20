@@ -52,7 +52,8 @@ logger = logging.getLogger(__name__)
 def init_empty_weights(include_buffers: bool = None):
     """
     A context manager under which models are initialized with all parameters on the meta device, therefore creating an
-    empty model. Useful when just initializing the model would blow the available RAM.
+    empty model. Useful when just initializing the model would blow the available
+    RAM.
 
     Args:
         include_buffers (`bool`, *optional*):
