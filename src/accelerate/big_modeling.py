@@ -107,7 +107,7 @@ def init_on_device(device: torch.device, include_buffers: bool = None):
         include_buffers = parse_flag_from_env("ACCELERATE_INIT_INCLUDE_BUFFERS", False)
 
     # TODO(shingjan): remove the torch version check once older versions are deprecated
-    if is_torch_version(">=", "2.0") and include_buffers:
+    if is_torch_version(">=", "2.0") and include_buffers:  # Fix style issue here
         with device:
             yield
         return
