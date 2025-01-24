@@ -72,7 +72,8 @@ def init_empty_weights(include_buffers: bool = None):
     <Tip warning={true}>
 
     Any model created under this context manager has no weights. As such you can't do something like
-    `model.to(some_device)` with it. To load weights inside your empty model, see [`load_checkpoint_and_dispatch`].
+    `model.to(some_device)` with it. To load weights inside your empty model, see 
+    [`load_checkpoint_and_dispatch`].
     Make sure to overwrite the default device_map param, otherwise dispatch is not called.
     </Tip>
     """
