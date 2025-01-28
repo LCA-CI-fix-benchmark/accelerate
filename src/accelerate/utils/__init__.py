@@ -1,3 +1,17 @@
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
+from .launch import (
+    PrepareForLaunch,
+    _filter_args,
+    prepare_deepspeed_cmd_env,
+    prepare_multi_gpu_env, 
+    prepare_sagemager_args_inputs,
+    prepare_simple_launcher_cmd_env,
+    prepare_tpu,
+)
+from .memory import find_executable_batch_size, release_memory
+from .versions import compare_versions, is_torch_version
+
 from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
@@ -150,17 +164,6 @@ if is_deepspeed_available():
         HfDeepSpeedConfig,
     )
 
-from .bnb import has_4bit_bnb_layers, load_and_quantize_model
-from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
-from .launch import (
-    PrepareForLaunch,
-    _filter_args,
-    prepare_deepspeed_cmd_env,
-    prepare_multi_gpu_env,
-    prepare_sagemager_args_inputs,
-    prepare_simple_launcher_cmd_env,
-    prepare_tpu,
-)
 from .megatron_lm import (
     AbstractTrainStep,
     BertTrainStep,
@@ -179,7 +182,6 @@ from .megatron_lm import prepare_data_loader as megatron_lm_prepare_data_loader
 from .megatron_lm import prepare_model as megatron_lm_prepare_model
 from .megatron_lm import prepare_optimizer as megatron_lm_prepare_optimizer
 from .megatron_lm import prepare_scheduler as megatron_lm_prepare_scheduler
-from .memory import find_executable_batch_size, release_memory
 from .other import (
     check_os_kernel,
     clean_state_dict_for_safetensors,
