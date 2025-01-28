@@ -32,6 +32,9 @@ from transformers.utils import is_torch_bf16_available
 import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
+from copy import deepcopy
+from pathlib import Path
+from parameterized import parameterized
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
     TempDirTestCase,
