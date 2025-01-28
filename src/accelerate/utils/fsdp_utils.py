@@ -1,23 +1,23 @@
 # Copyright 2023 The HuggingFace Team. All rights reserved.
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
 #     http://www.apache.org/licenses/LICENSE-2.0
-#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import os
 
 import torch
-
 from ..logging import get_logger
 from .constants import FSDP_MODEL_NAME, FSDP_PYTORCH_VERSION, OPTIMIZER_NAME
-from .imports import is_torch_distributed_available, is_peft_available
+from .imports import (
+    is_peft_available,
+    is_torch_distributed_available,
+)
 from .other import extract_model_from_parallel
 from .versions import is_torch_version
 
