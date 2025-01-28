@@ -37,6 +37,14 @@ from .dataclasses import (
     TensorInformation,
     TorchDynamoPlugin,
 )
+from .deepspeed import (
+    DeepSpeedEngineWrapper,
+    DeepSpeedOptimizerWrapper,
+    DeepSpeedSchedulerWrapper,
+    DummyOptim,
+    DummyScheduler,
+    HfDeepSpeedConfig,
+)
 from .environment import (
     are_libraries_initialized,
     check_cuda_p2p_ib_support,
@@ -46,6 +54,7 @@ from .environment import (
     parse_flag_from_env,
     str_to_bool,
 )
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
 from .imports import (
     get_ccl_version,
     is_4bit_bnb_available,
@@ -59,7 +68,6 @@ from .imports import (
     is_comet_ml_available,
     is_cuda_available,
     is_datasets_available,
-    is_peft_available,
     is_deepspeed_available,
     is_dvclive_available,
     is_fp8_available,
@@ -70,6 +78,7 @@ from .imports import (
     is_msamp_available,
     is_npu_available,
     is_pandas_available,
+    is_peft_available,
     is_rich_available,
     is_sagemaker_available,
     is_tensorboard_available,
@@ -80,8 +89,16 @@ from .imports import (
     is_wandb_available,
     is_xpu_available,
 )
+from .launch import (
+    PrepareForLaunch,
+    _filter_args,
+    prepare_deepspeed_cmd_env,
+    prepare_multi_gpu_env,
+    prepare_sagemager_args_inputs,
+    prepare_simple_launcher_cmd_env,
+    prepare_tpu,
+)
 from .modeling import (
-    is_peft_model,
     calculate_maximum_sizes,
     check_device_map,
     check_tied_parameters_in_config,
@@ -94,6 +111,7 @@ from .modeling import (
     get_max_layer_size,
     get_max_memory,
     get_mixed_precision_context_manager,
+    is_peft_model,
     id_tensor_storage,
     infer_auto_device_map,
     load_checkpoint_in_model,
@@ -139,28 +157,8 @@ from .operations import (
 )
 from .versions import compare_versions, is_torch_version
 
-
 if is_deepspeed_available():
-    from .deepspeed import (
-        DeepSpeedEngineWrapper,
-        DeepSpeedOptimizerWrapper,
-        DeepSpeedSchedulerWrapper,
-        DummyOptim,
-        DummyScheduler,
-        HfDeepSpeedConfig,
-    )
-
-from .bnb import has_4bit_bnb_layers, load_and_quantize_model
-from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
-from .launch import (
-    PrepareForLaunch,
-    _filter_args,
-    prepare_deepspeed_cmd_env,
-    prepare_multi_gpu_env,
-    prepare_sagemager_args_inputs,
-    prepare_simple_launcher_cmd_env,
-    prepare_tpu,
-)
+    from .bnb import has_4bit_bnb_layers, load_and_quantize_model
 from .megatron_lm import (
     AbstractTrainStep,
     BertTrainStep,
