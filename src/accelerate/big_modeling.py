@@ -25,7 +25,6 @@ from .hooks import (
     AlignDevicesHook,
     CpuOffload,
     UserCpuOffloadHook,
-    add_hook_to_module,
     attach_align_device_hook,
     attach_align_device_hook_on_blocks,
 )
@@ -41,6 +40,7 @@ from .utils import (
     load_checkpoint_in_model,
     offload_state_dict,
     parse_flag_from_env,
+    register_hook_to_module,
     retie_parameters,
 )
 
@@ -192,7 +192,7 @@ def cpu_offload(
     if state_dict is None:
         state_dict = {n: p.to("cpu") for n, p in model.state_dict().items()}
 
-    add_hook_to_module(model, AlignDevicesHook(io_same_device=True), append=True)
+    register_hook_to_module(model, AlignDevicesHook(io_same_device=True), append=True)
     attach_align_device_hook(
         model,
         execution_device=execution_device,
