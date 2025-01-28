@@ -26,18 +26,18 @@ from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
-    TempDirTestCase,
     execute_subprocess_async,
-    require_non_cpu,
     require_fsdp,
     require_multi_device,
+    require_non_cpu,
+    TempDirTestCase,
     slow,
 )
 from accelerate.utils.constants import (
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
     FSDP_SHARDING_STRATEGY,
-    FSDP_STATE_DICT_TYPE,
+    FSDP_STATE_DICT_TYPE
 )
 from accelerate.utils.dataclasses import FullyShardedDataParallelPlugin
 from accelerate.utils.other import patch_environment

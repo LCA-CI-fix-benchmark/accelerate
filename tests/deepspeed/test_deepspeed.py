@@ -36,22 +36,20 @@ from accelerate.test_utils.testing import (
     AccelerateTestCase,
     TempDirTestCase,
     execute_subprocess_async,
-    require_non_cpu,
     require_deepspeed,
     require_multi_device,
+    require_non_cpu,
     slow,
 )
 from accelerate.test_utils.training import RegressionDataset
 from accelerate.utils.dataclasses import DeepSpeedPlugin
 from accelerate.utils.deepspeed import (
-    DeepSpeedEngineWrapper,
     DeepSpeedOptimizerWrapper,
     DeepSpeedSchedulerWrapper,
     DummyOptim,
     DummyScheduler,
 )
 from accelerate.utils.other import patch_environment
-
 
 set_seed(42)
 
