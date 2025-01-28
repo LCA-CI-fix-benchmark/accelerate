@@ -119,9 +119,10 @@ def init_on_device(device: torch.device, include_buffers: bool = None):
     def register_empty_parameter(module, name, param):
         old_register_parameter(module, name, param)
         if param is not None:
-            param_cls = type(module._parameters[name])
-            kwargs = module._parameters[name].__dict__
-            module._parameters[name] = param_cls(module._parameters[name].to(device), **kwargs)
+            param_cls = type(module._parameters[name]) 
+            param_dict = module._parameters[name].__dict__
+            param_to_device = module._parameters[name].to(device)
+            module._parameters[name] = param_cls(param_to_device, **param_dict)
 
     def register_empty_buffer(module, name, buffer, persistent=True):
         old_register_buffer(module, name, buffer, persistent=persistent)
@@ -131,8 +132,7 @@ def init_on_device(device: torch.device, include_buffers: bool = None):
     # Patch tensor creation
     if include_buffers:
         tensor_constructors_to_patch = {
-            torch_function_name: getattr(torch, torch_function_name)
-            for torch_function_name in ["empty", "zeros", "ones", "full"]
+            name: getattr(torch, name) for name in ["empty", "zeros", "ones", "full"]
         }
     else:
         tensor_constructors_to_patch = {}
