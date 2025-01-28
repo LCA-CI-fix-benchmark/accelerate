@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import inspect
 import io
+import inspect
 import itertools
 import json
 import os
-import tempfile
 from copy import deepcopy
 from pathlib import Path
+import tempfile
 
 import torch
 from parameterized import parameterized
