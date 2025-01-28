@@ -164,7 +164,7 @@ def cpu_offload(
     execution_device: Optional[torch.device] = None,
     offload_buffers: bool = False,
     state_dict: Optional[Dict[str, torch.Tensor]] = None,
-    preload_module_classes: Optional[List[str]] = None,
+    preload_module_classes: Optional[List[str]] = [],
 ):
     """
     Activates full CPU offload for a model. As a result, all parameters of the model will be offloaded and only one
@@ -254,7 +254,7 @@ def disk_offload(
     offload_dir: Union[str, os.PathLike],
     execution_device: Optional[torch.device] = None,
     offload_buffers: bool = False,
-    preload_module_classes: Optional[List[str]] = None,
+    preload_module_classes: Optional[List[str]] = [],
 ):
     """
     Activates full disk offload for a model. As a result, all parameters of the model will be offloaded as
@@ -303,8 +303,8 @@ def dispatch_model(
     offload_dir: Optional[Union[str, os.PathLike]] = None,
     offload_index: Optional[Dict[str, str]] = None,
     offload_buffers: bool = False,
-    skip_keys: Optional[Union[str, List[str]]] = None,
-    preload_module_classes: Optional[List[str]] = None,
+    skip_keys: Optional[List[str]] = [],
+    preload_module_classes: Optional[List[str]] = [],
     force_hooks: bool = False,
 ):
     """
@@ -454,13 +454,13 @@ def load_checkpoint_and_dispatch(
     checkpoint: Union[str, os.PathLike],
     device_map: Optional[Union[str, Dict[str, Union[int, str, torch.device]]]] = None,
     max_memory: Optional[Dict[Union[int, str], Union[int, str]]] = None,
-    no_split_module_classes: Optional[List[str]] = None,
+    no_split_module_classes: Optional[List[str]] = [],
     offload_folder: Optional[Union[str, os.PathLike]] = None,
     offload_buffers: bool = False,
     dtype: Optional[Union[str, torch.dtype]] = None,
     offload_state_dict: Optional[bool] = None,
-    skip_keys: Optional[Union[str, List[str]]] = None,
-    preload_module_classes: Optional[List[str]] = None,
+    skip_keys: Optional[List[str]] = [],
+    preload_module_classes: Optional[List[str]] = [],
     force_hooks: bool = False,
 ):
     """
