@@ -81,7 +81,6 @@ from .imports import (
     is_xpu_available,
 )
 from .modeling import (
-    is_peft_model,
     calculate_maximum_sizes,
     check_device_map,
     check_tied_parameters_in_config,
@@ -103,6 +102,7 @@ from .modeling import (
     retie_parameters,
     set_module_tensor_to_device,
     shard_checkpoint,
+    is_peft_model,
 )
 from .offload import (
     OffloadedWeightsLoader,
