@@ -66,7 +66,7 @@ def init_empty_weights(include_buffers: bool = None):
 
     # Initialize a model with 100 billions parameters in no time and without using any RAM.
     with init_empty_weights():
-        tst = nn.Sequential(*[nn.Linear(10000, 10000) for _ in range(1000)])
+        tst = nn.Sequential(*[nn.Linear(10000, 10000) for _ in range(1000)]
     ```
 
     <Tip warning={true}>
