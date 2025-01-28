@@ -9,7 +9,6 @@ from .constants import (
     SCALER_NAME,
     SCHEDULER_NAME,
     TORCH_DISTRIBUTED_OPERATION_TYPES,
-    TORCH_LAUNCH_PARAMS,
     WEIGHTS_INDEX_NAME,
     WEIGHTS_NAME,
 )
@@ -198,3 +197,4 @@ from .random import set_seed, synchronize_rng_state, synchronize_rng_states
 from .torch_xla import install_xla
 from .tqdm import tqdm
 from .transformer_engine import convert_model, has_transformer_engine_layers
+from .versions import compare_versions, is_torch_version
