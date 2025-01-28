@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import contextlib
-import gc
+import collections
 import inspect
 import json
 import logging
