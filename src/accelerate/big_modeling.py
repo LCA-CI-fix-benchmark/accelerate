@@ -49,18 +49,7 @@ logger = logging.getLogger(__name__)
 
 
 @contextmanager
-def init_empty_weights(include_buffers: bool = None):
-    """
-    A context manager under which models are initialized with all parameters on the meta device, therefore creating an
-    empty model. Useful when just initializing the model would blow the available RAM.
-
-    Args:
-        include_buffers (`bool`, *optional*):
-            Whether or not to also put all buffers on the meta device while initializing.
-
-    Example:
-
-    ```python
+def init_empty_weights(include_buffers: bool = None):```python
     import torch.nn as nn
     from accelerate import init_empty_weights
 
