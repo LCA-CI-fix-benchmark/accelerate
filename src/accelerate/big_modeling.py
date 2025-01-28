@@ -450,7 +450,7 @@ def dispatch_model(
 
 
 def load_checkpoint_and_dispatch(
-    model: nn.Module,
+    model: torch.nn.Module,
     checkpoint: Union[str, os.PathLike],
     device_map: Optional[Union[str, Dict[str, Union[int, str, torch.device]]]] = None,
     max_memory: Optional[Dict[Union[int, str], Union[int, str]]] = None,
