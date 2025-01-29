@@ -479,7 +479,7 @@ def load_checkpoint_and_dispatch(
             name, once a given module name is inside, every submodule of it will be sent to the same device.
 
             To have Accelerate compute the most optimized `device_map` automatically, set `device_map="auto"`. For more
-            information about each option see [here](../concept_guides/big_model_inference#designing-a-device-map).
+            information about each option see [here](https://huggingface.co/docs/accelerate/main/en/concept_guides/big_model_inference#designing-a-device-map).
             Defaults to None, which means `dispatch_model` will not be called.
         max_memory (`Dict`, *optional*):
             A dictionary device identifier to maximum memory. Will default to the maximum memory available for each GPU
