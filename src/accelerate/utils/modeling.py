@@ -11,21 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import contextlib
 import gc
 import inspect
 import json
 import logging
 import os
+from collections import OrderedDict, defaultdict
+from typing import Dict, List, Optional, Tuple, Union
 import re
 import shutil
 import tempfile
-from collections import OrderedDict, defaultdict
-from typing import Dict, List, Optional, Tuple, Union
 
 import torch
 import torch.nn as nn
+from safetensors import safe_open
+from safetensors.torch import load_file as safe_load_file
 
 from ..state import AcceleratorState
 from .constants import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
@@ -33,14 +34,10 @@ from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
 from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
 from .offload import load_offloaded_weight, offload_weight, save_offload_index
 from .tqdm import is_tqdm_available, tqdm
-
+from .versions import compare_versions, is_torch_version
 
 if is_npu_available(check_device=False):
     import torch_npu  # noqa: F401
-
-from safetensors import safe_open
-from safetensors.torch import load_file as safe_load_file
-
 
 WEIGHTS_INDEX_NAME = "pytorch_model.bin.index.json"
 
