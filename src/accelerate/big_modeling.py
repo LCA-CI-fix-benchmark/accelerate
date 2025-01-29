@@ -59,8 +59,7 @@ def init_empty_weights(include_buffers: bool = None):
             Whether or not to also put all buffers on the meta device while initializing.
 
     Example:
-
-    ```python
+```python
     import torch.nn as nn
     from accelerate import init_empty_weights
 
