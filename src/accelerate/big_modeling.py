@@ -182,7 +182,7 @@ def cpu_offload(
         state_dict (`Dict[str, torch.Tensor]`, *optional*):
             The state dict of the model that will be kept on CPU.
         preload_module_classes (`List[str]`, *optional*):
-            A list of classes whose instances should load all their weights (even in the submodules) at the beginning
+            A list of classes whose instances should preload all their weights (even in the submodules) at the beginning
             of the forward. This should only be used for classes that have submodules which are registered but not
             called directly during the forward, for instance if a `dense` linear layer is registered, but at forward,
             `dense.weight` and `dense.bias` are used in some operations instead of calling `dense` directly.
@@ -333,7 +333,7 @@ def dispatch_model(
             A list of keys to ignore when moving inputs or outputs between devices.
         preload_module_classes (`List[str]`, *optional*):
             A list of classes whose instances should load all their weights (even in the submodules) at the beginning
-            of the forward. This should only be used for classes that have submodules which are registered but not
+            of the forward pass. This should only be used for classes that have submodules which are registered but not
             called directly during the forward, for instance if a `dense` linear layer is registered, but at forward,
             `dense.weight` and `dense.bias` are used in some operations instead of calling `dense` directly.
         force_hooks (`bool`, *optional*, defaults to `False`):
