@@ -15,6 +15,8 @@
 import contextlib
 import gc
 import inspect
+from safetensors import safe_open
+from safetensors.torch import load_file as safe_load_file
 import json
 import logging
 import os
@@ -33,13 +35,7 @@ from .dataclasses import AutocastKwargs, CustomDtype, DistributedType
 from .imports import is_mps_available, is_npu_available, is_xpu_available, is_peft_available
 from .offload import load_offloaded_weight, offload_weight, save_offload_index
 from .tqdm import is_tqdm_available, tqdm
-
-
-if is_npu_available(check_device=False):
-    import torch_npu  # noqa: F401
-
-from safetensors import safe_open
-from safetensors.torch import load_file as safe_load_file
+from torch_npu import torch_npu  # noqa: F401
 
 
 WEIGHTS_INDEX_NAME = "pytorch_model.bin.index.json"
