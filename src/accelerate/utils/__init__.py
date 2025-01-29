@@ -38,12 +38,12 @@ from .dataclasses import (
     TorchDynamoPlugin,
 )
 from .environment import (
+    parse_flag_from_env,
     are_libraries_initialized,
     check_cuda_p2p_ib_support,
     check_fp8_capability,
     get_int_from_env,
     parse_choice_from_env,
-    parse_flag_from_env,
     str_to_bool,
 )
 from .imports import (
@@ -58,8 +58,8 @@ from .imports import (
     is_clearml_available,
     is_comet_ml_available,
     is_cuda_available,
-    is_datasets_available,
     is_peft_available,
+    is_datasets_available,
     is_deepspeed_available,
     is_dvclive_available,
     is_fp8_available,
@@ -81,8 +81,8 @@ from .imports import (
     is_xpu_available,
 )
 from .modeling import (
-    is_peft_model,
     calculate_maximum_sizes,
+    is_peft_model,
     check_device_map,
     check_tied_parameters_in_config,
     check_tied_parameters_on_same_device,
@@ -133,8 +133,8 @@ from .operations import (
     listify,
     pad_across_processes,
     recursively_apply,
+    offload_state_dict,
     reduce,
-    send_to_device,
     slice_tensors,
 )
 from .versions import compare_versions, is_torch_version
