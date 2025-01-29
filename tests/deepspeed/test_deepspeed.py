@@ -13,23 +13,23 @@
 # limitations under the License.
 
 import inspect
-import io
 import itertools
+import io
 import json
 import os
-import tempfile
 from copy import deepcopy
 from pathlib import Path
+import tempfile
 
 import torch
+
+import accelerate
 from parameterized import parameterized
 from torch.utils.data import DataLoader
 from transformers import AutoModel, AutoModelForCausalLM, get_scheduler
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available
-
-import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
@@ -37,8 +37,8 @@ from accelerate.test_utils.testing import (
     TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
-    require_deepspeed,
     require_multi_device,
+    require_deepspeed,
     slow,
 )
 from accelerate.test_utils.training import RegressionDataset
