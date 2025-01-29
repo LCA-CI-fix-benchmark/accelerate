@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import os
 
 import torch
 
@@ -20,6 +19,8 @@ from .constants import FSDP_MODEL_NAME, FSDP_PYTORCH_VERSION, OPTIMIZER_NAME
 from .imports import is_torch_distributed_available, is_peft_available
 from .other import extract_model_from_parallel
 from .versions import is_torch_version
+
+import os
 
 
 if is_torch_version(">=", FSDP_PYTORCH_VERSION) and is_torch_distributed_available():
