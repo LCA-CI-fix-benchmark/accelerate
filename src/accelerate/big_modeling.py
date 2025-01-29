@@ -537,7 +537,8 @@ def load_checkpoint_and_dispatch(
             "'sequential'."
         )
     if isinstance(device_map, str):
-        if device_map != "sequential":
+        if device_map != "sequential":  # Only call `get_balanced_memory` if not sequential.
+            # For sequential, `infer_auto_device_map` already takes `dtype` and low_zero into consideration.
             max_memory = get_balanced_memory(
                 model,
                 max_memory=max_memory,
