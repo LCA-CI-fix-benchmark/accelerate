@@ -87,7 +87,6 @@ from .modeling import (
     check_tied_parameters_in_config,
     check_tied_parameters_on_same_device,
     compute_module_sizes,
-    convert_file_size_to_int,
     dtype_byte_size,
     find_tied_parameters,
     get_balanced_memory,
@@ -103,6 +102,7 @@ from .modeling import (
     retie_parameters,
     set_module_tensor_to_device,
     shard_checkpoint,
+    convert_file_size_to_int,
 )
 from .offload import (
     OffloadedWeightsLoader,
