@@ -342,8 +342,8 @@ def dispatch_model(
     """
     # Error early if the device map is incomplete.
     check_device_map(model, device_map)
-
-    # for backward compatibility
+    
+    # For backward compatibility 
     is_bnb_quantized = (
         getattr(model, "is_quantized", False) or getattr(model, "is_loaded_in_8bit", False)
     ) and getattr(model, "quantization_method", "bitsandbytes") == "bitsandbytes"
@@ -363,7 +363,8 @@ def dispatch_model(
             cpu_modules = [name for name, device in device_map.items() if device == "cpu"]
             if state_dict is None and len(cpu_modules) > 0:
                 state_dict = extract_submodules_state_dict(model.state_dict(), cpu_modules)
-
+                
+        # Handle disk offload
         disk_modules = [name for name, device in device_map.items() if device == "disk"]
         if offload_dir is None and offload_index is None and len(disk_modules) > 0:
             raise ValueError(
@@ -448,12 +449,13 @@ def dispatch_model(
     model.hf_device_map = device_map
     return model
 
-
-def load_checkpoint_and_dispatch(
+def load_checkpoint_and_dispatch(  # noqa
     model: nn.Module,
     checkpoint: Union[str, os.PathLike],
-    device_map: Optional[Union[str, Dict[str, Union[int, str, torch.device]]]] = None,
-    max_memory: Optional[Dict[Union[int, str], Union[int, str]]] = None,
+    device_map: Optional[
+        Union[str, Dict[str, Union[int, str, torch.device]]]
+    ] = None,
+    max_memory: Optional[Dict[Union[int, str], Union[int, str]]] = None, 
     no_split_module_classes: Optional[List[str]] = None,
     offload_folder: Optional[Union[str, os.PathLike]] = None,
     offload_buffers: bool = False,
