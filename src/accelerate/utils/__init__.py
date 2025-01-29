@@ -161,6 +161,7 @@ from .launch import (
     prepare_simple_launcher_cmd_env,
     prepare_tpu,
 )
+from .module_hooks import add_hook_to_module
 from .megatron_lm import (
     AbstractTrainStep,
     BertTrainStep,
