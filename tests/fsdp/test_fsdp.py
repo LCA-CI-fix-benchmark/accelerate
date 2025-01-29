@@ -15,24 +15,12 @@
 
 import inspect
 import os
-
-import torch
-from transformers import AutoModel
-from transformers.testing_utils import mockenv_context
-from transformers.trainer_utils import set_seed
-
 import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
     TempDirTestCase,
-    execute_subprocess_async,
-    require_non_cpu,
-    require_fsdp,
-    require_multi_device,
-    slow,
-)
 from accelerate.utils.constants import (
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
@@ -41,7 +29,16 @@ from accelerate.utils.constants import (
 )
 from accelerate.utils.dataclasses import FullyShardedDataParallelPlugin
 from accelerate.utils.other import patch_environment
-
+import torch
+from transformers import AutoModel
+from transformers.testing_utils import mockenv_context
+from transformers.trainer_utils import set_seed
+    execute_subprocess_async,
+    require_non_cpu,
+    require_fsdp,
+    require_multi_device,
+    slow,
+)
 
 set_seed(42)
 
