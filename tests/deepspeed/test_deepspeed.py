@@ -25,7 +25,6 @@ import torch
 from parameterized import parameterized
 from torch.utils.data import DataLoader
 from transformers import AutoModel, AutoModelForCausalLM, get_scheduler
-from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 from transformers.utils import is_torch_bf16_available
 
@@ -43,6 +42,7 @@ from accelerate.test_utils.testing import (
 )
 from accelerate.test_utils.training import RegressionDataset
 from accelerate.utils.dataclasses import DeepSpeedPlugin
+from accelerate.utils.other import patch_environment
 from accelerate.utils.deepspeed import (
     DeepSpeedEngineWrapper,
     DeepSpeedOptimizerWrapper,
@@ -50,7 +50,7 @@ from accelerate.utils.deepspeed import (
     DummyOptim,
     DummyScheduler,
 )
-from accelerate.utils.other import patch_environment
+from transformers.testing_utils import mockenv_context
 
 
 set_seed(42)
