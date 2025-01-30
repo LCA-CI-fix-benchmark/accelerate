@@ -14,7 +14,6 @@
 
 import inspect
 import io
-import itertools
 import json
 import os
 import tempfile
@@ -31,9 +30,9 @@ from transformers.utils import is_torch_bf16_available
 
 import accelerate
 from accelerate.accelerator import Accelerator
-from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
+    require_deepspeed,
     TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
@@ -42,6 +41,7 @@ from accelerate.test_utils.testing import (
     slow,
 )
 from accelerate.test_utils.training import RegressionDataset
+from accelerate.state import AcceleratorState
 from accelerate.utils.dataclasses import DeepSpeedPlugin
 from accelerate.utils.deepspeed import (
     DeepSpeedEngineWrapper,

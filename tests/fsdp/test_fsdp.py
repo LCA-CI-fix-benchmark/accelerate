@@ -23,9 +23,9 @@ from transformers.trainer_utils import set_seed
 
 import accelerate
 from accelerate.accelerator import Accelerator
-from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
+    require_fsdp,
     TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
@@ -33,6 +33,7 @@ from accelerate.test_utils.testing import (
     require_multi_device,
     slow,
 )
+from accelerate.state import AcceleratorState
 from accelerate.utils.constants import (
     FSDP_AUTO_WRAP_POLICY,
     FSDP_BACKWARD_PREFETCH,
