@@ -24,6 +24,8 @@ import tempfile
 from collections import OrderedDict, defaultdict
 from typing import Dict, List, Optional, Tuple, Union
 
+from safetensors import safe_open
+from safetensors.torch import load_file as safe_load_file
 import torch
 import torch.nn as nn
 
