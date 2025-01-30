@@ -1,4 +1,6 @@
 from .constants import (
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
     RNG_STATE_NAME,
@@ -14,6 +16,7 @@ from .constants import (
     WEIGHTS_NAME,
 )
 from .dataclasses import (
+    from .bnb import has_4bit_bnb_layers, load_and_quantize_model
     AutocastKwargs,
     BnbQuantizationConfig,
     ComputeEnvironment,
@@ -79,6 +82,7 @@ from .imports import (
     is_transformers_available,
     is_wandb_available,
     is_xpu_available,
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
 )
 from .modeling import (
     is_peft_model,
@@ -142,6 +146,8 @@ from .versions import compare_versions, is_torch_version
 
 if is_deepspeed_available():
     from .deepspeed import (
+    if is_deepspeed_available():
+        from .deepspeed import (
         DeepSpeedEngineWrapper,
         DeepSpeedOptimizerWrapper,
         DeepSpeedSchedulerWrapper,
@@ -150,8 +156,6 @@ if is_deepspeed_available():
         HfDeepSpeedConfig,
     )
 
-from .bnb import has_4bit_bnb_layers, load_and_quantize_model
-from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
 from .launch import (
     PrepareForLaunch,
     _filter_args,
