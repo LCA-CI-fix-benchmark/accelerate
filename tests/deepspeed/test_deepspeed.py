@@ -15,7 +15,6 @@
 import inspect
 import io
 import itertools
-import json
 import os
 import tempfile
 from copy import deepcopy
@@ -37,7 +36,6 @@ from accelerate.test_utils.testing import (
     TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
-    require_deepspeed,
     require_multi_device,
     slow,
 )
@@ -47,6 +45,7 @@ from accelerate.utils.deepspeed import (
     DeepSpeedEngineWrapper,
     DeepSpeedOptimizerWrapper,
     DeepSpeedSchedulerWrapper,
+    require_deepspeed,
     DummyOptim,
     DummyScheduler,
 )
