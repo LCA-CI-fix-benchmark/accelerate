@@ -16,8 +16,8 @@
 import inspect
 import os
 
-import torch
 from transformers import AutoModel
+import torch
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 
