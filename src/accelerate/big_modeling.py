@@ -166,7 +166,9 @@ def cpu_offload(
     state_dict: Optional[Dict[str, torch.Tensor]] = None,
     preload_module_classes: Optional[List[str]] = None,
 ):
-    """
+    r"""
+    Activates full CPU offload for a model.
+
     Activates full CPU offload for a model. As a result, all parameters of the model will be offloaded and only one
     copy of the state dict of the model will be kept. During the forward pass, parameters will be extracted from that
     state dict and put on the execution device passed as they are needed, then offloaded again.
@@ -256,7 +258,9 @@ def disk_offload(
     offload_buffers: bool = False,
     preload_module_classes: Optional[List[str]] = None,
 ):
-    """
+    r"""
+    Activates full disk offload for a model.
+
     Activates full disk offload for a model. As a result, all parameters of the model will be offloaded as
     memory-mapped array in a given folder. During the forward pass, parameters will be accessed from that folder and
     put on the execution device passed as they are needed, then offloaded again.
