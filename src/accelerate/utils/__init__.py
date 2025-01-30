@@ -1,3 +1,7 @@
+from .bnb import has_4bit_bnb_layers, load_and_quantize_model
+from .fsdp_utils import load_fsdp_model, load_fsdp_optimizer, save_fsdp_model, save_fsdp_optimizer
+from .memory import find_executable_batch_size, release_memory
+from .transformer_engine import convert_model, has_transformer_engine_layers
 from .constants import (
     MODEL_NAME,
     OPTIMIZER_NAME,
@@ -30,6 +34,8 @@ from .dataclasses import (
     KwargsHandler,
     LoggerType,
     MegatronLMPlugin,
+    MegatronLMSchedulerWrapper,
+    MegatronLMOptimizerWrapper,
     PrecisionType,
     ProjectConfiguration,
     RNGType,
