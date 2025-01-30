@@ -34,7 +34,7 @@ from .utils import (
     check_device_map,
     extract_submodules_state_dict,
     find_tied_parameters,
-    get_balanced_memory,
+    get_balanced_memory, 
     infer_auto_device_map,
     is_npu_available,
     is_torch_version,
