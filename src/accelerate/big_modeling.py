@@ -492,7 +492,7 @@ def load_checkpoint_and_dispatch(
         offload_buffers (`bool`, *optional*, defaults to `False`):
             In the layers that are offloaded on the CPU or the hard drive, whether or not to offload the buffers as
             well as the parameters.
-        dtype (`str` or `torch.dtype`, *optional*):
+        dtype (`str` or `torch.dtype`, *optional*, defaults to `None`):
             If provided, the weights will be converted to that type when loaded.
         offload_state_dict (`bool`, *optional*):
             If `True`, will temporarily offload the CPU state dict on the hard drive to avoid getting out of CPU RAM if
