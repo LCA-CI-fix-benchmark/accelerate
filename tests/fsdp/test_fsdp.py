@@ -21,12 +21,10 @@ from transformers import AutoModel
 from transformers.testing_utils import mockenv_context
 from transformers.trainer_utils import set_seed
 
-import accelerate
 from accelerate.accelerator import Accelerator
 from accelerate.state import AcceleratorState
 from accelerate.test_utils.testing import (
     AccelerateTestCase,
-    TempDirTestCase,
     execute_subprocess_async,
     require_non_cpu,
     require_fsdp,
